@@ -1,0 +1,64 @@
+# depslib dependency file v1.0
+1455478584 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"fight.h"
+	"gameUtil.h"
+
+1455292107 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.h
+	"player.h"
+
+1455534572 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
+	<stdbool.h>
+	"usableItem.h"
+
+1455535669 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.h
+
+1455478388 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1455534564 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"player.h"
+	"fight.h"
+	"usableItem.h"
+	"gameUtil.h"
+
+1455478549 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.h
+
+1455440538 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\mob.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1455534645 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"player.h"
+	"fight.h"
+	"gameUtil.h"
+	"usableItem.h"
+
+1455534564 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.c
+	<stdio.h>
+	<stdlib.h>
+	"usableItem.h"
+	"player.h"
+	"gameUtil.h"
+
+1455534564 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\wastecode.h
+
+1455534564 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\wastecode.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"usableItem.h"
+	"player.h"
+	"gameUtil.h"
+
