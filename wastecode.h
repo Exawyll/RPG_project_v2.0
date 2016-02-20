@@ -1,7 +1,16 @@
 #ifndef WASTECODE_H_INCLUDED
 #define WASTECODE_H_INCLUDED
 
-
+/*Equipment* Equipment_ctor(StuffItem* head, StuffItem* body, StuffItem* legs, StuffItem* foots, StuffItem* rightHand, StuffItem* leftHand){
+    Equipment* p = malloc(sizeof(Equipment));
+    p->head = head;
+    p->body = body;
+    p->legs = legs;
+    p->foots = foots;
+    p->rightHand = rightHand;
+    p->leftHand = leftHand;
+    return p;
+}*/
 
 /*enum itemNumber {
     HEALTH_POTION,

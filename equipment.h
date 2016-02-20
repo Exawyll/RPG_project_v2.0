@@ -11,13 +11,13 @@
 			- main droite
 			- main gauche*/
 
-typedef struct Equipment{
-    StuffItem** head;
-    StuffItem** body;
-    StuffItem** legs;
-    StuffItem** foots;
-    StuffItem** rightHand;
-    StuffItem** leftHand;
+/*typedef struct Equipment{
+    StuffItem head;
+    StuffItem body;
+    StuffItem legs;
+    StuffItem foots;
+    StuffItem rightHand;
+    StuffItem leftHand;
 }Equipment;
 
 Equipment* Equipment_ctor(StuffItem* head, StuffItem* body, StuffItem* legs, StuffItem* foots, StuffItem* rightHand, StuffItem* leftHand);
@@ -51,6 +51,6 @@ Dlisteqpt *eqpt_insert(Dlisteqpt *p_list, Equipment equip, int position);
 Dlisteqpt *eqpt_prepend(Dlisteqpt *p_list, Equipment equip);
 Dlisteqpt *eqpt_append(Dlisteqpt *p_list, Equipment equip);
 Dlisteqpt *eqpt_new(void);
-void printf_struct_equip(Equipment* equip);
+void printf_struct_equip(Equipment* equip);*/
 
 #endif // EQUIPMENT_H_INCLUDED

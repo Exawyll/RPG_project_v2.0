@@ -24,7 +24,7 @@ typedef struct playerStructure {
     bool autoPilot;
     DlistItem *inventory;
     DlistStuff *armory;
-    Equipment *equiped;
+    StuffItem* build[6];
 }Player;
 
 // Function Prototype
@@ -45,6 +45,7 @@ void setStuffAtStart(Player *target);
 //Concern Equipment
 void initEqt(Player *target);
 void displayEqpt(Player *target);
+void set_equipment(Player *target);
 
 
 #endif // PLAYER_H_INCLUDED
