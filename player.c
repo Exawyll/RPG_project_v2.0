@@ -41,6 +41,7 @@ Player* NewPlayer() {
     else {
         tempPlayer->autoPilot = false;
         //SetName(tempPlayer);
+        initEqt(tempPlayer);
         setJob(tempPlayer);
         setStuffAtStart(tempPlayer);
         //buildToStart(tempPlayer);

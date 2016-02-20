@@ -3,6 +3,7 @@
 
 #include "stuffItem.h"
 #include "player.h"
+#include "equipment.h"
 
 /*- StuffItem.c : contient les fonctions suivantes :
 			- eqpStuffItem(StuffItem* item, Mob* mob)
@@ -21,7 +22,7 @@ StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusHP, int I_
     return p;
 }
 
-void eqpStuffItem(StuffItem* item, Mob* mob){
+/*void eqpStuffItem(StuffItem* item, Mob* mob){
 }
 
 void unEqpStuffItem(StuffItem* item, Mob* mob){
@@ -435,17 +436,43 @@ void setStuffAtStart(Player *target){
         case WARRIOR:
             item_append(target->armory, *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0));
             item_append(target->armory, *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10));
+            printf("Would you like to auto-equip ?\n1 : Yes\n2 : No\n");
+            int userChoice = userInputInt();
+            if(userChoice == 1){
+                StuffItem sword = *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0);
+                StuffItem armor = *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10);
+                Equipment myEqpt = *Equipment_ctor(0,&armor,0,0,&sword,0);
+                eqpt_append(target->equiped, myEqpt);
+                item_remove_id(target->armory,1);
+                item_remove_id(target->armory,2);
+            }
             break;
-        case RANGER:
+        /*case RANGER:
             item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 0, 10, 0, 0));
             item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 0, 1, 10));
+            printf("Would you like to auto-equip ?\1 : Yes\2 : No");
+            int userChoice = userInputInt();
+            if(userChoice == 1){
+                target->equiped->rightHand = *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0);
+                target->equiped->body = *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10);
+                item_remove_id(target->armory,1);
+                item_remove_id(target->armory,2);
+            }
             break;
         case WIZARD:
             item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 0, 10, 0, 0));
             item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 0, 1, 10));
+            printf("Would you like to auto-equip ?\1 : Yes\2 : No");
+            int userChoice = userInputInt();
+            if(userChoice == 1){
+                target->equiped->rightHand = *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0);
+                target->equiped->body = *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10);
+                item_remove_id(target->armory,1);
+                item_remove_id(target->armory,2);
+            }
             break;
         default:
-            break;
+            break;*/
     }
     item_display(target->armory);
 }
