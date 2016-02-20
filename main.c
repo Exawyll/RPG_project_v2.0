@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     Player *Hero = NewPlayer();
     //Player *Mob = NewPlayer();
     //menu_player(Hero);
+    DisplayStats(Hero);
 
     return(0);
 }

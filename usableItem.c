@@ -6,6 +6,11 @@
 #include "gameUtil.h"
 
 #define NBR_POTIONS 3
+#define POTION_LIFE 10
+#define POTION_STRENGTH 10
+#define POTION_DEFENSE 10
+#define POTION_DODGE 10
+#define TIME_EFFECT 3
 
 /*- Usableitem.c : contient les fonctions suivantes :
 			- doUsableItemEffect(Usableitem* item, Mob* mob)
@@ -317,6 +322,31 @@ size_t useItem_length(DlistItem *p_list)
     return ret;
 }
 
+int useItem_return_id(DlistItem *p_list, int position)
+{
+    if (p_list != NULL)
+    {
+        struct node_item *p_temp = p_list->p_head;
+        int i = 1;
+        while (p_temp != NULL && i <= position)
+        {
+            if (position == i)
+            {
+                UsableItem *monObjet;
+                monObjet = &p_temp->item;
+                return monObjet->id;
+            }
+            else
+            {
+                p_temp = p_temp->p_next;
+            }
+            i++;
+        }
+    }
+    return -1;
+}
+
+
 /*DlistItem *useItem_find(DlistItem *p_list, UsableItem item) {
     DlistItem *ret = NULL;
     if (p_list != NULL)
@@ -343,27 +373,32 @@ size_t useItem_length(DlistItem *p_list)
 // FIND ITEM
 // Can't return 0 because it's interpreted as an int. Return NULL for functions
 // that are supposed to return pointers.
-/*struct node_item* findItem (struct node_item *node, enum itemNumber number) {
-
-  if (node == NULL) {
-    return(NULL);
-  }
-
-  // Avoid unitialized or unassigned nodes.
-  while (node->item != NULL) {
-     if (node->item->id == number) {
-       return(node);
-     }
-
-     if (node->p_next != NULL) {
-       node = node->p_next;
-     } else {
-       return(NULL);
-     }
-  }
-  return(NULL);
-}*/
-
+//Return choosen item to a new list
+int useItem_find_id(DlistItem *p_list, enum itemNumber number)
+{
+    int ret = 0;
+    //DlistItem *ret = NULL;
+    if (p_list != NULL)
+    {
+        struct node_item *p_temp = p_list->p_head;
+        int found = 0;
+        while (p_temp != NULL && !found)
+        {
+            UsableItem *monObjet;
+            monObjet = &p_temp->item;
+            if (monObjet->id == number)
+            {
+                ret = number;
+                found = 1;
+            }
+            else
+            {
+                p_temp = p_temp->p_next;
+            }
+        }
+    }
+    return ret;
+}
 
 //Return all choosen items to a new list
 DlistItem *useItem_find_all(DlistItem *p_list, UsableItem item)
@@ -435,19 +470,19 @@ DlistItem* readFromFile_item(){
 
 UsableItem createUsableItems(enum itemNumber number){
     if(number == HEALTH_POTION){
-        UsableItem health = *usableItem_ctor("HEALTH_POTION", HEALTH_POTION, "Heals 20 health points.", 10, 0, 0, 1, 1, 1);
+        UsableItem health = *usableItem_ctor("HEALTH_POTION", HEALTH_POTION, "Heals 20 health points.", 50, 0, POTION_LIFE, 0, 0, 0);
         return health;
     }
     else if(number == STRENGTH_POTION){
-        UsableItem strength = *usableItem_ctor("STRENGTH_POTION", STRENGTH_POTION, "Add 20 attack points.", 0, 10, 0, 1, 1, 1);
+        UsableItem strength = *usableItem_ctor("STRENGTH_POTION", STRENGTH_POTION, "Add 20 attack points.", 100, TIME_EFFECT, 0, POTION_STRENGTH, 0, 0);
         return strength;
     }
     else if(number == DEFENSE_POTION){
-        UsableItem defense = *usableItem_ctor("DEFENSE_POTION", DEFENSE_POTION, "Add 20 defense points.", 0, 10, 0, 1, 1, 1);
+        UsableItem defense = *usableItem_ctor("DEFENSE_POTION", DEFENSE_POTION, "Add 20 defense points.", 100, TIME_EFFECT, 0, 0, POTION_DEFENSE, 0);
         return defense;
     }
     else if(number == GHOST_POTION){
-        UsableItem ghost = *usableItem_ctor("GHOST_POTION", GHOST_POTION,"Add 20 dodge points.", 0, 0, 10, 1, 1, 1);
+        UsableItem ghost = *usableItem_ctor("GHOST_POTION", GHOST_POTION,"Add 20 dodge points.", 100, TIME_EFFECT, 0, 0, 0, POTION_DODGE);
         return ghost;
     }
 }
@@ -488,73 +523,7 @@ void setPotionAtStart(Player *target){
         }
     }
     useItem_display(target->inventory);
-    int founded = 0;
-    founded = useItem_find(target->inventory, STRENGTH_POTION);
-    printf("%d\n", founded);
-    //printf("%d\n", target->inventory->p_head);
-   /*if (target->inventory != NULL)
-    {
-        struct node_item *p_temp = target->inventory->p_head;
-        while (p_temp != NULL)
-        {
-            printf("%d -> ", i);
-            UsableItem *monObjet;
-            monObjet = &p_temp->item;
-            printf("Name: %s\n", monObjet->id);
-            p_temp = p_temp->p_next;
-        }
-    }
-    printf("\n");*/
-
-    //printf("%d\n", useItem_find(target->inventory, GHOST_POTION));
-    //int searchResult = useItem_find(target->inventory, STRENGTH_POTION);
-    //printf("\n\n%d\n\n", searchResult);
 }
-
-//Return choosen item to a new list
-int useItem_find(DlistItem *p_list, enum itemNumber number)
-{
-    int ret = 0;
-    //DlistItem *ret = NULL;
-    if (p_list != NULL)
-    {
-        struct node_item *p_temp = p_list->p_head;
-        int found = 0;
-        while (p_temp != NULL && !found)
-        {
-            UsableItem *monObjet;
-            monObjet = &p_temp->item;
-            if (monObjet->id == number)
-            {
-                ret = number;
-                found = 1;
-            }
-            else
-            {
-                p_temp = p_temp->p_next;
-            }
-        }
-    }
-    return ret;
-}
-    /*if (node == NULL) {
-    return(NULL);
-  }
-
-  // Avoid unitialized or unassigned nodes.
-  while (node->p_head != NULL) {
-     if (node->length->id == number) {
-       return(node);
-     }
-
-     if (node->next != NULL) {
-       node = node->next;
-     } else {
-       return(NULL);
-     }
-  }
-  return(NULL);
-}*/
 
 void show_inventory(Player *target){
     int userChoice = 0;
@@ -567,22 +536,53 @@ void show_inventory(Player *target){
         useYourPotion(target);
     }
     else if(userChoice == 2){
-        //deletePotion();
+        deletePotion(target);
     }
     else{
         printf("Please choose only 1 or 2\n");
     }
 }
 
-void useYourPotion(Player *Target){
+void useYourPotion(Player *target){
     int userChoice = 0;
-    printf("Select the item your want to use by pressing the corresponding number :");
+    int id = 0;
+    printf("Select the item your want to USE by pressing the corresponding number :");
     userChoice = userInputInt();
-    /*switch(userChoice){
-        case 1
+
+    id = useItem_return_id(target->inventory, userChoice);
+
+    switch(id){
+        case HEALTH_POTION:
+            target->health += POTION_LIFE;
+            useItem_remove_id(target->inventory, userChoice);
+            break;
+        case STRENGTH_POTION:
+            target->attack += POTION_STRENGTH;
+            useItem_remove_id(target->inventory, userChoice);
+            break;
+        case DEFENSE_POTION:
+            target->defense += POTION_DEFENSE;
+            useItem_remove_id(target->inventory, userChoice);
+            break;
+        case GHOST_POTION:
+            target->dodge += POTION_DODGE;
+            useItem_remove_id(target->inventory, userChoice);
+            break;
+        default:
+            break;
     }
-    HEALTH_POTION,
-    STRENGTH_POTION,
-    DEFENSE_POTION,
-    GHOST_POTION*/
+    /*int founded = 0;
+    founded = useItem_find_id(target->inventory, HEALTH_POTION);
+    founded = useItem_find_id(target->inventory, STRENGTH_POTION);
+    founded = useItem_find_id(target->inventory, DEFENSE_POTION);
+    founded = useItem_find_id(target->inventory, GHOST_POTION);
+    printf("%d\n", founded);*/
+}
+
+void deletePotion(Player *target)
+{
+    int userChoice = 0;
+    printf("Select the item your want to DELETE by pressing the corresponding number :");
+    userChoice = userInputInt();
+    useItem_remove_id(target->inventory, userChoice);
 }

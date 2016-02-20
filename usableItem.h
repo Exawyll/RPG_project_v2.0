@@ -52,12 +52,12 @@ DlistItem* readFromFile_item();
 void writeToFile_item(DlistItem *p_list);
 DlistItem *useItem_find_all(DlistItem *p_list, UsableItem item);
 //DlistItem *useItem_find(DlistItem *p_list, UsableItem item);
-
-//struct node_item* findItem (struct node_item *node, enum itemNumber number);
-
-int useItem_find(DlistItem *p_list, enum itemNumber number);
+int useItem_find_id(DlistItem *p_list, enum itemNumber number);
 size_t useItem_length(DlistItem *p_list);
 DlistItem *useItem_remove_id(DlistItem *p_list, int position);
+
+int useItem_return_id(DlistItem *p_list, int position);
+
 DlistItem *useItem_remove_all(DlistItem *p_list, int item);
 DlistItem *useItem_remove(DlistItem *p_list, UsableItem item);
 void useItem_display(DlistItem *p_list);
@@ -71,6 +71,6 @@ void printf_struct_item(UsableItem* item);
 //Prototype functions
 UsableItem createUsableItems(enum itemNumber);
 void menuSelectPotion();
-//void show_inventory(Player *target);
+
 
 #endif // USABLEITEM_H_INCLUDED

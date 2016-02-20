@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include "usableItem.h"
+#include "stuffItem.h"
 
 // Classes are enumerated. WARRIOR = 0; RANGER = 1, etc.
 typedef enum ClassEnum  {
@@ -21,7 +22,7 @@ typedef struct playerStructure {
     int job;
     bool autoPilot;
     DlistItem *inventory;
-    //DlistStuff *armory;
+    DlistStuff *armory;
 }Player;
 
 // Function Prototype
@@ -30,10 +31,15 @@ void SetName(Player *target);
 Player* NewPlayer();    // Creates player and sets class.
 int setJob(Player* target);
 void buildToStart(Player *target);
-void setPotionAtStart(Player *target);
-void init_inventory(Player* target);
-
-void setPotionAtStart(Player *target);
 void menu_player(Player *target);
+//Concern USABLE ITEMS
+void init_inventory(Player* target);
+void setPotionAtStart(Player *target);
+void show_inventory(Player *target);
+void useYourPotion(Player *target);
+void deletePotion(Player *target);
+//Concern STUFF ITEMS
+void setStuffAtStart(Player *target);
+
 
 #endif // PLAYER_H_INCLUDED

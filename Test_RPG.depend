@@ -9,18 +9,19 @@
 1455292107 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.h
 	"player.h"
 
-1455730047 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
+1455981765 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
 	<stdbool.h>
 	"usableItem.h"
+	"stuffItem.h"
 
-1455974239 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.h
+1455981765 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.h
 
 1455478388 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1455968125 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
+1455978419 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -36,7 +37,7 @@
 	<stdlib.h>
 	<string.h>
 
-1455965090 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
+1455981906 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -44,8 +45,9 @@
 	"fight.h"
 	"gameUtil.h"
 	"usableItem.h"
+	"stuffItem.h"
 
-1455973875 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.c
+1455981776 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.c
 	<stdio.h>
 	<stdlib.h>
 	"usableItem.h"
@@ -62,10 +64,11 @@
 	"player.h"
 	"gameUtil.h"
 
-1455729117 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.c
+1455981725 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.c
 	<stdlib.h>
 	<stdio.h>
 	"stuffItem.h"
+	"player.h"
 
-1455538528 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.h
+1455981645 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.h
 

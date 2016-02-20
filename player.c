@@ -6,6 +6,7 @@
 #include "fight.h"
 #include "gameUtil.h"
 #include "usableItem.h"
+#include "stuffItem.h"
 
 #define POINT_TO_ATTRIBUTE 10
 
@@ -40,9 +41,11 @@ Player* NewPlayer() {
     else {
         tempPlayer->autoPilot = false;
         //SetName(tempPlayer);
-        //setJob(tempPlayer);
+        setJob(tempPlayer);
+        setStuffAtStart(tempPlayer);
         //buildToStart(tempPlayer);
-        setPotionAtStart(tempPlayer);
+        //setPotionAtStart(tempPlayer);
+
     }
     ++PlayersCreated;
 
@@ -59,7 +62,9 @@ void SetName(Player *target) {
 int setJob(Player *target){
     int choice = 0;
 
-    printf("Please select your job : \n1 : WARRIOR\n2 : RANGER\n3 : WIZARD\n(default if you enter a wrong input \"not recommended\")");
+    printf("Please select your job : \n1 : WARRIOR (Start with a SWORD and a TEXTILE ARMOR)\n");
+    printf("2 : RANGER (Start with a BOW and a TINY SHORT)\n");
+    printf("3 : WIZARD (Start with a WAND and a ROBE)\n(NO JOB if you enter a wrong input \"not recommended\")");
     choice = userInputInt();
 
     // Assign stats based on the given job.

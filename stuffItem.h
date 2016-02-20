@@ -11,11 +11,12 @@
 			- defense absolue*/
 
 // 0 based.
-enum itemNumber {
+enum stuffNumber {
     HELMET,
     ARMOR,
     RIGHT_HAND,
     LEFT_HAND,
+    TWO_HAND,
     LEGGINGS,
     BOOTS
 };
@@ -32,7 +33,7 @@ typedef struct StuffItem{
 }StuffItem;
 
 //prototype for the stuffDlistStuff builder
-StuffItem* stuffDlistStuff_ctor(char* name, int price, int type, int I_bonusHP, int I_bonusATT, int I_bonusDEFRel, int I_bonusDEFAbs);
+StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusHP, int I_bonusATT, int I_bonusDEFRel, int I_bonusDEFAbs);
 
 //Create of list for stuffDlistStuff
 struct node_stuff
@@ -64,5 +65,7 @@ DlistStuff *item_prepend(DlistStuff *p_list, StuffItem stuff);
 DlistStuff *item_append(DlistStuff *p_list, StuffItem stuff);
 DlistStuff *item_new(void);
 void printf_struct_stuff(StuffItem* stuff);
+
+//Prototype of functions
 
 #endif // STUFFITEM_H_INCLUDED

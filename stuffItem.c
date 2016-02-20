@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "stuffItem.h"
+#include "player.h"
 
 /*- StuffItem.c : contient les fonctions suivantes :
 			- eqpStuffItem(StuffItem* item, Mob* mob)
@@ -20,7 +21,7 @@ StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusHP, int I_
     return p;
 }
 
-/*void eqpStuffItem(StuffItem* item, Mob* mob){
+void eqpStuffItem(StuffItem* item, Mob* mob){
 }
 
 void unEqpStuffItem(StuffItem* item, Mob* mob){
@@ -32,7 +33,29 @@ void sellStuffItem(StuffItem* item, Player* player){
 //Allow to display correct info of list items
 void printf_struct_stuff(StuffItem* stuff)
 {
-    printf("%s %d %d %d %d %d %d\n",stuff->name, stuff->price, stuff->type, stuff->I_bonusHP, stuff->I_bonusATT, stuff->I_bonusDEFRel, stuff->I_bonusDEFAbs);
+    printf("Name : %s\nPrice : %d\n", stuff->name, stuff->price);
+    int type = stuff->type;
+    switch(type){
+        case HELMET:
+            printf("Type : HELMET\n");
+            break;
+        case ARMOR:
+            printf("Type : ARMOR\n");
+            break;
+        case RIGHT_HAND:
+            printf("Type : RIGHT_HAND\n");
+            break;
+        case LEFT_HAND:
+            printf("Type : LEFT_HAND\n");
+            break;
+        case LEGGINGS:
+            printf("Type : LEGGINGS\n");
+            break;
+        case BOOTS:
+            printf("Type : BOOTS\n");
+            break;
+    }
+    printf("HP : +%d\nATT : +%d\nDEFRel : +%d\nDEF : +%d\n\n", stuff->I_bonusHP, stuff->I_bonusATT, stuff->I_bonusDEFRel, stuff->I_bonusDEFAbs);
 }
 
 /*int* display_list_ids(DlistStuff *p_list)
@@ -406,65 +429,29 @@ DlistStuff* readFromFile_stuff(){
 }
 //endregion
 
-/*UsableItem createUsableItems(enum itemNumber number){
-    if(number == HEALTH_POTION){
-        UsableItem health = *usableItem_ctor("HEALTH_POTION","Drinkable item that heals 20 health points.", 10, 0, 0, 0, 1, 1, 1);
-        return health;
+void setStuffAtStart(Player *target){
+    target->armory = item_new();
+    switch(target->job){
+        case WARRIOR:
+            item_append(target->armory, *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0));
+            item_append(target->armory, *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10));
+            break;
+        case RANGER:
+            item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 0, 10, 0, 0));
+            item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 0, 1, 10));
+            break;
+        case WIZARD:
+            item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 0, 10, 0, 0));
+            item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 0, 1, 10));
+            break;
+        default:
+            break;
     }
-    else if(number == STRENGTH_POTION){
-        UsableItem strength = *usableItem_ctor("STRENGTH_POTION","Drinkable item that heals 20 attack points.", 0, 10, 0, 0, 1, 1, 1);
-        return strength;
-    }
-    else if(number == DEFENSE_POTION){
-        UsableItem defense = *usableItem_ctor("DEFENSE_POTION","Drinkable item that heals 20 defense points.", 0, 0, 10, 0, 1, 1, 1);
-        return defense;
-    }
-    else if(number == GHOST_POTION){
-        UsableItem ghost = *usableItem_ctor("GHOST_POTION","Drinkable item that heals 20 dodge points.", 0, 0, 0, 10, 1, 1, 1);
-        return ghost;
-    }
-}
-
-void menuSelectPotion(){
-    printf("Now you have 3 potions to add to your inventory, what will you choose ?\n(trick : you can have many of the same type)\n");
-    printf("1 : HEALTH POTION (increase temporally 10 HP)\n");
-    printf("2 : STRENGTH POTION (increase temporally 10 attack points)\n");
-    printf("3 : DEFENSE POTION (increase temporally 10 defense points)\n");
-    printf("4 : GHOST POTION (increase temporally 10 dodge points)\n");
-    printf("(WARNING : if you enter a wrong input, you won't have ANY POTION !!!)\n");
-}
-
-void setPotionAtStart(Player *target){
-    int choice = 0;
-    int i = 0;
-
-    target->inventory = useItem_new();
-    menuSelectPotion();
-
-    for(i = 0; i < NBR_POTIONS; i++){
-        choice = userInputInt();
-        switch(choice){
-            case 1:
-                useItem_append(target->inventory, createUsableItems(HEALTH_POTION));
-                break;
-            case 2:
-                useItem_append(target->inventory, createUsableItems(STRENGTH_POTION));
-                break;
-            case 3:
-                useItem_append(target->inventory, createUsableItems(DEFENSE_POTION));
-                break;
-            case 4:
-                useItem_append(target->inventory, createUsableItems(GHOST_POTION));
-                break;
-            default:
-                break;
-        }
-    }
-    useItem_display(target->inventory);
+    item_display(target->armory);
 }
 
 
-void createStuff(){
+/*void createStuff(){
     DlistStuff* stuffList = item_new();
 
     StuffItem* casque = stuffItem_ctor("beret", 100, 0, 10, 2, 10, 3);
@@ -472,21 +459,21 @@ void createStuff(){
     StuffItem* leggings = stuffItem_ctor("cuir", 100, 2, 10, 2, 10, 3);
     StuffItem* boots = stuffItem_ctor("sandales", 100, 1, 10, 2, 10, 3);
     StuffItem* sword = stuffItem_ctor("katana", 100, 1, 10, 2, 10, 3);
-    StuffItem* shield = stuffItem_ctor("bouclier", 100, 1, 10, 2, 10, 3);*/
+    StuffItem* shield = stuffItem_ctor("bouclier", 100, 1, 10, 2, 10, 3);
 
-    /*item_append(stuffList, *casque);
+    item_append(stuffList, *casque);
     item_append(stuffList, *armor);
     item_append(stuffList, *leggings);
     item_append(stuffList, *boots);
     item_append(stuffList, *sword);
-    item_append(stuffList, *shield);*/
+    item_append(stuffList, *shield;
 
-    //item_display(stuffList);
+    item_display(stuffList);
 
-    //Equipment* start = Equipment_ctor(casque, armor, leggings, boots, sword, shield);
+    Equipment* start = Equipment_ctor(casque, armor, leggings, boots, sword, shield);
 
-    //writeToFile_stuff(stuffList);
-    //DlistStuff* newStuffList = readFromFile_stuff();
+    writeToFile_stuff(stuffList);
+    DlistStuff* newStuffList = readFromFile_stuff();
 
-    //item_display(newStuffList);
-//}
+    item_display(newStuffList);
+}*/
