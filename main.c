@@ -19,8 +19,7 @@ int main(int argc, char *argv[])
 {
     Player *Hero = NewPlayer();
     //Player *Mob = NewPlayer();
-    //setPotionAtStart(Hero);
-
+    menu_player(Hero);
 
     return(0);
 }

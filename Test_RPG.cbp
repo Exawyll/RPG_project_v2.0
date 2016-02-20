@@ -50,10 +50,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="player.h" />
+		<Unit filename="stuffItem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="stuffItem.h" />
 		<Unit filename="usableItem.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="usableItem.h" />
+		<Unit filename="wastecode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="wastecode.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

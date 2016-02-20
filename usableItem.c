@@ -29,8 +29,8 @@ UsableItem* usableItem_ctor(char* name, char* description, int price, int timeEf
 void printf_struct_item(UsableItem* item)
 {
     printf("Name: %s\n",item->name);
-    printf("Effect: %s (for %d turns duration)\n",item->description, item->timeEffect);
-    printf("Price: %d\n",item->price);
+    printf("     Effect: %s (for %d turns duration)\n",item->description, item->timeEffect);
+    printf("     Price: %d\n",item->price);
     /*printf("Price: %d\n",item->price);
            %s %d %d %d %d %d %d %d\n",,item->bonusHP,item->bonusATT,item->bonusDEFRel,item->bonusDEFAbs,item->bonusESQ);*/
 }
@@ -174,12 +174,15 @@ void useItem_display(DlistItem *p_list)
 {
     if (p_list != NULL)
     {
+        int i = 1;
         struct node_item *p_temp = p_list->p_head;
         while (p_temp != NULL)
         {
+            printf("%d -> ", i);
             printf_struct_item(&p_temp->item);
             fflush(stdout);
             p_temp = p_temp->p_next;
+            i++;
         }
     }
     printf("\n");
@@ -395,7 +398,7 @@ DlistItem* readFromFile_item(){
 
         /* Attempt to read element one by one */
         while (fread(item,sizeof(UsableItem),1,fptr) == 1) {
-            useItem_append(p_list, *usableItem_ctor(item->name,item->description,item->price,item->timeEffect,item->bonusHP,item->bonusATT,item->bonusDEFRel,item->bonusDEFAbs,item->bonusESQ));
+            useItem_append(p_list, *usableItem_ctor(item->name,item->description,item->price,item->timeEffect,item->bonusHP,item->bonusATT,item->bonusDEFAbs,item->bonusESQ));
         }
         printf("\n");
     }
@@ -408,19 +411,19 @@ DlistItem* readFromFile_item(){
 
 UsableItem createUsableItems(enum itemNumber number){
     if(number == HEALTH_POTION){
-        UsableItem health = *usableItem_ctor("HEALTH_POTION","Drinkable item that heals 20 health points.", 10, 0, 0, 0, 1, 1, 1);
+        UsableItem health = *usableItem_ctor("HEALTH_POTION","Heals 20 health points.", 10, 0, 0, 1, 1, 1);
         return health;
     }
     else if(number == STRENGTH_POTION){
-        UsableItem strength = *usableItem_ctor("STRENGTH_POTION","Drinkable item that heals 20 attack points.", 0, 10, 0, 0, 1, 1, 1);
+        UsableItem strength = *usableItem_ctor("STRENGTH_POTION","Add 20 attack points.", 0, 10, 0, 1, 1, 1);
         return strength;
     }
     else if(number == DEFENSE_POTION){
-        UsableItem defense = *usableItem_ctor("DEFENSE_POTION","Drinkable item that heals 20 defense points.", 0, 0, 10, 0, 1, 1, 1);
+        UsableItem defense = *usableItem_ctor("DEFENSE_POTION","Add 20 defense points.", 0, 10, 0, 1, 1, 1);
         return defense;
     }
     else if(number == GHOST_POTION){
-        UsableItem ghost = *usableItem_ctor("GHOST_POTION","Drinkable item that heals 20 dodge points.", 0, 0, 0, 10, 1, 1, 1);
+        UsableItem ghost = *usableItem_ctor("GHOST_POTION","Add 20 dodge points.", 0, 0, 10, 1, 1, 1);
         return ghost;
     }
 }
@@ -460,5 +463,9 @@ void setPotionAtStart(Player *target){
                 break;
         }
     }
+    useItem_display(target->inventory);
+}
+
+void show_inventory(Player *target){
     useItem_display(target->inventory);
 }

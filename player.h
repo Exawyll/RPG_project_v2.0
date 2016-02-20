@@ -21,7 +21,7 @@ typedef struct playerStructure {
     int job;
     bool autoPilot;
     DlistItem *inventory;
-    DlistStuff *armory;
+    //DlistStuff *armory;
 }Player;
 
 // Function Prototype
@@ -34,5 +34,6 @@ void setPotionAtStart(Player *target);
 void init_inventory(Player* target);
 
 void setPotionAtStart(Player *target);
+void menu_player(Player *target);
 
 #endif // PLAYER_H_INCLUDED

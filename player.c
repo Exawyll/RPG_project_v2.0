@@ -140,3 +140,21 @@ void buildToStart(Player *target){
         DisplayStats(target);
     }
 }
+
+void menu_player(Player *target){
+    int userChoice;
+
+    printf("########################\n");
+    printf("#1 : Inventory         #\n");
+    printf("########################\n");
+
+    userChoice = userInputInt();
+
+    switch(userChoice){
+        case 1:
+            show_inventory(target);
+            break;
+        default:
+            break;
+    }
+}

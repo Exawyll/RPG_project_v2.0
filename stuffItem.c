@@ -177,7 +177,7 @@ void item_display(DlistStuff *p_list)
         struct node_stuff *p_temp = p_list->p_head;
         while (p_temp != NULL)
         {
-            printf_struct_race(&p_temp->stuff);
+            printf_struct_stuff(&p_temp->stuff);
             fflush(stdout);
             p_temp = p_temp->p_next;
         }
@@ -406,7 +406,7 @@ DlistStuff* readFromFile_stuff(){
 }
 //endregion
 
-UsableItem createUsableItems(enum itemNumber number){
+/*UsableItem createUsableItems(enum itemNumber number){
     if(number == HEALTH_POTION){
         UsableItem health = *usableItem_ctor("HEALTH_POTION","Drinkable item that heals 20 health points.", 10, 0, 0, 0, 1, 1, 1);
         return health;
@@ -472,21 +472,21 @@ void createStuff(){
     StuffItem* leggings = stuffItem_ctor("cuir", 100, 2, 10, 2, 10, 3);
     StuffItem* boots = stuffItem_ctor("sandales", 100, 1, 10, 2, 10, 3);
     StuffItem* sword = stuffItem_ctor("katana", 100, 1, 10, 2, 10, 3);
-    StuffItem* shield = stuffItem_ctor("bouclier", 100, 1, 10, 2, 10, 3);
+    StuffItem* shield = stuffItem_ctor("bouclier", 100, 1, 10, 2, 10, 3);*/
 
-    item_append(stuffList, *casque);
+    /*item_append(stuffList, *casque);
     item_append(stuffList, *armor);
     item_append(stuffList, *leggings);
     item_append(stuffList, *boots);
     item_append(stuffList, *sword);
-    item_append(stuffList, *shield);
+    item_append(stuffList, *shield);*/
 
-    item_display(stuffList);
+    //item_display(stuffList);
 
-    Equipment* start = Equipment_ctor(casque, armor, leggings, boots, sword, shield);
+    //Equipment* start = Equipment_ctor(casque, armor, leggings, boots, sword, shield);
 
     //writeToFile_stuff(stuffList);
     //DlistStuff* newStuffList = readFromFile_stuff();
 
     //item_display(newStuffList);
-}
+//}

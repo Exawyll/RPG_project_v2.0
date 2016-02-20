@@ -9,7 +9,7 @@
 1455292107 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.h
 	"player.h"
 
-1455534572 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
+1455730047 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
 	<stdbool.h>
 	"usableItem.h"
 
@@ -20,7 +20,7 @@
 	<stdlib.h>
 	<string.h>
 
-1455534564 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
+1455730046 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -36,7 +36,7 @@
 	<stdlib.h>
 	<string.h>
 
-1455534645 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
+1455730146 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -45,7 +45,7 @@
 	"gameUtil.h"
 	"usableItem.h"
 
-1455534564 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.c
+1455730284 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.c
 	<stdio.h>
 	<stdlib.h>
 	"usableItem.h"
@@ -61,4 +61,11 @@
 	"usableItem.h"
 	"player.h"
 	"gameUtil.h"
+
+1455729117 source:c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.c
+	<stdlib.h>
+	<stdio.h>
+	"stuffItem.h"
+
+1455538528 c:\users\stèphanie\documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.h
 
