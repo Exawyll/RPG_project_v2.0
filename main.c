@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 {
     Player *Hero = NewPlayer();
     //Player *Mob = NewPlayer();
-    menu_player(Hero);
+    //menu_player(Hero);
 
     return(0);
 }

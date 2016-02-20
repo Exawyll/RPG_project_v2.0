@@ -12,9 +12,10 @@
 			- removeUsableItemEffect(Usableitem* item, Mob* mob)
 			- sellUsableitem(Usableitem* item, Player* player)*/
 
-UsableItem* usableItem_ctor(char* name, char* description, int price, int timeEffect, int bonusHP, int bonusATT, int bonusDEFAbs, int bonusESQ){
+UsableItem* usableItem_ctor(char* name, int id, char* description, int price, int timeEffect, int bonusHP, int bonusATT, int bonusDEFAbs, int bonusESQ){
     UsableItem* p = malloc(sizeof(UsableItem));
     p->name = name;
+    p->id = id;
     p->description = description;
     p->price = price;
     p->timeEffect = timeEffect;
@@ -316,9 +317,7 @@ size_t useItem_length(DlistItem *p_list)
     return ret;
 }
 
-//Return choosen item to a new list
-DlistItem *useItem_find(DlistItem *p_list, UsableItem item)
-{
+/*DlistItem *useItem_find(DlistItem *p_list, UsableItem item) {
     DlistItem *ret = NULL;
     if (p_list != NULL)
     {
@@ -339,7 +338,32 @@ DlistItem *useItem_find(DlistItem *p_list, UsableItem item)
         }
     }
     return ret;
-}
+}*/
+
+// FIND ITEM
+// Can't return 0 because it's interpreted as an int. Return NULL for functions
+// that are supposed to return pointers.
+/*struct node_item* findItem (struct node_item *node, enum itemNumber number) {
+
+  if (node == NULL) {
+    return(NULL);
+  }
+
+  // Avoid unitialized or unassigned nodes.
+  while (node->item != NULL) {
+     if (node->item->id == number) {
+       return(node);
+     }
+
+     if (node->p_next != NULL) {
+       node = node->p_next;
+     } else {
+       return(NULL);
+     }
+  }
+  return(NULL);
+}*/
+
 
 //Return all choosen items to a new list
 DlistItem *useItem_find_all(DlistItem *p_list, UsableItem item)
@@ -398,7 +422,7 @@ DlistItem* readFromFile_item(){
 
         /* Attempt to read element one by one */
         while (fread(item,sizeof(UsableItem),1,fptr) == 1) {
-            useItem_append(p_list, *usableItem_ctor(item->name,item->description,item->price,item->timeEffect,item->bonusHP,item->bonusATT,item->bonusDEFAbs,item->bonusESQ));
+            useItem_append(p_list, *usableItem_ctor(item->name,item->id,item->description,item->price,item->timeEffect,item->bonusHP,item->bonusATT,item->bonusDEFAbs,item->bonusESQ));
         }
         printf("\n");
     }
@@ -411,19 +435,19 @@ DlistItem* readFromFile_item(){
 
 UsableItem createUsableItems(enum itemNumber number){
     if(number == HEALTH_POTION){
-        UsableItem health = *usableItem_ctor("HEALTH_POTION","Heals 20 health points.", 10, 0, 0, 1, 1, 1);
+        UsableItem health = *usableItem_ctor("HEALTH_POTION", HEALTH_POTION, "Heals 20 health points.", 10, 0, 0, 1, 1, 1);
         return health;
     }
     else if(number == STRENGTH_POTION){
-        UsableItem strength = *usableItem_ctor("STRENGTH_POTION","Add 20 attack points.", 0, 10, 0, 1, 1, 1);
+        UsableItem strength = *usableItem_ctor("STRENGTH_POTION", STRENGTH_POTION, "Add 20 attack points.", 0, 10, 0, 1, 1, 1);
         return strength;
     }
     else if(number == DEFENSE_POTION){
-        UsableItem defense = *usableItem_ctor("DEFENSE_POTION","Add 20 defense points.", 0, 10, 0, 1, 1, 1);
+        UsableItem defense = *usableItem_ctor("DEFENSE_POTION", DEFENSE_POTION, "Add 20 defense points.", 0, 10, 0, 1, 1, 1);
         return defense;
     }
     else if(number == GHOST_POTION){
-        UsableItem ghost = *usableItem_ctor("GHOST_POTION","Add 20 dodge points.", 0, 0, 10, 1, 1, 1);
+        UsableItem ghost = *usableItem_ctor("GHOST_POTION", GHOST_POTION,"Add 20 dodge points.", 0, 0, 10, 1, 1, 1);
         return ghost;
     }
 }
@@ -464,8 +488,101 @@ void setPotionAtStart(Player *target){
         }
     }
     useItem_display(target->inventory);
+    int founded = 0;
+    founded = useItem_find(target->inventory, STRENGTH_POTION);
+    printf("%d\n", founded);
+    //printf("%d\n", target->inventory->p_head);
+   /*if (target->inventory != NULL)
+    {
+        struct node_item *p_temp = target->inventory->p_head;
+        while (p_temp != NULL)
+        {
+            printf("%d -> ", i);
+            UsableItem *monObjet;
+            monObjet = &p_temp->item;
+            printf("Name: %s\n", monObjet->id);
+            p_temp = p_temp->p_next;
+        }
+    }
+    printf("\n");*/
+
+    //printf("%d\n", useItem_find(target->inventory, GHOST_POTION));
+    //int searchResult = useItem_find(target->inventory, STRENGTH_POTION);
+    //printf("\n\n%d\n\n", searchResult);
 }
 
+//Return choosen item to a new list
+int useItem_find(DlistItem *p_list, enum itemNumber number)
+{
+    int ret = 0;
+    //DlistItem *ret = NULL;
+    if (p_list != NULL)
+    {
+        struct node_item *p_temp = p_list->p_head;
+        int found = 0;
+        while (p_temp != NULL && !found)
+        {
+            UsableItem *monObjet;
+            monObjet = &p_temp->item;
+            if (monObjet->id == number)
+            {
+                ret = number;
+                found = 1;
+            }
+            else
+            {
+                p_temp = p_temp->p_next;
+            }
+        }
+    }
+    return ret;
+}
+    /*if (node == NULL) {
+    return(NULL);
+  }
+
+  // Avoid unitialized or unassigned nodes.
+  while (node->p_head != NULL) {
+     if (node->length->id == number) {
+       return(node);
+     }
+
+     if (node->next != NULL) {
+       node = node->next;
+     } else {
+       return(NULL);
+     }
+  }
+  return(NULL);
+}*/
+
 void show_inventory(Player *target){
+    int userChoice = 0;
     useItem_display(target->inventory);
+
+    printf("1 : Use item\n2 : Delete item\n");
+
+    userChoice = userInputInt();
+    if(userChoice == 1){
+        useYourPotion(target);
+    }
+    else if(userChoice == 2){
+        //deletePotion();
+    }
+    else{
+        printf("Please choose only 1 or 2\n");
+    }
+}
+
+void useYourPotion(Player *Target){
+    int userChoice = 0;
+    printf("Select the item your want to use by pressing the corresponding number :");
+    userChoice = userInputInt();
+    /*switch(userChoice){
+        case 1
+    }
+    HEALTH_POTION,
+    STRENGTH_POTION,
+    DEFENSE_POTION,
+    GHOST_POTION*/
 }

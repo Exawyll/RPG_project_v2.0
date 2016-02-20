@@ -39,9 +39,9 @@ Player* NewPlayer() {
     }
     else {
         tempPlayer->autoPilot = false;
-        SetName(tempPlayer);
-        setJob(tempPlayer);
-        buildToStart(tempPlayer);
+        //SetName(tempPlayer);
+        //setJob(tempPlayer);
+        //buildToStart(tempPlayer);
         setPotionAtStart(tempPlayer);
     }
     ++PlayersCreated;

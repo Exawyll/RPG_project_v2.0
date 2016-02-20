@@ -21,6 +21,7 @@ enum itemNumber {
 
 typedef struct UsableItem{
     char* name;
+    int id;
     char* description;
     int price;
     int timeEffect;
@@ -30,7 +31,7 @@ typedef struct UsableItem{
     int bonusESQ;
 }UsableItem;
 
-UsableItem* usableItem_ctor(char* name, char* description, int price, int TimeEffect, int bonusHP, int bonusATT, int bonusDEFAbs, int bonusESQ);
+UsableItem* usableItem_ctor(char* name, int id, char* description, int price, int TimeEffect, int bonusHP, int bonusATT, int bonusDEFAbs, int bonusESQ);
 
 //Creation of list for UsableItem
 struct node_item
@@ -50,7 +51,11 @@ typedef struct useItem
 DlistItem* readFromFile_item();
 void writeToFile_item(DlistItem *p_list);
 DlistItem *useItem_find_all(DlistItem *p_list, UsableItem item);
-DlistItem *useItem_find(DlistItem *p_list, UsableItem item);
+//DlistItem *useItem_find(DlistItem *p_list, UsableItem item);
+
+//struct node_item* findItem (struct node_item *node, enum itemNumber number);
+
+int useItem_find(DlistItem *p_list, enum itemNumber number);
 size_t useItem_length(DlistItem *p_list);
 DlistItem *useItem_remove_id(DlistItem *p_list, int position);
 DlistItem *useItem_remove_all(DlistItem *p_list, int item);
@@ -66,5 +71,6 @@ void printf_struct_item(UsableItem* item);
 //Prototype functions
 UsableItem createUsableItems(enum itemNumber);
 void menuSelectPotion();
+//void show_inventory(Player *target);
 
 #endif // USABLEITEM_H_INCLUDED
