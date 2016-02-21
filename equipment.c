@@ -10,21 +10,59 @@
 			- calcRelDef(Equipment* equipment, Mob* mob)
 			- calcAbsDef(Equipment* equipment, Mob* mob)*/
 
-/*void set_equipment(Player *target){
-    target->build = malloc(sizeof(StuffItem));
-    build[HELMET] = 0;
-    build[ARMOR] = *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10);
-    build[LEFT_HAND] = 0;
-    build[RIGHT_HAND] = *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0);
-    build[LEGGINGS] = 0;
-    build[BOOTS] = 0;
+void calcAttributesWithEqpt(Player *target)
+{
+    int bonusATT = 0;
+    int bonusHP = 0;
+    int bonusDEF = 0;
+    int bonusDEFRel = 0;
     int i = 0;
     for(i = 0; i < 6; i++){
-        if(target->build[i] != 0){
+        if(target->build[i])
+        {
+            bonusATT = target->build[i]->I_bonusATT;
+            bonusHP = target->build[i]->I_bonusHP;
+            bonusDEF = target->build[i]->I_bonusDEFAbs;
+            bonusDEFRel = target->build[i]->I_bonusDEFRel;
 
+            if(bonusATT > 0)
+            {
+                target->attack += bonusATT;
+            }
+            if(bonusDEF > 0)
+            {
+                target->defense += bonusDEF;
+            }
+            if(bonusDEFRel > 0)
+            {
+                target->relDef += bonusDEFRel;
+            }
+            if(bonusHP > 0)
+            {
+                target->health += bonusHP;
+            }
         }
     }
-}*/
+}
+
+void displayEqpt(Player *target)
+{
+    int i = 0;
+    for(i = 0; i < 6; i++){
+        if(target->build[i])
+        {
+            printf("Name :%s\n", target->build[i]->name);
+            printf("Price :%d\n", target->build[i]->price);
+            printf("Type :%d\n", target->build[i]->type);
+            printf("ATT :%d\n", target->build[i]->I_bonusATT);
+            printf("DEF :%d\n", target->build[i]->I_bonusDEFAbs);
+            printf("DEFRel :%d\n", target->build[i]->I_bonusDEFRel);
+            printf("HP :%d\n", target->build[i]->I_bonusHP);
+        }
+    }
+}
+
+
 
 /*void initEqt(Player *target){
     StuffItem* rienHead = stuffItem_ctor(' ',0,HELMET,0,0,0,0);
@@ -33,16 +71,14 @@
     StuffItem* rienRight = stuffItem_ctor(' ',0,RIGHT_HAND,0,0,0,0);
     StuffItem* rienLegs = stuffItem_ctor(' ',0,LEGGINGS,0,0,0,0);
     StuffItem* rienBoot = stuffItem_ctor(' ',0,BOOTS,0,0,0,0);
-    Equipment* myEqpt = Equipment_ctor(rienHead,rienBody,rienLegs,rienBoot,rienRight,rienLeft);
-    target->equiped = myEqpt;
 }
 
 void setEqpt(){
 
 }*/
 
-void displayEqpt(Player *target){
-    /*printf("                  /88888888888888888888888888\          \n");
+/*void displayEqpt(Player *target){
+    printf("                  /88888888888888888888888888\          \n");
     printf("                  |88888888888888888888888888/      <---    \n");
     printf("                   |~~____~~~~~~~~~\"\"\"\"\"\"\"\"\"|           \n");
     printf("                  / \_________/\"\"\"\"\"\"\"\"\"\"\"\"\"\           \n");
@@ -74,8 +110,8 @@ void displayEqpt(Player *target){
     printf("     /   |                     |     ----------\"\"\\      \n");
     printf("/\"\--\"--_|                     |               |  \\     \n");
     printf("|_______/                      \\______________/    )    \n");
-    printf("                                              \\___/     \n");*/
-}
+    printf("                                              \\___/     \n");
+}*/
 
 /*void calcAttack(Equipment* equipment, Mob* mob){
 }

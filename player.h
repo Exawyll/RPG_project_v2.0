@@ -35,6 +35,8 @@ int setJob(Player* target);
 void buildToStart(Player *target);
 void menu_player(Player *target);
 //Concern USABLE ITEMS
+UsableItem createUsableItems(enum itemNumber);
+void menuSelectPotion();
 void init_inventory(Player* target);
 void setPotionAtStart(Player *target);
 void show_inventory(Player *target);
@@ -42,10 +44,11 @@ void useYourPotion(Player *target);
 void deletePotion(Player *target);
 //Concern STUFF ITEMS
 void setStuffAtStart(Player *target);
+void show_stuff(Player *target);
+void set_equip(Player *target, int position);
 //Concern Equipment
 void initEqt(Player *target);
 void displayEqpt(Player *target);
-void set_equipment(Player *target);
-
+void calcAttributesWithEqpt(Player *target);
 
 #endif // PLAYER_H_INCLUDED

@@ -23,6 +23,7 @@
 // Takes a player as an argument and prints their name, health, and attack. Returns nothing.
 void DisplayStats (struct playerStructure *Target) {
     // We don't want to keep retyping all this.
+    calcAttributesWithEqpt(Target);
     printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", Target->name, Target->health, Target->attack, Target->defense, Target->relDef, Target->dodge);
 }
 
@@ -40,10 +41,10 @@ Player* NewPlayer() {
     }
     else {
         tempPlayer->autoPilot = false;
-        SetName(tempPlayer);
+        //SetName(tempPlayer);
         //initEqt(tempPlayer);
-        //setJob(tempPlayer);
-        //setStuffAtStart(tempPlayer);
+        setJob(tempPlayer);
+        setStuffAtStart(tempPlayer);
         //buildToStart(tempPlayer);
         //setPotionAtStart(tempPlayer);
 
@@ -151,7 +152,9 @@ void menu_player(Player *target){
     int userChoice;
 
     printf("########################\n");
-    printf("#1 : Inventory         #\n");
+    printf("#1 : POTION inventory  #\n");
+    printf("#2 : STUFF Inventory   #\n");
+    printf("#3 : EQUIPMENT         #\n");
     printf("########################\n");
 
     userChoice = userInputInt();
@@ -160,7 +163,14 @@ void menu_player(Player *target){
         case 1:
             show_inventory(target);
             break;
+        case 2:
+            //showEqpt(target);
+            break;
+        case 3:
+            //showEqpt(target);
+            break;
         default:
+            printf("Please, write only a correct entry !\n");
             break;
     }
 }

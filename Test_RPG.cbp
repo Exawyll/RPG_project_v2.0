@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="equipment.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="equipment.h" />
 		<Unit filename="fight.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -58,9 +62,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="usableItem.h" />
-		<Unit filename="wastecode.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="wastecode.h" />
 		<Extensions>
 			<code_completion />

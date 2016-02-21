@@ -180,6 +180,9 @@ void useItem_display(DlistItem *p_list)
 {
     if (p_list != NULL)
     {
+        printf("----------------------------------\n");
+        printf("Welcome into your POTION INVENTORY\n");
+        printf("----------------------------------\n");
         int i = 1;
         struct node_item *p_temp = p_list->p_head;
         while (p_temp != NULL)
@@ -191,6 +194,7 @@ void useItem_display(DlistItem *p_list)
             i++;
         }
     }
+    printf("----------------------------------\n");
     printf("\n");
 }
 

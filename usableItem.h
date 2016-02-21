@@ -1,6 +1,7 @@
 #ifndef USABLEITEM_H_INCLUDED
 #define USABLEITEM_H_INCLUDED
 
+
 /*- Usableitem.h : contient l'ensemble des objets utilisable par une créature :
 			- nom
 			- valeur (valeur en or)
@@ -69,8 +70,6 @@ DlistItem *useItem_new(void);
 void printf_struct_item(UsableItem* item);
 
 //Prototype functions
-UsableItem createUsableItems(enum itemNumber);
-void menuSelectPotion();
 
 
 #endif // USABLEITEM_H_INCLUDED

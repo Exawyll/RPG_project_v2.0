@@ -1,6 +1,7 @@
 #ifndef STUFFITEM_H_INCLUDED
 #define STUFFITEM_H_INCLUDED
 
+
 /*- StuffItem.h : contient l'ensemble des caractéristiques d'un objet porté par une créature :
 			- nom
 			- valeur (valeur en or)
@@ -16,9 +17,9 @@ enum stuffNumber {
     ARMOR,
     RIGHT_HAND,
     LEFT_HAND,
-    TWO_HAND,
     LEGGINGS,
-    BOOTS
+    BOOTS,
+    TWO_HAND
 };
 
 //Gives attributes to all the items which equip a creature
@@ -65,7 +66,9 @@ DlistStuff *item_prepend(DlistStuff *p_list, StuffItem stuff);
 DlistStuff *item_append(DlistStuff *p_list, StuffItem stuff);
 DlistStuff *item_new(void);
 void printf_struct_stuff(StuffItem* stuff);
+StuffItem *item_return_stuff(DlistStuff *p_list, int position);
 
 //Prototype of functions
+
 
 #endif // STUFFITEM_H_INCLUDED

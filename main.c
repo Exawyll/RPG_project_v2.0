@@ -18,7 +18,6 @@ char* userInputChar(char* string);
 int main(int argc, char *argv[])
 {
     Player *Hero = NewPlayer();
-    printf("Yo\n");
     //Player *Mob = NewPlayer();
     //menu_player(Hero);
     //Hero->build[HELMET] = 0;
@@ -26,9 +25,11 @@ int main(int argc, char *argv[])
     //Hero->build[LEFT_HAND] = 0;
     Hero->build[RIGHT_HAND] = stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0);
     //Hero->build[LEGGINGS] = 0;
-    //Hero->build[BOOTS] = 0;
-    int i = 0;
+    //Hero->build[BOOTS] = 0;*/
+    /*int i = 0;
     for(i = 0; i < 6; i++){
+        Hero->build[i] = 0;
+        printf("Name : %s\n", Hero->build[i]->name);
         if(Hero->build[i] != 0){
             printf("Name : %s\n", Hero->build[i]->name);
             Hero->attack += Hero->build[i]->I_bonusATT;
