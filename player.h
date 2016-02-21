@@ -28,7 +28,7 @@ typedef struct playerStructure {
 }Player;
 
 // Function Prototype
-void DisplayStats (struct playerStructure *Target);
+void DisplayStats (Player *Target);
 void SetName(Player *target);
 Player* NewPlayer();    // Creates player and sets class.
 int setJob(Player* target);

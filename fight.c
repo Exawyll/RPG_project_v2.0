@@ -5,8 +5,34 @@
 #include "fight.h"
 #include "gameUtil.h"
 
-int Fight (Player *Attacker, Player *Target) {
-    int EffectiveAttack = Attacker->attack - Target->defense;
+int calcPlayerAttack(Player *target)
+{
+    int diceATT = rollDice_attack();
+    int totAttack = (target->attack + diceATT);
+    return totAttack;
+}
+
+int calcMobAttack(Mob *mob)
+{
+    int diceATT = rollDice_attack();
+    int totAttack = (mob->attack + diceATT);
+    return totAttack;
+}
+
+int calcDefenseRel_player(Player *target, int attack)
+{
+
+}
+
+int calcDefenseRel_mob(Player *target, int attack)
+{
+
+}
+
+int Fight (Player *player, Mob *mob) {
+    int diceATT = 0;
+    int diceDOD = 0;
+    int EffectiveAttack = (Attacker->attack + diceATT) - (mob->relDef) + mob->defense;
 
     while (Target->health > 0) {
         // Get user input if autopilot is set to false.

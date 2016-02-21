@@ -33,10 +33,10 @@ typedef struct StuffItem{
     int I_bonusDEFAbs;
 }StuffItem;
 
-//prototype for the stuffDlistStuff builder
+//prototype for the Stuff builder
 StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusHP, int I_bonusATT, int I_bonusDEFRel, int I_bonusDEFAbs);
 
-//Create of list for stuffDlistStuff
+//Create of list for DlistStuff
 struct node_stuff
 {
     StuffItem stuff;

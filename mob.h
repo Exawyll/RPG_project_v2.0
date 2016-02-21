@@ -1,27 +1,18 @@
 #ifndef MOB_H_INCLUDED
 #define MOB_H_INCLUDED
 
-// Races of mobs are enumerated.
-typedef enum RacesEnum  {
-    GOBELIN,
-    ORC,
-    URUKAI,
-    TROLL,
-    DRAGON
-} races;
-
-typedef struct monsterStructure {
-    char name[50];
+typedef struct mobStructure {
+    int races;
     int health;
     int attack;
     int defense;
     int relDef;
     int dodge;
-    int job;
-    bool autoPilot;
-    DlistItem *inventory;
-    DlistStuff *armory;
-    StuffItem* build[6];
-}Monster;
+}Mob;
+//Prototype of constructor for mob
+Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int dodge);
+
+//Prototype of functions
+void createMobs();
 
 #endif // MOB_H_INCLUDED

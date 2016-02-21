@@ -20,24 +20,9 @@ int main(int argc, char *argv[])
     Player *Hero = NewPlayer();
     //Player *Mob = NewPlayer();
     //menu_player(Hero);
-    //Hero->build[HELMET] = 0;
-    /*Hero->build[ARMOR] = stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10);
-    //Hero->build[LEFT_HAND] = 0;
-    Hero->build[RIGHT_HAND] = stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0);
-    //Hero->build[LEGGINGS] = 0;
-    //Hero->build[BOOTS] = 0;*/
-    /*int i = 0;
-    for(i = 0; i < 6; i++){
-        Hero->build[i] = 0;
-        printf("Name : %s\n", Hero->build[i]->name);
-        if(Hero->build[i] != 0){
-            printf("Name : %s\n", Hero->build[i]->name);
-            Hero->attack += Hero->build[i]->I_bonusATT;
-            Hero->health += Hero->build[i]->I_bonusHP;
-            Hero->defense += Hero->build[i]->I_bonusDEFAbs;
-            Hero->relDef += Hero->build[i]->I_bonusDEFRel;
-        }
-    }*/
+
+    createMobs();
+
     DisplayStats(Hero);
 
 
