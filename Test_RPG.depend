@@ -86,7 +86,7 @@
 	"stuffItem.h"
 	"player.h"
 
-1456578712 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\equipment.c
+1456584894 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\equipment.c
 	<stdio.h>
 	<stdlib.h>
 	"equipment.h"
@@ -100,7 +100,7 @@
 
 1456071896 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.h
 
-1456582997 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
+1456584993 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
 	<stdbool.h>
 	"usableItem.h"
 	"stuffItem.h"
@@ -119,7 +119,7 @@
 
 1455478550 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.h
 
-1456577807 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
+1456585008 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -138,7 +138,7 @@
 
 1456068666 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mobrace.c
 
-1456578866 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
+1456584292 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

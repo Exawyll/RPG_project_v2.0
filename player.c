@@ -45,11 +45,10 @@ Player* NewPlayer() {
         tempPlayer->autoPilot = false;
         //SetName(tempPlayer);
         setJob(tempPlayer);
-        //initEqt(tempPlayer);
+        initEqpt(tempPlayer);
         setStuffAtStart(tempPlayer);
         //buildToStart(tempPlayer);
         //setPotionAtStart(tempPlayer);
-
     }
     ++PlayersCreated;
 

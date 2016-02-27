@@ -49,7 +49,7 @@ void setStuffAtStart(Player *target);
 void show_stuff(Player *target);
 void set_equip(Player *target, int position);
 //Concern Equipment
-void initEqt(Player *target);
+void initEqpt(Player *target);
 void displayEqpt(Player *target);
 void calcAttributesWithEqpt(Player *target);
 void autoEquip(Player *target, StuffItem *toEquip);

@@ -47,24 +47,67 @@ void calcAttributesWithEqpt(Player *target)
 
 void displayEqpt(Player *target)
 {
+    char *name;
+    int price = 0;
+    int type = 0;
+    int bonusATT = 0;
+    int bonusHP = 0;
+    int bonusDEF = 0;
+    int bonusDEFRel = 0;
+    int bonusDEFAbs = 0;
     int i = 0;
+
+    printf("-------------------------------\n");
+    printf("-          EQUIPPED           -\n");
+    printf("-------------------------------\n");
+
     for(i = 0; i < 6; i++){
         if(target->build[i])
         {
-            printf("Name :%s\n", target->build[i]->name);
-            printf("Price :%d\n", target->build[i]->price);
-            printf("Type :%d\n", target->build[i]->type);
-            printf("ATT :%d\n", target->build[i]->I_bonusATT);
-            printf("DEF :%d\n", target->build[i]->I_bonusDEFAbs);
-            printf("DEFRel :%d\n", target->build[i]->I_bonusDEFRel);
-            printf("HP :%d\n", target->build[i]->I_bonusHP);
+            name = target->build[i]->name;
+            price = target->build[i]->price;
+            type = target->build[i]->type;
+            bonusATT = target->build[i]->I_bonusATT;
+            bonusHP = target->build[i]->I_bonusHP;
+            bonusDEFAbs = target->build[i]->I_bonusDEFAbs;
+            bonusDEFRel = target->build[i]->I_bonusDEFRel;
+            if(name != ' '){
+                switch(type){
+                    case HELMET:
+                        printf("HEAD --> ");
+                        break;
+                    case ARMOR:
+                        printf("BODY --> ");
+                        break;
+                    case RIGHT_HAND:
+                        printf("HAND --> ");
+                        break;
+                    case LEFT_HAND:
+                        printf("HAND --> ");
+                        break;
+                    case LEGGINGS:
+                        printf("LEGS --> ");
+                        break;
+                    case BOOTS:
+                        printf("FOOT --> ");
+                        break;
+                }
+                printf("Name :%s\n", name);
+                printf("         Price :%d\n", price);
+                printf("         HP :%d\n", bonusHP);
+                printf("         ATT :%d\n", bonusATT);
+                printf("         DEF :%d\n", bonusDEFAbs);
+                printf("         DEFRel :%d\n", bonusDEFRel);
+            }
         }
     }
+    printf("-------------------------------\n");
+    printf("\n");
 }
 
-void initEqt(Player *target){
+void initEqpt(Player *target){
     int i = 0;
-    for(i = 0; i < 0; i++){
+    for(i = 0; i < 6; i++){
         StuffItem* fakeObject = stuffItem_ctor(' ',0,i,0,0,0,0);
         target->build[i] = fakeObject;
     }

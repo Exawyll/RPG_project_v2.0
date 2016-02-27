@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     //menu_player(Hero);
     //show_stuff(Hero);
     //createMobs();
-
+    displayEqpt(Hero);
     DisplayStats(Hero);
 
 
