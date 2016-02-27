@@ -477,33 +477,71 @@ void setStuffAtStart(Player *target){
     int userChoice = userInputInt();
     switch(target->job){
         case WARRIOR:
-            item_append(target->armory, *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0));
-            item_append(target->armory, *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10));
             if(userChoice == 1){
-                set_equip(target, 1);
-                set_equip(target, 1);
+                autoEquip(target, stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0));
+                autoEquip(target, stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10));
+            }
+            else{
+                item_append(target->armory, *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0));
+                item_append(target->armory, *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10));
             }
             break;
         case RANGER:
-            item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 0, 10, 0, 0));
-            item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 0, 1, 10));
             if(userChoice == 1){
-                set_equip(target, 1);
-                set_equip(target, 1);
+                autoEquip(target, stuffItem_ctor("My First Bow", 10, TWO_HAND, 0, 10, 0, 0));
+                autoEquip(target, stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 0, 1, 10));
+            }
+            else{
+                item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 0, 10, 0, 0));
+                item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 0, 1, 10));
             }
             break;
         case WIZARD:
-            item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 0, 10, 0, 0));
-            item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 0, 1, 10));
             if(userChoice == 1){
-                set_equip(target, 1);
-                set_equip(target, 1);
+                autoEquip(target, stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 0, 10, 0, 0));
+                autoEquip(target, stuffItem_ctor("My First Robe", 10, ARMOR, 0, 0, 1, 10));
+            }
+            else{
+                item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 0, 10, 0, 0));
+                item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 0, 1, 10));
             }
             break;
         default:
             break;
     }
     item_display(target->armory);
+}
+
+void autoEquip(Player *target, StuffItem *toEquip){
+    int type = toEquip->type;
+    StuffItem *object2;
+    switch(type){
+        case HELMET:
+            target->build[HELMET] = toEquip;
+            break;
+        case ARMOR:
+            target->build[ARMOR] = toEquip;
+            break;
+        case RIGHT_HAND:
+            target->build[RIGHT_HAND] = toEquip;
+            break;
+        case LEFT_HAND:
+            target->build[LEFT_HAND] = toEquip;
+            break;
+        case LEGGINGS:
+            target->build[LEGGINGS] = toEquip;
+            break;
+        case BOOTS:
+            target->build[BOOTS] = toEquip;
+            break;
+        case TWO_HAND:
+            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0,0);
+            target->build[RIGHT_HAND] = toEquip;
+            target->build[LEFT_HAND] = object2;
+            break;
+        default:
+            break;
+    }
 }
 
 void show_stuff(Player *target){
@@ -531,8 +569,8 @@ void show_stuff(Player *target){
 
 void set_equip(Player *target, int position){
     StuffItem* toEquip = item_return_stuff(target->armory, position);
-    printf("Name : %s\n", toEquip->name);
     int type = toEquip->type;
+    printf("Type : %d\n", type);
     StuffItem *object;
     StuffItem *object2;
     switch(type){
@@ -560,8 +598,26 @@ void set_equip(Player *target, int position){
             }
             else
             {
-                printf("Je vais equip une armure\n: %s\n", toEquip->name);
                 target->build[ARMOR] = toEquip;
+                item_remove_id(target->armory, position);
+            }
+            break;
+        case RIGHT_HAND:
+            printf("Name : \n");
+            if(target->build[RIGHT_HAND])
+            {
+                printf("la\n");
+                object = target->build[RIGHT_HAND];
+                printf("reussi\n");
+                item_append(target->armory, *object);
+                printf("dur\n");
+                target->build[RIGHT_HAND] = toEquip;
+                item_remove_id(target->armory, position);
+            }
+            else
+            {
+                printf("Dans right hand\n");
+                target->build[RIGHT_HAND] = toEquip;
                 item_remove_id(target->armory, position);
             }
             break;
@@ -576,21 +632,6 @@ void set_equip(Player *target, int position){
             else
             {
                 target->build[LEFT_HAND] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            break;
-        case RIGHT_HAND:
-            if(target->build[RIGHT_HAND])
-            {
-                object = target->build[RIGHT_HAND];
-                item_append(target->armory, *object);
-                target->build[RIGHT_HAND] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            else
-            {
-                printf("Je vais equip une arme\n: %s\n", toEquip->name);
-                target->build[RIGHT_HAND] = toEquip;
                 item_remove_id(target->armory, position);
             }
             break;

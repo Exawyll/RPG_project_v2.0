@@ -3,9 +3,9 @@
 #include <string.h>
 
 #include "player.h"
-#include "fight.h"
+//#include "fight.h"
 #include "usableItem.h"
-#include "gameUtil.h"
+//#include "gameUtil.h"
 
 #define NBR_POTIONS 3
 
@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
     Player *Hero = NewPlayer();
     //Player *Mob = NewPlayer();
     //menu_player(Hero);
-
-    createMobs();
+    //show_stuff(Hero);
+    //createMobs();
 
     DisplayStats(Hero);
 

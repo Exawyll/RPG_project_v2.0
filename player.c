@@ -3,35 +3,37 @@
 #include <string.h>
 
 #include "player.h"
-#include "fight.h"
-#include "gameUtil.h"
+//#include "fight.h"
+//#include "gameUtil.h"
 #include "usableItem.h"
 #include "stuffItem.h"
 
 #define POINT_TO_ATTRIBUTE 10
 
-//Resume the structurePlayer
-/*struct playerStructure {
-    char name[50];
-    int health;
-    int attack;
-    int defense;
-    int relDef;
-    int dodge;
-};*/
+Player* player_ctor(char name[50], int health, int attack, int defense, int relDef, int dodge){
+    Player* p = malloc(sizeof(Player));
+    p->name[50] = name[50];
+    p->health = health;
+    p->attack = attack;
+    p->defense = defense;
+    p->relDef = relDef;
+    p->dodge = dodge;
+    return p;
+}
 
 // Takes a player as an argument and prints their name, health, and attack. Returns nothing.
-void DisplayStats (struct playerStructure *Target) {
+void DisplayStats (struct playerStructure *target) {
     // We don't want to keep retyping all this.
-    calcAttributesWithEqpt(Target);
-    printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", Target->name, Target->health, Target->attack, Target->defense, Target->relDef, Target->dodge);
+    calcAttributesWithEqpt(target);
+    printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, target->health, target->attack, target->defense, target->relDef, target->dodge);
 }
 
 // Creates player and set job.
 Player* NewPlayer() {
     // Allocate memory to player pointer.
-    Player *tempPlayer = malloc(sizeof(Player));
-
+    Player *tempPlayer = player_ctor(" ", 0,0,0,0,0);
+    /*DlistItem *tempInventory = useItem_new();
+    DlistStuff *tempArmory = item_new();*/
     // Keep track of players created.
     // The static int allow to keep the value even after the function return 0.
     static int PlayersCreated = 0;
@@ -42,8 +44,8 @@ Player* NewPlayer() {
     else {
         tempPlayer->autoPilot = false;
         //SetName(tempPlayer);
-        //initEqt(tempPlayer);
         setJob(tempPlayer);
+        //initEqt(tempPlayer);
         setStuffAtStart(tempPlayer);
         //buildToStart(tempPlayer);
         //setPotionAtStart(tempPlayer);

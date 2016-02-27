@@ -50,6 +50,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mob.h" />
+		<Unit filename="mobRace.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mobRace.h" />
 		<Unit filename="player.c">
 			<Option compilerVar="CC" />
 		</Unit>

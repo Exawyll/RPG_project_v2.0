@@ -27,8 +27,10 @@ typedef struct playerStructure {
     StuffItem* build[6];
 }Player;
 
+Player* player_ctor(char[50], int health, int attack, int defense, int relDef, int dodge);
+
 // Function Prototype
-void DisplayStats (Player *Target);
+void DisplayStats (Player *target);
 void SetName(Player *target);
 Player* NewPlayer();    // Creates player and sets class.
 int setJob(Player* target);
@@ -50,5 +52,6 @@ void set_equip(Player *target, int position);
 void initEqt(Player *target);
 void displayEqpt(Player *target);
 void calcAttributesWithEqpt(Player *target);
+void autoEquip(Player *target, StuffItem *toEquip);
 
 #endif // PLAYER_H_INCLUDED

@@ -4,7 +4,7 @@
 #include "mob.h"
 #include "mobRace.h"
 
-Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int dodge){
+/*Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int dodge){
     Mob* p = malloc(sizeof(Mob));
     p->races = races;
     p->health = health;
@@ -23,4 +23,4 @@ void createMobs(){
     Mob* urukai = mob_ctor(URUKAI, 40, 7, 7, 3, 3);
     Mob* troll = mob_ctor(TROLL, 50, 8, 8, 4, 4);
     Mob* dragon = mob_ctor(DRAGON, 70, 10, 10, 5, 5);
-}
+}*/

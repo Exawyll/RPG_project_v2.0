@@ -62,20 +62,13 @@ void displayEqpt(Player *target)
     }
 }
 
-
-
-/*void initEqt(Player *target){
-    StuffItem* rienHead = stuffItem_ctor(' ',0,HELMET,0,0,0,0);
-    StuffItem* rienBody = stuffItem_ctor(' ',0,ARMOR,0,0,0,0);
-    StuffItem* rienLeft = stuffItem_ctor(' ',0,LEFT_HAND,0,0,0,0);
-    StuffItem* rienRight = stuffItem_ctor(' ',0,RIGHT_HAND,0,0,0,0);
-    StuffItem* rienLegs = stuffItem_ctor(' ',0,LEGGINGS,0,0,0,0);
-    StuffItem* rienBoot = stuffItem_ctor(' ',0,BOOTS,0,0,0,0);
+void initEqt(Player *target){
+    int i = 0;
+    for(i = 0; i < 0; i++){
+        StuffItem* fakeObject = stuffItem_ctor(' ',0,i,0,0,0,0);
+        target->build[i] = fakeObject;
+    }
 }
-
-void setEqpt(){
-
-}*/
 
 /*void displayEqpt(Player *target){
     printf("                  /88888888888888888888888888\          \n");

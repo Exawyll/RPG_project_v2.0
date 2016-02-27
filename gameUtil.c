@@ -54,7 +54,7 @@ char* userInputChar(){
 }
 
 
-//Return a random number between MAX and MIN
+/*//Return a random number between MAX and MIN
 int doRand(int MIN, int MAX){
     srand(time(NULL));
     return (rand() % (MAX - MIN + 1)) + MIN;
@@ -73,5 +73,5 @@ int rollDice_attack(){
 //Roll the dice to dodge
 int rollDice_dodge(){
     return doRand(1, 8);
-}
+}*/
 

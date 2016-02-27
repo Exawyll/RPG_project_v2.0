@@ -1,4 +1,4 @@
-#include <stdio.h>
+/*#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -76,4 +76,4 @@ int Fight (Player *player, Mob *mob) {
 
 void DisplayFightMenu () {
     printf("1) Attack\n2) Run\n");
-}
+}*/

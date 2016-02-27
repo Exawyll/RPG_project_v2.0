@@ -86,3 +86,82 @@
 	"stuffItem.h"
 	"player.h"
 
+1456578712 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\equipment.c
+	<stdio.h>
+	<stdlib.h>
+	"equipment.h"
+	"stuffItem.h"
+	"player.h"
+
+1456059762 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\equipment.h
+	"equipment.h"
+	"stuffItem.h"
+	"player.h"
+
+1456071896 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.h
+
+1456582997 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
+	<stdbool.h>
+	"usableItem.h"
+	"stuffItem.h"
+	"equipment.h"
+
+1456063430 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.h
+
+1456571816 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.c
+	<stdlib.h>
+	<string.h>
+	"fight.h"
+	"gameUtil.h"
+
+1455292108 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.h
+	"player.h"
+
+1455478550 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.h
+
+1456577807 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"player.h"
+	"usableItem.h"
+
+1456573968 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mob.c
+	<stdio.h>
+	<stdlib.h>
+	"mob.h"
+	"mobRace.h"
+
+1456573968 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mob.h
+
+1456071896 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mobrace.h
+
+1456068666 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mobrace.c
+
+1456578866 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"player.h"
+	"usableItem.h"
+	"stuffItem.h"
+
+1456583081 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.c
+	<stdlib.h>
+	<stdio.h>
+	"stuffItem.h"
+	"player.h"
+	"equipment.h"
+
+1456065682 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.c
+	<stdio.h>
+	<stdlib.h>
+	"usableItem.h"
+	"player.h"
+	"gameUtil.h"
+
+1456571856 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
