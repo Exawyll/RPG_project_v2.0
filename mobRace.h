@@ -12,4 +12,6 @@ typedef enum RacesEnum  {
     DRAGON
 } races;
 
+char* displayMobNames (enum RacesEnum);
+
 #endif // MOBRACE_H_INCLUDED

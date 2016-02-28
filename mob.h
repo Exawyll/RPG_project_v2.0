@@ -1,7 +1,7 @@
 #ifndef MOB_H_INCLUDED
 #define MOB_H_INCLUDED
 
-/*typedef struct mobStructure {
+typedef struct mobStructure {
     int races;
     int health;
     int attack;
@@ -13,6 +13,6 @@
 Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int dodge);
 
 //Prototype of functions
-void createMobs();*/
+void createMobs();
 
 #endif // MOB_H_INCLUDED

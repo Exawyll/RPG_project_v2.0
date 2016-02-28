@@ -53,13 +53,15 @@ char* userInputChar(){
     return string;
 }
 
-
-/*//Return a random number between MAX and MIN
+//Return a random number between MAX and MIN
 int doRand(int MIN, int MAX){
     srand(time(NULL));
     return (rand() % (MAX - MIN + 1)) + MIN;
 }
 
+//Roll dice attack
+//Always 2d4 et 1d6
+//Return the sum of the three dices
 Roll the dices to attack
 int rollDice_attack(){
     int sumAttack = 0;
@@ -71,7 +73,37 @@ int rollDice_attack(){
 }
 
 //Roll the dice to dodge
-int rollDice_dodge(){
-    return doRand(1, 8);
-}*/
+//number is the dodge value of the mob
+//Three different dodge dices depending on the dodge value
+int rollDice_dodge(int number){
+    int diceResult = 0;
+    if(number < 5){
+        diceResult = doRand(1, 8);
+        if(diceResult == 8){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+
+    }
+    else if(number >= 5 && number < 10)
+        diceResult = doRand(1, 4)
+        if(diceResult == 4){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+
+    else{
+        diceResult = doRand(1, 2)
+        if(diceResult == 2){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+}
 

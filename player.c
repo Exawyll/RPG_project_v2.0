@@ -32,8 +32,7 @@ void DisplayStats (struct playerStructure *target) {
 Player* NewPlayer() {
     // Allocate memory to player pointer.
     Player *tempPlayer = player_ctor(" ", 0,0,0,0,0);
-    /*DlistItem *tempInventory = useItem_new();
-    DlistStuff *tempArmory = item_new();*/
+
     // Keep track of players created.
     // The static int allow to keep the value even after the function return 0.
     static int PlayersCreated = 0;
@@ -45,7 +44,7 @@ Player* NewPlayer() {
         tempPlayer->autoPilot = false;
         //SetName(tempPlayer);
         setJob(tempPlayer);
-        initEqpt(tempPlayer);
+        //initEqpt(tempPlayer);
         setStuffAtStart(tempPlayer);
         //buildToStart(tempPlayer);
         //setPotionAtStart(tempPlayer);
