@@ -17,6 +17,17 @@ void calcAttributesWithEqpt(Player *target)
     int bonusDEF = 0;
     int bonusDEFRel = 0;
     int i = 0;
+    int health = 0;
+    int attack = 0;
+    int defense = 0;
+    int relDef = 0;
+    int dodge = 0;
+
+    health= target->health;
+    attack = target->attack;
+    defense = target->defense;
+    relDef = target->relDef;
+
     for(i = 0; i < 6; i++){
         if(target->build[i])
         {
@@ -27,22 +38,28 @@ void calcAttributesWithEqpt(Player *target)
 
             if(bonusATT > 0)
             {
-                target->attack += bonusATT;
+                attack += bonusATT;
             }
             if(bonusDEF > 0)
             {
-                target->defense += bonusDEF;
+                defense += bonusDEF;
             }
             if(bonusDEFRel > 0)
             {
-                target->relDef += bonusDEFRel;
+                relDef += bonusDEFRel;
             }
             if(bonusHP > 0)
             {
-                target->health += bonusHP;
+                health += bonusHP;
             }
         }
     }
+    displayStatsPlayerWithEqpt(target, health, attack, defense, relDef);
+}
+
+void displayStatsPlayerWithEqpt(Player *target, int health, int attack, int defense, int relDef){
+    printf("Your stats with equipment : \n");
+    printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, health, attack, defense, relDef, target->dodge);
 }
 
 void displayEqpt(Player *target)

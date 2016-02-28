@@ -7,5 +7,4 @@
 
 //Prototype of functions
 
-
 #endif // EQUIPMENT_H_INCLUDED

@@ -32,25 +32,28 @@ int calcMobRelDef (Mob *mob, int attack){
 }
 
 int fightPlayerToMob (Player *target, Mob *mob) {
-    int Attack = calcPlayerAttack(player);
-    int Dodge = rollDice_dodge(mob->dodge);
+    int attack = calcPlayerAttack(target);
+    int dodge = rollDice_dodge(mob->dodge);
     char* mobName;
-    mobName = displayMobNames();
-
-    if(dodge){
-        printf("")
-    }
-    int EffectiveAttack = (Attack) - (mob->relDef) + mob->defense;
+    mobName = setMobNames(mob->races);
 
     while (mob->health > 0) {
 
         DisplayFightMenu();
+        int userInput = userInputInt();
 
-        switch (userInputInt()) {
+        switch (userInput) {
             case 1:
-                mob->health = mob->health - EffectiveAttack;
-                printf("%s inflicted %d damage to %s.\n", player->name, EffectiveAttack, mobName);
-                DisplayStats(Target);
+                if(dodge){
+                    printf("%s has dodged.\n", mobName);
+                }
+                else{
+                    attack = calcMobRelDef(mob, attack);
+                    int effectiveAttack = attack - mob->defense;
+                    mob->health = mob->health - effectiveAttack;
+                    printf("%s inflicted %d damage to %s.\n", target->name, effectiveAttack, mobName);
+                    displayStatsMob(mob);
+                }
                 break;
             case 2:
                 printf("Running away!\n");
@@ -59,69 +62,45 @@ int fightPlayerToMob (Player *target, Mob *mob) {
                 printf("Bad input. Try again.\n");
                 break;
         }
-
-        else{
-            // Autopilot. Userless player acts independently.
-            Target->health = Target->health - EffectiveAttack;
-            printf("%s inflicted %d damage to %s.\n", Attacker->name, EffectiveAttack, Target->name);
-            DisplayStats(Target);
-        }
     }
 
     // Victoryǃ
-    if (Target->health <= 0) {
-        printf("%s has bested %s in combat.\n", Attacker->name, Target->name) ;
+    if (target->health <= 0) {
+        printf("%s has bested %s in combat.\n", target->name, mobName);
     }
     else {
-        // Swap attacker and target.
-        Player *tmp = Attacker;
-        Attacker = Target;
-        Target = tmp;
+        // Swap player and mob.
+        fightMobToPlayer(mob,target);
     }
     return(0);
 }
 
 int fightMobToPlayer (Mob *mob, Player *target) {
-    int diceATT = 0;
-    int diceDOD = 0;
-    int EffectiveAttack = (player->attack + diceATT) - (mob->relDef) + mob->defense;
+    int attack = calcMobAttack(mob);
+    int dodge = rollDice_dodge(mob->dodge);
+    char* mobName;
+    mobName = setMobNames(mob->races);
 
-    while (Target->health > 0) {
-        // Get user input if autopilot is set to false.
-        if (Attacker->autoPilot == false) {
-            DisplayFightMenu();
+    while (target->health > 0) {
 
-            switch (userInputInt()) {
-                case 1:
-                    Target->health = Target->health - EffectiveAttack;
-                    printf("%s inflicted %d damage to %s.\n", Attacker->name, EffectiveAttack, Target->name);
-                    DisplayStats(Target);
-                    break;
-                case 2:
-                    printf("Running away!\n");
-                    return(0);
-                default:
-                    printf("Bad input. Try again.\n");
-                    break;
-            }
+        if(dodge){
+            printf("%s has dodged.\n", target->name);
         }
         else{
-            // Autopilot. Userless player acts independently.
-            Target->health = Target->health - EffectiveAttack;
-            printf("%s inflicted %d damage to %s.\n", Attacker->name, EffectiveAttack, Target->name);
-            DisplayStats(Target);
+            attack = calcPlayerRelDef(mob, attack);
+            int effectiveAttack = attack - target->defense;
+            target->health = target->health - effectiveAttack;
+            printf("%s inflicted %d damage to %s.\n", mobName, effectiveAttack, target->name);
         }
     }
 
     // Victoryǃ
-    if (Target->health <= 0) {
-        printf("%s has bested %s in combat.\n", Attacker->name, Target->name) ;
+    if (target->health <= 0) {
+        printf("%s has bested %s in combat.\n", mobName, target->name);
     }
     else {
-        // Swap attacker and target.
-        Player *tmp = Attacker;
-        Attacker = Target;
-        Target = tmp;
+        // Swap mob and player.
+        fightPlayerToMob(target,mob);
     }
     return(0);
 }

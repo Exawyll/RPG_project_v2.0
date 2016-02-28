@@ -86,21 +86,21 @@
 	"stuffItem.h"
 	"player.h"
 
-1456586607 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\equipment.c
+1456679396 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\equipment.c
 	<stdio.h>
 	<stdlib.h>
 	"equipment.h"
 	"stuffItem.h"
 	"player.h"
 
-1456059762 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\equipment.h
+1456679167 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\equipment.h
 	"equipment.h"
 	"stuffItem.h"
 	"player.h"
 
 1456071896 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.h
 
-1456584993 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
+1456679167 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
 	<stdbool.h>
 	"usableItem.h"
 	"stuffItem.h"
@@ -108,37 +108,48 @@
 
 1456063430 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\usableitem.h
 
-1456571816 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.c
+1456677358 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.c
+	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"fight.h"
 	"gameUtil.h"
-
-1455292108 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.h
+	"mob.h"
 	"player.h"
+
+1456657433 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\fight.h
+	"player.h"
+	"mob.h"
 
 1456656050 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.h
 
-1456585008 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
+1456679202 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"player.h"
+	"fight.h"
 	"usableItem.h"
+	"gameUtil.h"
+	"mob.h"
+	"mobRace.h"
 
-1456573968 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mob.c
+1456677373 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mob.c
 	<stdio.h>
 	<stdlib.h>
 	"mob.h"
 	"mobRace.h"
 
-1456573968 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mob.h
+1456677347 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mob.h
 
-1456071896 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mobrace.h
+1456677347 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mobrace.h
 
-1456068666 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mobrace.c
+1456677347 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\mobrace.c
+	<stdio.h>
+	<stdlib.h>
+	"mobRace.h"
 
-1456654249 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
+1456679402 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -146,7 +157,7 @@
 	"usableItem.h"
 	"stuffItem.h"
 
-1456583081 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.c
+1456679167 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.c
 	<stdlib.h>
 	<stdio.h>
 	"stuffItem.h"
@@ -160,7 +171,7 @@
 	"player.h"
 	"gameUtil.h"
 
-1456571856 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.c
+1456676277 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\gameutil.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

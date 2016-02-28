@@ -24,7 +24,7 @@ Player* player_ctor(char name[50], int health, int attack, int defense, int relD
 // Takes a player as an argument and prints their name, health, and attack. Returns nothing.
 void DisplayStats (struct playerStructure *target) {
     // We don't want to keep retyping all this.
-    calcAttributesWithEqpt(target);
+    printf("Your stats without equipment :\n");
     printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, target->health, target->attack, target->defense, target->relDef, target->dodge);
 }
 
@@ -42,12 +42,12 @@ Player* NewPlayer() {
     }
     else {
         tempPlayer->autoPilot = false;
-        //SetName(tempPlayer);
+        SetName(tempPlayer);
         setJob(tempPlayer);
-        //initEqpt(tempPlayer);
+        initEqpt(tempPlayer);
         setStuffAtStart(tempPlayer);
-        //buildToStart(tempPlayer);
-        //setPotionAtStart(tempPlayer);
+        buildToStart(tempPlayer);
+        setPotionAtStart(tempPlayer);
     }
     ++PlayersCreated;
 

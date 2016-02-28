@@ -62,7 +62,7 @@ int doRand(int MIN, int MAX){
 //Roll dice attack
 //Always 2d4 et 1d6
 //Return the sum of the three dices
-Roll the dices to attack
+//Roll the dices to attack
 int rollDice_attack(){
     int sumAttack = 0;
     int dice6 = doRand(1, 6);
@@ -87,17 +87,17 @@ int rollDice_dodge(int number){
         }
 
     }
-    else if(number >= 5 && number < 10)
-        diceResult = doRand(1, 4)
+    else if(number >= 5 && number < 10){
+        diceResult = doRand(1, 4);
         if(diceResult == 4){
             return 1;
         }
         else{
             return 0;
         }
-
+    }
     else{
-        diceResult = doRand(1, 2)
+        diceResult = doRand(1, 2);
         if(diceResult == 2){
             return 1;
         }

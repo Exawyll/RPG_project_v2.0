@@ -14,5 +14,5 @@ Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int do
 
 //Prototype of functions
 void createMobs();
-
+void displayStatsMob(Mob *mob);
 #endif // MOB_H_INCLUDED

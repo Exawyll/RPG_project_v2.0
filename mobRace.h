@@ -4,7 +4,7 @@
 // Races of mobs are enumerated.
 typedef enum RacesEnum  {
     GOBELIN,
-    SQUELET,
+    SKELETON,
     ORC,
     ZOMBIE,
     URUKAI,
@@ -12,6 +12,6 @@ typedef enum RacesEnum  {
     DRAGON
 } races;
 
-char* displayMobNames (enum RacesEnum);
+char* setMobNames (int races);
 
 #endif // MOBRACE_H_INCLUDED

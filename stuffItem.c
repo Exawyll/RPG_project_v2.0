@@ -475,6 +475,7 @@ void setStuffAtStart(Player *target){
     target->armory = item_new();
     printf("Would you like to auto-equip the basic stuff ?\n1 : Yes\n2 : No\n");
     int userChoice = userInputInt();
+
     switch(target->job){
         case WARRIOR:
             if(userChoice == 1){
@@ -512,7 +513,7 @@ void setStuffAtStart(Player *target){
     item_display(target->armory);
 }
 
-void autoEquip(Player *target, StuffItem *toEquip){
+int autoEquip(Player *target, StuffItem *toEquip){
     int type = toEquip->type;
     StuffItem *object2;
     switch(type){
@@ -542,6 +543,7 @@ void autoEquip(Player *target, StuffItem *toEquip){
         default:
             break;
     }
+    return(0);
 }
 
 void show_stuff(Player *target){

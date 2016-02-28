@@ -3,9 +3,11 @@
 #include <string.h>
 
 #include "player.h"
-//#include "fight.h"
+#include "fight.h"
 #include "usableItem.h"
-//#include "gameUtil.h"
+#include "gameUtil.h"
+#include "mob.h"
+#include "mobRace.h"
 
 #define NBR_POTIONS 3
 
@@ -22,9 +24,12 @@ int main(int argc, char *argv[])
     //menu_player(Hero);
     //show_stuff(Hero);
     //createMobs();
-    displayEqpt(Hero);
-    DisplayStats(Hero);
+    //Mob* gobelin = mob_ctor(GOBELIN, 10, 3, 3, 1, 1);
 
+    //fightPlayerToMob(Hero,gobelin);
+
+    DisplayStats(Hero);
+    calcAttributesWithEqpt(Hero);
 
     return(0);
 }
