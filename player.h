@@ -54,6 +54,9 @@ void displayEqpt(Player *target);
 void calcAttributesWithEqpt(Player *target);
 int autoEquip(Player *target, StuffItem *toEquip);
 void displayStatsPlayerWithEqpt(Player *target, int health, int attack, int defense, int relDef);
+int calcAbsDef(Player *target);
+int calcRelDef(Player *target);
+int calcAttack(Player *target);
 
 
 #endif // PLAYER_H_INCLUDED

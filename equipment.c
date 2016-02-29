@@ -10,6 +10,51 @@
 			- calcRelDef(Equipment* equipment, Mob* mob)
 			- calcAbsDef(Equipment* equipment, Mob* mob)*/
 
+int calcAttack(Player *target){
+    int bonusATT = 0;
+    int attack = 0;
+    int i = 0;
+    attack = target->attack;
+
+    for(i = 0; i < 6; i++){
+        bonusATT = target->build[i]->I_bonusATT;
+        if(bonusATT > 0){
+            attack += bonusATT;
+        }
+    }
+    return attack;
+}
+
+int calcRelDef(Player *target){
+    int bonusDEFRel = 0;
+    int relDef = 0;
+    int i = 0;
+    relDef = target->relDef;
+
+    for(i = 0; i < 6; i++){
+        bonusDEFRel = target->build[i]->I_bonusDEFRel;
+        if(bonusDEFRel > 0){
+            relDef += bonusDEFRel;
+        }
+    }
+    return relDef;
+}
+
+int calcAbsDef(Player *target){
+    int bonusDEF = 0;
+    int defense = 0;
+    int i = 0;
+    defense = target->defense;
+
+    for(i = 0; i < 6; i++){
+        bonusDEF = target->build[i]->I_bonusDEFAbs;
+        if(bonusDEF > 0){
+            defense += bonusDEF;
+        }
+    }
+    return defense;
+}
+
 void calcAttributesWithEqpt(Player *target)
 {
     int bonusATT = 0;
@@ -29,8 +74,8 @@ void calcAttributesWithEqpt(Player *target)
     relDef = target->relDef;
 
     for(i = 0; i < 6; i++){
-        if(target->build[i])
-        {
+        //if(target->build[i])
+        //{
             bonusATT = target->build[i]->I_bonusATT;
             bonusHP = target->build[i]->I_bonusHP;
             bonusDEF = target->build[i]->I_bonusDEFAbs;
@@ -52,7 +97,7 @@ void calcAttributesWithEqpt(Player *target)
             {
                 health += bonusHP;
             }
-        }
+        //}
     }
     displayStatsPlayerWithEqpt(target, health, attack, defense, relDef);
 }

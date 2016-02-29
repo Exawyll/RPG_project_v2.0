@@ -16,7 +16,7 @@ Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int do
 }
 
 void createMobs(){
-    Mob* gobelin = mob_ctor(GOBELIN, 10, 3, 3, 1, 1);
+    Mob* gobelin = mob_ctor(GOBELIN, 100, 3, 3, 1, 1);
     Mob* skeleton = mob_ctor(SKELETON, 10, 4, 4, 2, 1);
     Mob* orc = mob_ctor(ORC, 20, 5, 5, 2, 2);
     Mob* zombie = mob_ctor(ZOMBIE, 30, 6, 6, 2, 2);

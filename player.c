@@ -46,8 +46,8 @@ Player* NewPlayer() {
         setJob(tempPlayer);
         initEqpt(tempPlayer);
         setStuffAtStart(tempPlayer);
-        buildToStart(tempPlayer);
-        setPotionAtStart(tempPlayer);
+        //buildToStart(tempPlayer);
+        //setPotionAtStart(tempPlayer);
     }
     ++PlayersCreated;
 
@@ -68,28 +68,26 @@ int setJob(Player *target){
     printf("2 : RANGER (Start with a BOW and a TINY SHORT)\n");
     printf("3 : WIZARD (Start with a WAND and a ROBE)\n(NO JOB if you enter a wrong input \"not recommended\")");
     choice = userInputInt();
+    choice--;
 
     // Assign stats based on the given job.
     switch(choice) {
-        case 1:
-            //WARRIOR
-            target->health += 60;
+        case WARRIOR:
+            target->health += 100;
             target->attack += 10;
             target->defense += 10;
             target->relDef += 5;
             target->dodge += 1;
             target->job = WARRIOR;
             break;
-        case 2:
-            //RANGER
+        case RANGER:
             target->health += 50;
             target->attack += 10;
             target->defense += 8;
             target->relDef += 6;
             target->job = RANGER;
             break;
-        case 3:
-            //WIZARD
+        case WIZARD:
             target->health += 40;
             target->attack += 8;
             target->defense += 6;

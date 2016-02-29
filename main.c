@@ -24,9 +24,9 @@ int main(int argc, char *argv[])
     //menu_player(Hero);
     //show_stuff(Hero);
     //createMobs();
-    //Mob* gobelin = mob_ctor(GOBELIN, 10, 3, 3, 1, 1);
+    Mob* gobelin = mob_ctor(GOBELIN, 100, 3, 3, 1, 1);
 
-    //fightPlayerToMob(Hero,gobelin);
+    fightPlayerToMob(Hero,gobelin);
 
     DisplayStats(Hero);
     calcAttributesWithEqpt(Hero);
