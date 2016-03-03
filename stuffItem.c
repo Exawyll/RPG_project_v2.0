@@ -22,15 +22,6 @@ StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusHP, int I_
     return p;
 }
 
-/*void eqpStuffItem(StuffItem* item, Mob* mob){
-}
-
-void unEqpStuffItem(StuffItem* item, Mob* mob){
-}
-
-void sellStuffItem(StuffItem* item, Player* player){
-}*/
-
 //Allow to display correct info of list items
 void printf_struct_stuff(StuffItem* stuff)
 {

@@ -575,12 +575,6 @@ void useYourPotion(Player *target){
         default:
             break;
     }
-    /*int founded = 0;
-    founded = useItem_find_id(target->inventory, HEALTH_POTION);
-    founded = useItem_find_id(target->inventory, STRENGTH_POTION);
-    founded = useItem_find_id(target->inventory, DEFENSE_POTION);
-    founded = useItem_find_id(target->inventory, GHOST_POTION);
-    printf("%d\n", founded);*/
 }
 
 void deletePotion(Player *target)

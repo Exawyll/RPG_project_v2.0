@@ -3,8 +3,8 @@
 #include <string.h>
 
 #include "player.h"
-//#include "fight.h"
-//#include "gameUtil.h"
+#include "fight.h"
+#include "gameUtil.h"
 #include "usableItem.h"
 #include "stuffItem.h"
 
@@ -33,23 +33,13 @@ Player* NewPlayer() {
     // Allocate memory to player pointer.
     Player *tempPlayer = player_ctor(" ", 0,0,0,0,0);
 
-    // Keep track of players created.
-    // The static int allow to keep the value even after the function return 0.
-    static int PlayersCreated = 0;
-
-    if (PlayersCreated > 0) {
-        tempPlayer->autoPilot = true;
-    }
-    else {
-        tempPlayer->autoPilot = false;
-        SetName(tempPlayer);
-        setJob(tempPlayer);
-        initEqpt(tempPlayer);
-        setStuffAtStart(tempPlayer);
-        //buildToStart(tempPlayer);
-        //setPotionAtStart(tempPlayer);
-    }
-    ++PlayersCreated;
+    SetName(tempPlayer);
+    setJob(tempPlayer);
+    initEqpt(tempPlayer);
+    setStuffAtStart(tempPlayer);
+    buildToStart(tempPlayer);
+    setPotionAtStart(tempPlayer);
+    displayMainMenu(tempPlayer);
 
     return(tempPlayer); // Return memory address of player.
 }

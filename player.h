@@ -1,7 +1,6 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include <stdbool.h>
 #include "usableItem.h"
 #include "stuffItem.h"
 #include "equipment.h"
@@ -21,10 +20,11 @@ typedef struct playerStructure {
     int relDef;
     int dodge;
     int job;
-    bool autoPilot;
     DlistItem *inventory;
     DlistStuff *armory;
     StuffItem* build[6];
+    int gold;
+    int score;
 }Player;
 
 Player* player_ctor(char[50], int health, int attack, int defense, int relDef, int dodge);

@@ -8,47 +8,123 @@
 #include "gameUtil.h"
 #include "mob.h"
 #include "mobRace.h"
+#include "dungeon.h"
 
 #define NBR_POTIONS 3
 
 
-void clean (char *chaine);
-void purge_buffer(void);
-int userInputInt();
-char* userInputChar(char* string);
+void startMenu();
+void displayMainMenu(Player *player);
+void startNewGame();
 
 int main(int argc, char *argv[])
 {
-    Player *Hero = NewPlayer();
-    //Player *Mob = NewPlayer();
-    //menu_player(Hero);
-    //show_stuff(Hero);
-    //createMobs();
-    Mob* gobelin = mob_ctor(GOBELIN, 100, 3, 3, 1, 1);
+    //startMenu();
 
-    fightPlayerToMob(Hero,gobelin);
-
-    DisplayStats(Hero);
-    calcAttributesWithEqpt(Hero);
+    StuffItem** newMercant = generateMercant();
 
     return(0);
 }
 
-/*void menuSelectPotion(){
-        printf("Now you have 3 potions to add to your inventory, what will you choose ?\n(trick : you can have many of the same type)\n");
-        printf("1 : HEALTH POTION (increase temporally 10 HP)\n");
-        printf("2 : STRENGTH POTION (increase temporally 10 attack points)\n");
-        printf("3 : DEFENSE POTION (increase temporally 10 defense points)\n");
-        printf("4 : GHOST POTION (increase temporally 10 dodge points)\n");
-        printf("(WARNING : if you enter a wrong input, you won't have ANY POTION !!!)");
+void startMenu(){
+    int userChoice = 0;
+
+    system("cls");
+
+    printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    printf("~~~        ***       LOST IN A DUNGEON      ***       ~~~\n");
+    printf("~~~                         BY                        ~~~\n");
+    printf("~~~                    --- EX@W ---                   ~~~\n");
+    printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
+
+    printf("\n\n");
+    printf("Would you like to continue a story or start a new one? \n");
+    printf("_______________________________________________________\n");
+    printf("1 : New Game\n");
+    printf("2 : Load Game\n\n");
+
+    userChoice = userInputInt();
+
+    switch(userChoice){
+        case 1:
+            startNewGame();
+            break;
+        case 2:
+            //loadExistingGame();
+            break;
+        default:
+            break;
+    }
+}
+
+void startNewGame(){
+
+    system("cls");
+
+    printf("Here start a great adventure, and everything starts with you, so tell me more about you...\n\n");
+
+    Player *Hero = NewPlayer();
+
+    printf("Dear %s, you have been sent by gods to free our caves full of evil creatures."
+           "They infested our cities since the day...\n");
+
+    displayMainMenu(Hero);
+}
+
+void displayMainMenu(Player *player){
+    int userChoice = 0;
+
+    printf("Here are all the things you can do :\n");
+    printf("___________________________________\n");
+    printf("1 - You can go to empty an infested Dungeon\n");
+    printf("2 - You can go to the tavern if you want to buy new stuff or potions\n");
+    printf("3 - You can see your potion inventory\n");
+    printf("4 - You can see your stuff inventory\n");
+    printf("5 - You can see your equipment\n");
+    printf("(Please select a correct entrance to continue)\n\n");
+
+    userChoice = userInputInt();
+
+    switch(userChoice){
+        case 1:
+            goThroughDungeon(player);
+            break;
+        case 2:
+            //goToTavern(player);
+            break;
+        case 3:
+            show_inventory(player);
+            break;
+        case 4:
+            show_stuff(player);
+            break;
+        case 5:
+            calcAttributesWithEqpt(player);
+            break;
+        default:
+            printf("Please enter a correct entry !\n");
+            break;
     }
 
-void addHealthPotion(Player *target){
-    AddItem(target->inventory, HEALTH_POTION);
 }
-void addStrengthPotion(Player *target){
-    AddItem(target->inventory, STRENGTH_POTION);
+
+/*Example of SAVE STRUCT
+struct date *object=malloc(sizeof(struct date));
+strcpy(object->day,"Good day");
+object->month=6;
+object->year=2013;
+FILE * file= fopen("output", "wb");
+if (file != NULL) {
+    fwrite(object, sizeof(struct date), 1, file);
+    fclose(file);
 }
-void addDefensePotion(Player *target){
-    AddItem(target->inventory, DEFENSE_POTION);
-}*/
+
+struct date *object2=malloc(sizeof(struct date));
+    FILE * file= fopen("output", "rb");
+    if (file != NULL) {
+        fread(object2, sizeof(struct date), 1, file);
+        fclose(file);
+    }
+    printf("%s/%d/%d\n",object2->day,object2->month,object2->year);*/

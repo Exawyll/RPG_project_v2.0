@@ -74,8 +74,8 @@ void calcAttributesWithEqpt(Player *target)
     relDef = target->relDef;
 
     for(i = 0; i < 6; i++){
-        //if(target->build[i])
-        //{
+        if(target->build[i])
+        {
             bonusATT = target->build[i]->I_bonusATT;
             bonusHP = target->build[i]->I_bonusHP;
             bonusDEF = target->build[i]->I_bonusDEFAbs;
@@ -97,7 +97,7 @@ void calcAttributesWithEqpt(Player *target)
             {
                 health += bonusHP;
             }
-        //}
+        }
     }
     displayStatsPlayerWithEqpt(target, health, attack, defense, relDef);
 }
@@ -210,31 +210,3 @@ void initEqpt(Player *target){
     printf("|_______/                      \\______________/    )    \n");
     printf("                                              \\___/     \n");
 }*/
-
-/*void calcAttack(Equipment* equipment, Mob* mob){
-}
-
-void calcAttack(Equipment* equipment, Mob* mob){
-}
-
-void calcAbsDef(Equipment* equipment, Mob* mob){
-}*/
-
-/*Example of SAVE STRUCT
-struct date *object=malloc(sizeof(struct date));
-strcpy(object->day,"Good day");
-object->month=6;
-object->year=2013;
-FILE * file= fopen("output", "wb");
-if (file != NULL) {
-    fwrite(object, sizeof(struct date), 1, file);
-    fclose(file);
-}
-
-struct date *object2=malloc(sizeof(struct date));
-    FILE * file= fopen("output", "rb");
-    if (file != NULL) {
-        fread(object2, sizeof(struct date), 1, file);
-        fclose(file);
-    }
-    printf("%s/%d/%d\n",object2->day,object2->month,object2->year);*/
