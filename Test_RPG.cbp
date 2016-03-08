@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="dungeon.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="dungeon.h" />
 		<Unit filename="equipment.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -62,6 +66,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="stuffItem.h" />
+		<Unit filename="tavern.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tavern.h" />
 		<Unit filename="usableItem.c">
 			<Option compilerVar="CC" />
 		</Unit>

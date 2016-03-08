@@ -20,8 +20,9 @@ void startNewGame();
 int main(int argc, char *argv[])
 {
     //startMenu();
+    Player *Hero = NewPlayer();
 
-    StuffItem** newMercant = generateMercant();
+    goToTavern(Hero);
 
     return(0);
 }
@@ -32,10 +33,11 @@ void startMenu(){
     system("cls");
 
     printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
-    printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    printf("~~~                                                   ~~~\n");
     printf("~~~        ***       LOST IN A DUNGEON      ***       ~~~\n");
     printf("~~~                         BY                        ~~~\n");
     printf("~~~                    --- EX@W ---                   ~~~\n");
+    printf("~~~                                                   ~~~\n");
     printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
 

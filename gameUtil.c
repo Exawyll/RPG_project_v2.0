@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 /*- GameUtil.c : contient l'ensemble des fonctions utilitaires (redondante ou non) du programme
 			- doRand(int start, int end)
@@ -105,5 +106,10 @@ int rollDice_dodge(int number){
             return 0;
         }
     }
+}
+
+//Weapons generation
+int generateType(){
+    return doRand(0,6);
 }
 

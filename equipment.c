@@ -62,13 +62,11 @@ void calcAttributesWithEqpt(Player *target)
     int bonusDEF = 0;
     int bonusDEFRel = 0;
     int i = 0;
-    int health = 0;
     int attack = 0;
     int defense = 0;
     int relDef = 0;
     int dodge = 0;
 
-    health= target->health;
     attack = target->attack;
     defense = target->defense;
     relDef = target->relDef;
@@ -77,7 +75,6 @@ void calcAttributesWithEqpt(Player *target)
         if(target->build[i])
         {
             bonusATT = target->build[i]->I_bonusATT;
-            bonusHP = target->build[i]->I_bonusHP;
             bonusDEF = target->build[i]->I_bonusDEFAbs;
             bonusDEFRel = target->build[i]->I_bonusDEFRel;
 
@@ -93,18 +90,14 @@ void calcAttributesWithEqpt(Player *target)
             {
                 relDef += bonusDEFRel;
             }
-            if(bonusHP > 0)
-            {
-                health += bonusHP;
-            }
         }
     }
-    displayStatsPlayerWithEqpt(target, health, attack, defense, relDef);
+    displayStatsPlayerWithEqpt(target, attack, defense, relDef);
 }
 
-void displayStatsPlayerWithEqpt(Player *target, int health, int attack, int defense, int relDef){
+void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int relDef){
     printf("Your stats with equipment : \n");
-    printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, health, attack, defense, relDef, target->dodge);
+    printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, target->health, attack, defense, relDef, target->dodge);
 }
 
 void displayEqpt(Player *target)
@@ -113,7 +106,6 @@ void displayEqpt(Player *target)
     int price = 0;
     int type = 0;
     int bonusATT = 0;
-    int bonusHP = 0;
     int bonusDEF = 0;
     int bonusDEFRel = 0;
     int bonusDEFAbs = 0;
@@ -130,7 +122,6 @@ void displayEqpt(Player *target)
             price = target->build[i]->price;
             type = target->build[i]->type;
             bonusATT = target->build[i]->I_bonusATT;
-            bonusHP = target->build[i]->I_bonusHP;
             bonusDEFAbs = target->build[i]->I_bonusDEFAbs;
             bonusDEFRel = target->build[i]->I_bonusDEFRel;
             if(name != ' '){
@@ -156,7 +147,6 @@ void displayEqpt(Player *target)
                 }
                 printf("Name :%s\n", name);
                 printf("         Price :%d\n", price);
-                printf("         HP :%d\n", bonusHP);
                 printf("         ATT :%d\n", bonusATT);
                 printf("         DEF :%d\n", bonusDEFAbs);
                 printf("         DEFRel :%d\n", bonusDEFRel);
@@ -170,7 +160,7 @@ void displayEqpt(Player *target)
 void initEqpt(Player *target){
     int i = 0;
     for(i = 0; i < 6; i++){
-        StuffItem* fakeObject = stuffItem_ctor(' ',0,i,0,0,0,0);
+        StuffItem* fakeObject = stuffItem_ctor(' ',0,i,0,0,0);
         target->build[i] = fakeObject;
     }
 }

@@ -1,21 +1,22 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "stuffItem.h"
 #include "player.h"
 #include "equipment.h"
+#include "gameUtil.h"
 
 /*- StuffItem.c : contient les fonctions suivantes :
 			- eqpStuffItem(StuffItem* item, Mob* mob)
 			- unEqpStuffItem(StuffItem* item, Mob* mob)
 			- sellStuffItem(StuffItem* item, Player* player)*/
 
-StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusHP, int I_bonusATT, int I_bonusDEFRel, int I_bonusDEFAbs){
+StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusATT, int I_bonusDEFRel, int I_bonusDEFAbs){
     StuffItem* p = malloc(sizeof(StuffItem));
     p->name = name;
     p->price = price;
     p->type = type;
-    p->I_bonusHP = I_bonusHP;
     p->I_bonusATT = I_bonusATT;
     p->I_bonusDEFRel = I_bonusDEFRel;
     p->I_bonusDEFAbs = I_bonusDEFAbs;
@@ -49,7 +50,7 @@ void printf_struct_stuff(StuffItem* stuff)
                 printf("     Type : BOOTS\n");
                 break;
         }
-        printf("     HP : +%d\n     ATT : +%d\n     DEFRel : +%d\n     DEF : +%d\n\n", stuff->I_bonusHP, stuff->I_bonusATT, stuff->I_bonusDEFRel, stuff->I_bonusDEFAbs);
+        printf("     ATT : +%d\n     DEFRel : +%d\n     DEF : +%d\n\n", stuff->I_bonusATT, stuff->I_bonusDEFRel, stuff->I_bonusDEFAbs);
     }
 }
 
@@ -451,7 +452,7 @@ DlistStuff* readFromFile_stuff(){
 
         /* Attempt to read element one by one */
         while (fread(stuff,sizeof(StuffItem),1,fptr) == 1) {
-            item_append(p_list, *stuffItem_ctor(stuff->name, stuff->price, stuff->type, stuff->I_bonusHP, stuff->I_bonusATT, stuff->I_bonusDEFRel, stuff->I_bonusDEFAbs));
+            item_append(p_list, *stuffItem_ctor(stuff->name, stuff->price, stuff->type, stuff->I_bonusATT, stuff->I_bonusDEFRel, stuff->I_bonusDEFAbs));
         }
         printf("\n");
     }
@@ -470,32 +471,32 @@ void setStuffAtStart(Player *target){
     switch(target->job){
         case WARRIOR:
             if(userChoice == 1){
-                autoEquip(target, stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0));
-                autoEquip(target, stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10));
+                autoEquip(target, stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 10, 0, 0));
+                autoEquip(target, stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 1, 10));
             }
             else{
-                item_append(target->armory, *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 0, 10, 0, 0));
-                item_append(target->armory, *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 0, 1, 10));
+                item_append(target->armory, *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 10, 0, 0));
+                item_append(target->armory, *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 1, 10));
             }
             break;
         case RANGER:
             if(userChoice == 1){
-                autoEquip(target, stuffItem_ctor("My First Bow", 10, TWO_HAND, 0, 10, 0, 0));
-                autoEquip(target, stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 0, 1, 10));
+                autoEquip(target, stuffItem_ctor("My First Bow", 10, TWO_HAND, 10, 0, 0));
+                autoEquip(target, stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 1, 10));
             }
             else{
-                item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 0, 10, 0, 0));
-                item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 0, 1, 10));
+                item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 10, 0, 0));
+                item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 1, 10));
             }
             break;
         case WIZARD:
             if(userChoice == 1){
-                autoEquip(target, stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 0, 10, 0, 0));
-                autoEquip(target, stuffItem_ctor("My First Robe", 10, ARMOR, 0, 0, 1, 10));
+                autoEquip(target, stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 10, 0, 0));
+                autoEquip(target, stuffItem_ctor("My First Robe", 10, ARMOR, 0, 1, 10));
             }
             else{
-                item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 0, 10, 0, 0));
-                item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 0, 1, 10));
+                item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 10, 0, 0));
+                item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 1, 10));
             }
             break;
         default:
@@ -527,7 +528,7 @@ int autoEquip(Player *target, StuffItem *toEquip){
             target->build[BOOTS] = toEquip;
             break;
         case TWO_HAND:
-            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0,0);
+            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0);
             target->build[RIGHT_HAND] = toEquip;
             target->build[LEFT_HAND] = object2;
             break;
@@ -657,7 +658,7 @@ void set_equip(Player *target, int position){
             }
             break;
         case TWO_HAND:
-            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0,0);
+            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0);
             if(target->build[RIGHT_HAND])
             {
                 object = target->build[RIGHT_HAND];
@@ -684,6 +685,51 @@ void set_equip(Player *target, int position){
         default:
             break;
     }
+}
+
+StuffItem* generateWeapon(){
+
+    int price = doRand(50, 1000);
+    int type = doRand(0,6);
+    char *name = generateName(type);
+    int bonusATT = doRand(1,20);
+    int bonusDEFRel = doRand(1,5);
+    int bonusDEFAbs = doRand(1,20);
+
+    StuffItem* newStuff = stuffItem_ctor(name,price,type,bonusATT,bonusDEFRel,bonusDEFAbs);
+
+    return newStuff;
+}
+
+//WARNING simple quotes for names doesn't work
+char* generateName(int type){
+    char *name;
+
+    switch(type)
+    {
+        case 0:
+            name = "Helmet";
+            break;
+        case 1:
+            name = "Armor";
+            break;
+        case 2:
+            name = "Weapon";
+            break;
+        case 3:
+            name = "Shield";
+            break;
+        case 4:
+            name = "leggings";
+            break;
+        case 5:
+            name = "boots";
+            break;
+        case 6:
+            name = "Big Weapon";
+            break;
+    }
+    return name;
 }
 
 /*void createStuff(){

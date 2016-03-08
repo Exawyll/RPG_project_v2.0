@@ -2,5 +2,4 @@
 #define TAVERN_H_INCLUDED
 
 
-
 #endif // TAVERN_H_INCLUDED

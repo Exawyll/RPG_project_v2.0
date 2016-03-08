@@ -27,14 +27,13 @@ typedef struct StuffItem{
     char* name;
     int price;
     int type;
-    int I_bonusHP;
     int I_bonusATT;
     int I_bonusDEFRel;
     int I_bonusDEFAbs;
 }StuffItem;
 
 //prototype for the Stuff builder
-StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusHP, int I_bonusATT, int I_bonusDEFRel, int I_bonusDEFAbs);
+StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusATT, int I_bonusDEFRel, int I_bonusDEFAbs);
 
 //Create of list for DlistStuff
 struct node_stuff
@@ -69,6 +68,7 @@ void printf_struct_stuff(StuffItem* stuff);
 StuffItem *item_return_stuff(DlistStuff *p_list, int position);
 
 //Prototype of functions
-
+StuffItem* generateWeapon();
+char* generateName(int type);
 
 #endif // STUFFITEM_H_INCLUDED
