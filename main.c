@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "player.h"
 #include "fight.h"
@@ -21,8 +22,6 @@ int main(int argc, char *argv[])
 {
     //startMenu();
     Player *Hero = NewPlayer();
-
-    goToTavern(Hero);
 
     return(0);
 }
@@ -78,6 +77,8 @@ void startNewGame(){
 void displayMainMenu(Player *player){
     int userChoice = 0;
 
+    system("cls");
+
     printf("Here are all the things you can do :\n");
     printf("___________________________________\n");
     printf("1 - You can go to empty an infested Dungeon\n");
@@ -85,7 +86,6 @@ void displayMainMenu(Player *player){
     printf("3 - You can see your potion inventory\n");
     printf("4 - You can see your stuff inventory\n");
     printf("5 - You can see your equipment\n");
-    printf("(Please select a correct entrance to continue)\n\n");
 
     userChoice = userInputInt();
 
@@ -94,7 +94,7 @@ void displayMainMenu(Player *player){
             goThroughDungeon(player);
             break;
         case 2:
-            //goToTavern(player);
+            goToTavern(player);
             break;
         case 3:
             show_inventory(player);
@@ -107,6 +107,8 @@ void displayMainMenu(Player *player){
             break;
         default:
             printf("Please enter a correct entry !\n");
+            Sleep(1500);
+            displayMainMenu(player);
             break;
     }
 

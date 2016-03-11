@@ -689,7 +689,7 @@ void set_equip(Player *target, int position){
 
 StuffItem* generateWeapon(){
 
-    int price = doRand(50, 1000);
+    int price = doRand(100, 1000);
     int type = doRand(0,6);
     char *name = generateName(type);
     int bonusATT = doRand(1,20);

@@ -24,6 +24,7 @@ void goToTavern(Player *player){
     printf("2 - Sell old stuff\n");
     printf("3 - Buy new potions\n");
     printf("4 - Sell potions\n");
+    printf("5 - Back in Town...\n");
     userChoice = userInputInt();
 
     switch(userChoice)
@@ -40,13 +41,16 @@ void goToTavern(Player *player){
         case 4:
             sellPotions(player);
             break;
+        case 5:
+            displayMainMenu(player);
+            break;
         default:
             printf("Please, enter a correct entry !\n");
             break;
     }
 }
 
-void generateMercantStuff(){
+DlistStuff *generateMercantStuff(){
     int i = 0;
     DlistStuff *armory = item_new();
 
@@ -55,53 +59,134 @@ void generateMercantStuff(){
         item_append(armory, *generateWeapon());
         waitMenuMercant(i);
     }
-    system("cls");
-    mercant_display(armory);
+    mercant_stuff_display(armory);
+    return armory;
+}
+
+void printAmbianceText(){
+    printf("Hello young hero, hard time to get new stuff with the infested caves\nall around us... But I've got something for you right here\nplease have a look and choose carefully what you need :\n\n");
+    printf("Please wait for the generation of the market place");
 }
 
 void waitMenuMercant(int i){
     system("cls");
-    if(i == 0 || i == 3 || i == 6 || i == 9){
-        printf("Hello young hero, hard time to get new stuff with the infested caves\nall around us... But I've got something for you right here\nplease have a look and choose carefully what you need :\n\n");
-        printf("Please wait for the generation of the market place.\n\n");
+    if(i%3 == 0){
+        printAmbianceText();
+        printf(".\n\n");
     }
-    else if(i == 1 || i == 4 || i == 7){
-        printf("Hello young hero, hard time to get new stuff with the infested caves\nall around us... But I've got something for you right here\nplease have a look and choose carefully what you need :\n\n");
-        printf("Please wait for the generation of the market place..\n\n");
+    else if((i - 1)%3 == 0){
+        printAmbianceText();
+        printf("..\n\n");
     }
     else{
-        printf("Hello young hero, hard time to get new stuff with the infested caves\nall around us... But I've got something for you right here\nplease have a look and choose carefully what you need :\n\n");
-        printf("Please wait for the generation of the market place...\n\n");
+        printAmbianceText();
+        printf("...\n\n");
+    }
+}
+
+//Remove item with selected position
+StuffItem *item_select_id(DlistStuff *p_list, int position)
+{
+    if (p_list != NULL)
+    {
+        int i = 1;
+        struct node_stuff *p_temp = p_list->p_head;
+        while (p_temp != NULL)
+        {
+            if(i == position){
+                return &p_temp->stuff;
+            }
+            else{
+                p_temp = p_temp->p_next;
+                i++;
+            }
+        }
     }
 }
 
 void buyNewStuff(Player *player){
-    generateMercantStuff();
-    printf("*** YOUR GOLD : %d PO ***\n",player->gold);
+    DlistStuff *mercant;
+    int objectToBuy = -1;
+    StuffItem *objectBought;
+    int badChoice = 0;
+
+    mercant = generateMercantStuff();
+
+    player->gold = 1000;
+
+    while(objectToBuy){
+
+        printf("*** YOUR GOLD : %d PO ***\n",player->gold);
+
+        if(badChoice == 0){
+            printf("Please, select the weapon you want to buy : (press 0 to exit)\n");
+        }
+
+        objectToBuy = userInputInt();
+
+        //Control the user to not crash the later lists functions
+        while(objectToBuy > mercant->length){
+            printf("Please select an existing weapon !!!\n");
+            objectToBuy = userInputInt();
+        }
+
+        if(objectToBuy == 0){
+            goToTavern(player);
+        }
+
+        objectBought = item_select_id(mercant, objectToBuy);
+
+        if(objectBought->price > player->gold || badChoice == 1){
+            printf("\n\nSorry, buddy you don't have enough coins, get richer and come back\n");
+            printf("or buy cheaper... (press 0 to exit)\n\n\n");
+            badChoice = 1;
+        }
+        else{
+            player->gold -= objectBought->price;
+            item_append(player->armory, *objectBought);
+            item_remove_id(mercant, objectToBuy);
+            mercant_stuff_display(mercant);
+        }
+    }
 }
 
 void sellOldStuff(Player *player){
 }
 
+DlistItem *generateMercantItem(){
+    DlistItem *potions = useItem_new();
+
+    useItem_append(potions, createUsableItems(HEALTH_POTION));
+    useItem_append(potions, createUsableItems(STRENGTH_POTION));
+    useItem_append(potions, createUsableItems(DEFENSE_POTION));
+    useItem_append(potions, createUsableItems(GHOST_POTION));
+
+    mercant_item_display(potions);
+    return potions;
+}
+
 void buyNewPotions(Player *player){
+    DlistItem *mercant = generateMercantItem();
 }
 
 void sellPotions(Player *player){
 }
 
 //Allow to display correct info of list items
-void printf_struct_mercant(StuffItem* stuff)
+void printf_stuff_mercant(StuffItem* stuff)
 {
     if(stuff->name)
     {
-        printf("Name : %s   Price : %d", stuff->name, stuff->price);
+        printf("%s   Price : %d", stuff->name, stuff->price);
         printf("   ATT : +%d   DEFRel : +%d   DEF : +%d\n\n", stuff->I_bonusATT, stuff->I_bonusDEFRel, stuff->I_bonusDEFAbs);
     }
 }
 
 //This display the list
-void mercant_display(DlistStuff *p_list)
+void mercant_stuff_display(DlistStuff *p_list)
 {
+    system("cls");
+
     if (p_list != NULL)
     {
         printf("---------------------------------------------------------------------\n");
@@ -112,7 +197,45 @@ void mercant_display(DlistStuff *p_list)
         while (p_temp != NULL)
         {
             printf("%d -> ", i);
-            printf_struct_mercant(&p_temp->stuff);
+            printf_stuff_mercant(&p_temp->stuff);
+            fflush(stdout);
+            p_temp = p_temp->p_next;
+            i++;
+        }
+    }
+    printf("---------------------------------------------------------------------\n");
+    printf("\n");
+}
+
+//Allow to display correct info of list items
+void printf_item_mercant(UsableItem* item)
+{
+    printf("%s   Price : %d\n", item->name, item->price);
+    if(item->timeEffect > 0){
+        printf("     Effect : %s FOR : %d turns\n\n", item->description, item->timeEffect);
+    }
+    else{
+        printf("     Effect : %s\n\n", item->description);
+    }
+
+}
+
+//This display the list
+void mercant_item_display(DlistItem *p_list)
+{
+    system("cls");
+
+    if (p_list != NULL)
+    {
+        printf("---------------------------------------------------------------------\n");
+        printf("                Welcome into the market for POTIONS\n");
+        printf("---------------------------------------------------------------------\n");
+        int i = 1;
+        struct node_item *p_temp = p_list->p_head;
+        while (p_temp != NULL)
+        {
+            printf("%d -> ", i);
+            printf_item_mercant(&p_temp->item);
             fflush(stdout);
             p_temp = p_temp->p_next;
             i++;
