@@ -20,8 +20,7 @@ void startNewGame();
 
 int main(int argc, char *argv[])
 {
-    //startMenu();
-    Player *Hero = NewPlayer();
+    startMenu();
 
     return(0);
 }
@@ -114,6 +113,44 @@ void displayMainMenu(Player *player){
             break;
     }
 
+}
+
+void displayGameOverMenu(Player *player){
+    int userChoice;
+
+    system("cls");
+
+    printf("#####################################\n");
+    printf("##############GAME OVER##############\n");
+    printf("#####################################\n");
+
+    if(player->life > 0){
+        printf("You still have %d life\n", player->life);
+        printf("Would you like to continue ?\n");
+        printf("1 : yes\n2 : No\n");
+
+        switch(userChoice){
+            case 1:
+                player->life--;
+                displayMainMenu(player);
+                break;
+            case 2:
+                printf("You are dead, you finished the game with :\n");
+                printf("Score -> %d\n", player->score);
+                printf("Try to do better next time...\n");
+                Sleep(5000);
+                startMenu();
+                break;
+            default:
+                break;
+        }
+
+        printf("You are dead, you finished the game with :\n");
+        printf("Score -> %d\n", player->score);
+        printf("Try to do better next time...\n");
+        Sleep(5000);
+        startMenu();
+    }
 }
 
 /*Example of SAVE STRUCT

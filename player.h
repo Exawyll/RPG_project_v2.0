@@ -26,9 +26,10 @@ typedef struct playerStructure {
     int gold;
     int score;
     int level;
+    int life;
 }Player;
 
-Player* player_ctor(char[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score);
+Player* player_ctor(char[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score, int level, int life);
 
 // Function Prototype
 void DisplayStats (Player *target);

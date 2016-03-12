@@ -10,7 +10,7 @@
 
 #define POINT_TO_ATTRIBUTE 10
 
-Player* player_ctor(char name[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score, int level){
+Player* player_ctor(char name[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score, int level, int life){
     Player* p = malloc(sizeof(Player));
     p->name[50] = name[50];
     p->health = health;
@@ -21,6 +21,7 @@ Player* player_ctor(char name[50], int health, int attack, int defense, int relD
     p->gold = gold;
     p->score = score;
     p->level = level;
+    p->life = life;
     return p;
 }
 
@@ -34,13 +35,13 @@ void DisplayStats (struct playerStructure *target) {
 // Creates player and set job.
 Player* NewPlayer() {
     // Allocate memory to player pointer.
-    Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,1);
+    Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,1,3);
 
-    //SetName(tempPlayer);
+    SetName(tempPlayer);
     setJob(tempPlayer);
-    //initEqpt(tempPlayer);
+    initEqpt(tempPlayer);
     setStuffAtStart(tempPlayer);
-    //buildToStart(tempPlayer);
+    buildToStart(tempPlayer);
     setPotionAtStart(tempPlayer);
     displayMainMenu(tempPlayer);
 
@@ -103,11 +104,18 @@ int setJob(Player *target){
 void buildToStart(Player *target){
     int skillPTS = POINT_TO_ATTRIBUTE;
 
+    system("cls");
+
     printf("\nHi %s, time to set your stats :\n", target->name);
-    DisplayStats(target);
     printf("You have %d points to attribute, please select what you want to increase :\n", skillPTS);
 
     while(skillPTS > 0){
+
+        if(skillPTS < 10){
+            printf("\nYou still have %d points to attribute...\n", skillPTS);
+        }
+
+        calcAttributesWithEqpt(target);
         printf("1: HP\n2: ATT\n3: AbsDEF\n4: RelDEF\n5: ESQ\n");
 
         switch(userInputInt()){
@@ -134,8 +142,7 @@ void buildToStart(Player *target){
             default:
                 break;
         }
-        printf("\nYou still have %d points to attribute...\n", skillPTS);
-        DisplayStats(target);
+        system("cls");
     }
 }
 
@@ -155,10 +162,10 @@ void menu_player(Player *target){
             show_inventory(target);
             break;
         case 2:
-            //showEqpt(target);
+            show_stuff(target);
             break;
         case 3:
-            //showEqpt(target);
+            displayEqpt(target);
             break;
         default:
             printf("Please, write only a correct entry !\n");

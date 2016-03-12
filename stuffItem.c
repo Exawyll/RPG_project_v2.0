@@ -505,7 +505,6 @@ void setStuffAtStart(Player *target){
         default:
             break;
     }
-    item_display(target->armory);
 }
 
 int autoEquip(Player *target, StuffItem *toEquip){
@@ -735,29 +734,4 @@ char* generateName(int type){
     return name;
 }
 
-/*void createStuff(){
-    DlistStuff* stuffList = item_new();
 
-    StuffItem* casque = stuffItem_ctor("beret", 100, 0, 10, 2, 10, 3);
-    StuffItem* armor = stuffItem_ctor("plate", 100, 1, 10, 2, 10, 3);
-    StuffItem* leggings = stuffItem_ctor("cuir", 100, 2, 10, 2, 10, 3);
-    StuffItem* boots = stuffItem_ctor("sandales", 100, 1, 10, 2, 10, 3);
-    StuffItem* sword = stuffItem_ctor("katana", 100, 1, 10, 2, 10, 3);
-    StuffItem* shield = stuffItem_ctor("bouclier", 100, 1, 10, 2, 10, 3);
-
-    item_append(stuffList, *casque);
-    item_append(stuffList, *armor);
-    item_append(stuffList, *leggings);
-    item_append(stuffList, *boots);
-    item_append(stuffList, *sword);
-    item_append(stuffList, *shield;
-
-    item_display(stuffList);
-
-    Equipment* start = Equipment_ctor(casque, armor, leggings, boots, sword, shield);
-
-    writeToFile_stuff(stuffList);
-    DlistStuff* newStuffList = readFromFile_stuff();
-
-    item_display(newStuffList);
-}*/

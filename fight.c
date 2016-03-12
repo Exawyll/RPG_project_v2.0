@@ -6,10 +6,18 @@
 #include "gameUtil.h"
 #include "mob.h"
 #include "player.h"
+#include "mobRace.h"
+
+#define SCORE_GOBELIN 10
+#define SCORE_SKELETON 20
+#define SCORE_ORC 30
+#define SCORE_ZOMBIE 40
+#define SCORE_URUKAI 50
+#define SCORE_TROLL 60
+#define SCORE_DRAGON 70
 
 int calcPlayerAttack (Player *target){
     int diceATT = rollDice_attack();
-    printf("dice ATT player : %d\n", diceATT);
     int AttackWithEqpt = calcAttack(target);
     int totAttack = (AttackWithEqpt + diceATT);
     return totAttack;
@@ -17,7 +25,6 @@ int calcPlayerAttack (Player *target){
 
 int calcMobAttack (Mob *mob) {
     int diceATT = rollDice_attack();
-    printf("dice ATT mob : %d\n", diceATT);
     int totAttack = (mob->attack + diceATT);
     return totAttack;
 }
@@ -26,7 +33,6 @@ int calcPlayerRelDef (Player *target, int attack){
     int relDefWithEqpt = calcRelDef(target);
     double relDEF = (relDefWithEqpt/100);
     int resultingAttack = attack - (attack * relDEF);
-    printf("Resulting ATT player : %d\n", resultingAttack);
     if(resultingAttack > 0){
         return resultingAttack;
     }
@@ -38,7 +44,6 @@ int calcPlayerRelDef (Player *target, int attack){
 int calcMobRelDef (Mob *mob, int attack){
     double relDEF = (mob->relDef/100);
     int resultingAttack = attack - (attack * relDEF);
-    printf("Resulting ATT mob : %d\n", resultingAttack);
     if(resultingAttack > 0){
         return resultingAttack;
     }
@@ -53,7 +58,6 @@ int fightPlayerToMob (Player *target, Mob *mob) {
     char* mobName;
     mobName = setMobNames(mob->races);
 
-    //while (mob->health > 0) {
     DisplayFightMenu();
     int userInput = userInputInt();
     attack = calcPlayerAttack(target);
@@ -87,6 +91,7 @@ int fightPlayerToMob (Player *target, Mob *mob) {
     // Victoryǃ
     if (target->health <= 0) {
         printf("%s has bested %s in combat.\n", mobName, target->name);
+        displayGameOverMenu(target);
     }
     else {
         // Swap player and mob.
@@ -100,11 +105,12 @@ int fightMobToPlayer (Mob *mob, Player *target) {
     int defensePlayerWithEqpt = 0;
     int dodge = rollDice_dodge(mob->dodge);
     char* mobName;
+
     mobName = setMobNames(mob->races);
 
     attack = calcMobAttack(mob);
     defensePlayerWithEqpt = calcAbsDef(target);
-    //while (target->health > 0) {
+
     if(dodge){
         printf("%s has dodged.\n", target->name);
     }
@@ -120,12 +126,11 @@ int fightMobToPlayer (Mob *mob, Player *target) {
         }
         printf("Name : %s\nHealth : %d\n", target->name, target->health);
     }
-    //}
 
     // Victoryǃ
     if (mob->health <= 0) {
         printf("%s has bested %s in combat.\n", target->name, mobName);
-        calculateReward(player, mob);
+        calculateReward(target, mob);
         return 1;
     }
     else {
@@ -138,43 +143,89 @@ int fightMobToPlayer (Mob *mob, Player *target) {
 void calculateReward(Player *player, Mob* mob){
     switch(mob->races){
         case GOBELIN:
-            player->score += 10;
-            player->gold += 10;
+            player->score += SCORE_GOBELIN;
+            player->gold += SCORE_GOBELIN;
+            Sleep(1000);
+            printf("Score +10\n");
+            Sleep(1000);
+            printf("Gold +10\n");
+            Sleep(1000);
             break;
         case SKELETON:
-            player->score += 20;
-            player->gold += 20;
+            player->score += SCORE_SKELETON;
+            player->gold += SCORE_SKELETON;
+            Sleep(1000);
+            printf("Score +20\n");
+            Sleep(1000);
+            printf("Gold +20\n");
+            Sleep(1000);
             break;
         case ORC:
-            player->score += 30;
-            player->gold += 30;
+            player->score += SCORE_ORC;
+            player->gold += SCORE_ORC;
+            Sleep(1000);
+            printf("Score +30\n");
+            Sleep(1000);
+            printf("Gold +30\n");
+            Sleep(1000);
             break;
         case ZOMBIE:
-            player->score += 40;
-            player->gold += 40;
+            player->score += SCORE_ZOMBIE;
+            player->gold += SCORE_ZOMBIE;
+            Sleep(1000);
+            printf("Score +40\n");
+            Sleep(1000);
+            printf("Gold +40\n");
+            Sleep(1000);
             break;
         case URUKAI:
-            player->score += 50;
-            player->gold += 50;
+            player->score += SCORE_URUKAI;
+            player->gold += SCORE_URUKAI;
+            Sleep(1000);
+            printf("Score +50\n");
+            Sleep(1000);
+            printf("Gold +50\n");
+            Sleep(1000);
             break;
         case TROLL:
-            player->score += 60;
-            player->gold += 60;
+            player->score += SCORE_TROLL;
+            player->gold += SCORE_TROLL;
+            Sleep(1000);
+            printf("Score +60\n");
+            Sleep(1000);
+            printf("Gold +60\n");
+            Sleep(1000);
             break;
         case DRAGON:
-            player->score += 70;
-            player->gold += 70;
+            player->score += SCORE_DRAGON;
+            player->gold += SCORE_DRAGON;
+            Sleep(1000);
+            printf("Score +70\n");
+            Sleep(1000);
+            printf("Gold +70\n");
+            Sleep(1000);
             break;
         default:
             break;
     }
 
     if((player->score)%100 == 0){
+        Sleep(1000);
+        printf("Congratulation you won a new level !!!\n");
+        Sleep(1000);
         player->level++;
+        increaseLevel(player);
     }
 }
 
-calculateGold(Player *player, Mob* mob){
+void increaseLevel(Player *player){
+    if((player->level)%3 == 0){
+        player->attack++;
+        player->defense++;
+        player->dodge++;
+        player->health += 10;
+        player->relDef++;
+    }
 }
 
 void DisplayFightMenu () {
