@@ -83,7 +83,6 @@ int fightPlayerToMob (Player *target, Mob *mob) {
             printf("Bad input. Try again.\n");
             break;
     }
-    //}
 
     // Victoryǃ
     if (target->health <= 0) {
@@ -126,6 +125,8 @@ int fightMobToPlayer (Mob *mob, Player *target) {
     // Victoryǃ
     if (mob->health <= 0) {
         printf("%s has bested %s in combat.\n", target->name, mobName);
+        calculateReward(player, mob);
+        return 1;
     }
     else {
         // Swap mob and player.
@@ -134,6 +135,48 @@ int fightMobToPlayer (Mob *mob, Player *target) {
     return(0);
 }
 
+void calculateReward(Player *player, Mob* mob){
+    switch(mob->races){
+        case GOBELIN:
+            player->score += 10;
+            player->gold += 10;
+            break;
+        case SKELETON:
+            player->score += 20;
+            player->gold += 20;
+            break;
+        case ORC:
+            player->score += 30;
+            player->gold += 30;
+            break;
+        case ZOMBIE:
+            player->score += 40;
+            player->gold += 40;
+            break;
+        case URUKAI:
+            player->score += 50;
+            player->gold += 50;
+            break;
+        case TROLL:
+            player->score += 60;
+            player->gold += 60;
+            break;
+        case DRAGON:
+            player->score += 70;
+            player->gold += 70;
+            break;
+        default:
+            break;
+    }
+
+    if((player->score)%100 == 0){
+        player->level++;
+    }
+}
+
+calculateGold(Player *player, Mob* mob){
+}
+
 void DisplayFightMenu () {
-    printf("1) Attack\n2) Run\n");
+    printf("1 -> Attack\n2 -> Run\n3 -> Go back in Town");
 }

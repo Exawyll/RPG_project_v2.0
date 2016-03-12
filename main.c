@@ -79,13 +79,15 @@ void displayMainMenu(Player *player){
 
     system("cls");
 
+    printf("<< IN TOWN >>\n\n");
+    printf("----------------------------------\n");
     printf("Here are all the things you can do :\n");
-    printf("___________________________________\n");
-    printf("1 - You can go to empty an infested Dungeon\n");
-    printf("2 - You can go to the tavern if you want to buy new stuff or potions\n");
-    printf("3 - You can see your potion inventory\n");
-    printf("4 - You can see your stuff inventory\n");
-    printf("5 - You can see your equipment\n");
+    printf("--------------------------------------\n");
+    printf("1 - Empty an infested Dungeon\n");
+    printf("2 - Go to the tavern if you want to buy new stuff or potions\n");
+    printf("3 - See your potion inventory\n");
+    printf("4 - See your stuff inventory\n");
+    printf("5 - See your equipment\n");
 
     userChoice = userInputInt();
 

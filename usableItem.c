@@ -34,12 +34,14 @@ UsableItem* usableItem_ctor(char* name, int id, char* description, int price, in
 //Allow to display correct info of list items
 void printf_struct_item(UsableItem* item)
 {
-    printf("Name: %s\n",item->name);
-    printf("     Effect: %s (for %d turns duration)\n",item->description, item->timeEffect);
-    printf("     Price: %d\n",item->price);
-    /*printf("Price: %d\n",item->price);
-           %s %d %d %d %d %d %d %d\n",,item->bonusHP,item->bonusATT,item->bonusDEFRel,item->bonusDEFAbs,item->bonusESQ);*/
-}
+    //text to be sure the list can be empty without crashing
+    if(item->name){
+        printf("Name: %s\n",item->name);
+        printf("     Effect: %s (for %d turns duration)\n",item->description, item->timeEffect);
+        printf("     Price: %d\n",item->price);
+    }
+
+    }
 
 /*int* display_list_ids(DlistItem *p_list)
 {
@@ -180,6 +182,8 @@ void useItem_display(DlistItem *p_list)
 {
     if (p_list != NULL)
     {
+        system("cls");
+
         printf("----------------------------------\n");
         printf("Welcome into your POTION INVENTORY\n");
         printf("----------------------------------\n");

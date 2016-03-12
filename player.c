@@ -10,7 +10,7 @@
 
 #define POINT_TO_ATTRIBUTE 10
 
-Player* player_ctor(char name[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score){
+Player* player_ctor(char name[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score, int level){
     Player* p = malloc(sizeof(Player));
     p->name[50] = name[50];
     p->health = health;
@@ -20,6 +20,7 @@ Player* player_ctor(char name[50], int health, int attack, int defense, int relD
     p->dodge = dodge;
     p->gold = gold;
     p->score = score;
+    p->level = level;
     return p;
 }
 
@@ -33,14 +34,14 @@ void DisplayStats (struct playerStructure *target) {
 // Creates player and set job.
 Player* NewPlayer() {
     // Allocate memory to player pointer.
-    Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0);
+    Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,1);
 
     //SetName(tempPlayer);
-    //setJob(tempPlayer);
+    setJob(tempPlayer);
     //initEqpt(tempPlayer);
-    //setStuffAtStart(tempPlayer);
+    setStuffAtStart(tempPlayer);
     //buildToStart(tempPlayer);
-    //setPotionAtStart(tempPlayer);
+    setPotionAtStart(tempPlayer);
     displayMainMenu(tempPlayer);
 
     return(tempPlayer); // Return memory address of player.

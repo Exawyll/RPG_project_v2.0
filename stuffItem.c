@@ -26,6 +26,7 @@ StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusATT, int I
 //Allow to display correct info of list items
 void printf_struct_stuff(StuffItem* stuff)
 {
+    //text to be sure the list can be empty without crashing
     if(stuff->name)
     {
         printf("Name : %s\n     Price : %d\n", stuff->name, stuff->price);
@@ -193,6 +194,8 @@ void item_display(DlistStuff *p_list)
 {
     if (p_list != NULL)
     {
+        system("cls");
+
         printf("---------------------------------\n");
         printf("Welcome into your STUFF INVENTORY\n");
         printf("---------------------------------\n");

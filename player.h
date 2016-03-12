@@ -25,6 +25,7 @@ typedef struct playerStructure {
     StuffItem* build[6];
     int gold;
     int score;
+    int level;
 }Player;
 
 Player* player_ctor(char[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score);

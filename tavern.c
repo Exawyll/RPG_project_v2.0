@@ -84,7 +84,7 @@ void waitMenuMercant(int i){
     }
 }
 
-//Remove item with selected position
+//Return stuffitem with selected position
 StuffItem *item_select_id(DlistStuff *p_list, int position)
 {
     if (p_list != NULL)
@@ -151,6 +151,37 @@ void buyNewStuff(Player *player){
 }
 
 void sellOldStuff(Player *player){
+    int objectToSell = -1;
+    StuffItem *objectSold;
+
+    system("cls");
+
+    item_display(player->armory);
+
+    while(objectToSell){
+
+        printf("*** YOUR GOLD : %d PO ***\n",player->gold);
+
+        printf("Please, select the weapon you want to sell : (press 0 to exit)\n");
+
+        objectToSell = userInputInt();
+
+        //Control the user to not crash the later lists functions
+        while(objectToSell > player->armory->length || objectToSell < 0){
+            printf("Please select an existing weapon !!!\n");
+            objectToSell = userInputInt();
+        }
+
+        if(objectToSell == 0){
+            goToTavern(player);
+        }
+
+        objectSold = item_select_id(player->armory, objectToSell);
+
+        player->gold += objectSold->price;
+        item_remove_id(player->armory, objectToSell);
+        item_display(player->armory);
+    }
 }
 
 DlistItem *generateMercantItem(){
@@ -165,11 +196,100 @@ DlistItem *generateMercantItem(){
     return potions;
 }
 
+//Remove item with selected position
+UsableItem *useItem_select_id(DlistItem *p_list, int position)
+{
+    if (p_list != NULL)
+    {
+        int i = 1;
+        struct node_item *p_temp = p_list->p_head;
+        while (p_temp != NULL)
+        {
+            if(i == position){
+                return &p_temp->item;
+            }
+            else{
+                p_temp = p_temp->p_next;
+                i++;
+            }
+        }
+    }
+}
+
 void buyNewPotions(Player *player){
+    int objectToBuy = -1;
+    UsableItem *objectBought;
     DlistItem *mercant = generateMercantItem();
+    int badChoice = 0;
+
+    player->gold = 1000;
+
+    while(objectToBuy){
+
+        printf("*** YOUR GOLD : %d PO ***\n",player->gold);
+
+        if(badChoice == 0){
+            printf("Please, select the potion you want to buy : (press 0 to exit)\n");
+        }
+
+        objectToBuy = userInputInt();
+        //Control the user to not crash the later lists functions
+        while(objectToBuy > mercant->length){
+            printf("Please select an existing potion !!!\n");
+            objectToBuy = userInputInt();
+        }
+
+        if(objectToBuy == 0){
+            goToTavern(player);
+        }
+
+        objectBought = useItem_select_id(mercant, objectToBuy);
+
+        if(objectBought->price > player->gold || badChoice == 1){
+            printf("\n\nSorry, buddy you don't have enough coins, get richer and come back\n");
+            printf("or buy cheaper... (press 0 to exit)\n\n\n");
+            badChoice = 1;
+        }
+        else{
+            player->gold -= objectBought->price;
+            useItem_append(player->inventory, *objectBought);
+            mercant_item_display(mercant);
+        }
+    }
 }
 
 void sellPotions(Player *player){
+    int potionToSell = -1;
+    UsableItem *potionSold;
+
+    system("cls");
+
+    useItem_display(player->inventory);
+
+    while(potionToSell){
+
+        printf("*** YOUR GOLD : %d PO ***\n",player->gold);
+
+        printf("Please, select the potion you want to sell : (press 0 to exit)\n");
+
+        potionToSell = userInputInt();
+
+        //Control the user to not crash the later lists functions
+        while(potionToSell > player->inventory->length || potionToSell < 0){
+            printf("Please select an existing weapon !!!\n");
+            potionToSell = userInputInt();
+        }
+
+        if(potionToSell == 0){
+            goToTavern(player);
+        }
+
+        potionSold = useItem_select_id(player->inventory, potionToSell);
+
+        player->gold += potionSold->price;
+        useItem_remove_id(player->inventory, potionToSell);
+        useItem_display(player->inventory);
+    }
 }
 
 //Allow to display correct info of list items
