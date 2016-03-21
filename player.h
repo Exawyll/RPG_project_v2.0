@@ -4,6 +4,7 @@
 #include "usableItem.h"
 #include "stuffItem.h"
 #include "equipment.h"
+#include "mob.h"
 
 // Classes are enumerated. WARRIOR = 0; RANGER = 1, etc.
 typedef enum ClassEnum  {
@@ -59,6 +60,28 @@ void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int rel
 int calcAbsDef(Player *target);
 int calcRelDef(Player *target);
 int calcAttack(Player *target);
-
+//Concern Dungeon
+Mob* generateMob(Player *player);
+int choiceInDungeon();
+void researchInDungeon(Player *player);
+void switchDungeons(Player *player);
+int calculateNomberOfMob(Player *player);
+void goThroughDungeon(Player *player);
+//Concern Tavern
+void goToTavern(Player *player);
+DlistStuff *generateMercantStuff();
+void printAmbianceText();
+void waitMenuMercant(int i);
+StuffItem *item_select_id(DlistStuff *p_list, int position);
+void buyNewStuff(Player *player);
+void sellOldStuff(Player *player);
+DlistItem *generateMercantItem();
+UsableItem *useItem_select_id(DlistItem *p_list, int position);
+void buyNewPotions(Player *player);
+void sellPotions(Player *player);
+void printf_stuff_mercant(StuffItem* stuff);
+void mercant_stuff_display(DlistStuff *p_list);
+void printf_item_mercant(UsableItem* item);
+void mercant_item_display(DlistItem *p_list);
 
 #endif // PLAYER_H_INCLUDED

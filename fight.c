@@ -140,6 +140,7 @@ int fightMobToPlayer (Mob *mob, Player *target) {
     return(0);
 }
 
+//Print and increase the score + Gold of the player
 void calculateReward(Player *player, Mob* mob){
     switch(mob->races){
         case GOBELIN:

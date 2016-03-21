@@ -41,7 +41,7 @@ void printf_struct_item(UsableItem* item)
         printf("     Price: %d\n",item->price);
     }
 
-    }
+}
 
 /*int* display_list_ids(DlistItem *p_list)
 {
@@ -537,7 +537,7 @@ void show_inventory(Player *target){
     int userChoice = 0;
     useItem_display(target->inventory);
 
-    printf("1 : Use item\n2 : Delete item\n");
+    printf("1 : Use item\n2 : Delete item\n(press 0 to get back)\n");
 
     userChoice = userInputInt();
     if(userChoice == 1){
@@ -579,6 +579,7 @@ void useYourPotion(Player *target){
         default:
             break;
     }
+    show_inventory(target);
 }
 
 void deletePotion(Player *target)

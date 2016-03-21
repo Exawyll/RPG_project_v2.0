@@ -8,7 +8,8 @@
 
 #define NBR_WEAPON_MERCANT 12
 
-void goToTavern(Player *player){
+void goToTavern(Player *player)
+{
     int userChoice = 0;
 
     system("cls");
@@ -50,7 +51,8 @@ void goToTavern(Player *player){
     }
 }
 
-DlistStuff *generateMercantStuff(){
+DlistStuff *generateMercantStuff()
+{
     int i = 0;
     DlistStuff *armory = item_new();
 
@@ -63,12 +65,14 @@ DlistStuff *generateMercantStuff(){
     return armory;
 }
 
-void printAmbianceText(){
+void printAmbianceText()
+{
     printf("Hello young hero, hard time to get new stuff with the infested caves\nall around us... But I've got something for you right here\nplease have a look and choose carefully what you need :\n\n");
     printf("Please wait for the generation of the market place");
 }
 
-void waitMenuMercant(int i){
+void waitMenuMercant(int i)
+{
     system("cls");
     if(i%3 == 0){
         printAmbianceText();
@@ -150,7 +154,8 @@ void buyNewStuff(Player *player){
     }
 }
 
-void sellOldStuff(Player *player){
+void sellOldStuff(Player *player)
+{
     int objectToSell = -1;
     StuffItem *objectSold;
 
@@ -184,7 +189,8 @@ void sellOldStuff(Player *player){
     }
 }
 
-DlistItem *generateMercantItem(){
+DlistItem *generateMercantItem()
+{
     DlistItem *potions = useItem_new();
 
     useItem_append(potions, createUsableItems(HEALTH_POTION));
@@ -216,7 +222,8 @@ UsableItem *useItem_select_id(DlistItem *p_list, int position)
     }
 }
 
-void buyNewPotions(Player *player){
+void buyNewPotions(Player *player)
+{
     int objectToBuy = -1;
     UsableItem *objectBought;
     DlistItem *mercant = generateMercantItem();
@@ -258,7 +265,8 @@ void buyNewPotions(Player *player){
     }
 }
 
-void sellPotions(Player *player){
+void sellPotions(Player *player)
+{
     int potionToSell = -1;
     UsableItem *potionSold;
 

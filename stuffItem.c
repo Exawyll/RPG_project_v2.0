@@ -545,22 +545,29 @@ void show_stuff(Player *target){
     int userChoice2 = 0;
     useItem_display(target->armory);
 
-    printf("1 : EQUIP item\n2 : DELETE item\n");
+    printf("1 : EQUIP item\n2 : DELETE item\n(press 0 to get back)\n");
 
     userChoice = userInputInt();
-    if(userChoice == 1){
-        printf("Which object you want to EQUIP ?\n(Type the corresponding number)\n");
-        userChoice2 = userInputInt();
-        set_equip(target, userChoice2);
+    switch(userChoice)
+    {
+        case 1:
+            printf("Which object you want to EQUIP ?\n(Type the corresponding number)\n");
+            userChoice2 = userInputInt();
+            set_equip(target, userChoice2);
+            break;
+        case 2:
+            printf("Which object you want to DELETE ?\n(Type the corresponding number)\n");
+            userChoice2 = userInputInt();
+            item_remove_id(target->armory, userChoice2);
+            break;
+        case 0:
+            displayMainMenu(target);
+            break;
+        default:
+            printf("Please choose only 1 or 2\n");
+            break;
     }
-    else if(userChoice == 2){
-        printf("Which object you want to DELETE ?\n(Type the corresponding number)\n");
-        userChoice2 = userInputInt();
-        item_remove_id(target->armory, userChoice2);
-    }
-    else{
-        printf("Please choose only 1 or 2\n");
-    }
+
 }
 
 void set_equip(Player *target, int position){

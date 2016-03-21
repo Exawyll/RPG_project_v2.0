@@ -165,6 +165,76 @@ void initEqpt(Player *target){
     }
 }
 
+//How to save the stuff equipped on the player
+void writeToFile_eqpt(StuffItem **build){
+    int i = 0;
+    FILE *fptr;
+    fptr=fopen("./list_eqpt.txt","w+");
+
+    StuffItem* stuff = malloc(sizeof(StuffItem));
+
+    for(i = 0; i < 6; i++)
+    {
+        if (build[i] != NULL)
+        {
+        stuff = build[i];
+        fwrite(stuff,sizeof(StuffItem),1,fptr);
+        }
+    }
+    printf("\n");
+    fclose(fptr);
+}
+
+//Read a list of structure to display it
+StuffItem** readFromFile_eqpt(){
+    StuffItem** build = malloc(sizeof(StuffItem));
+    StuffItem* stuff = malloc(sizeof(StuffItem));
+    StuffItem* object2 = malloc(sizeof(StuffItem));
+    FILE *fptr;
+
+    fptr=fopen("./list_eqpt.txt","r");
+
+    if (fptr) {
+        /* File was opened successfully. */
+
+        /* Attempt to read element one by one */
+        while (fread(stuff,sizeof(StuffItem),1,fptr) == 1) {
+            switch(stuff->type){
+                case HELMET:
+                    build[HELMET] = stuff;
+                    break;
+                case ARMOR:
+                    build[ARMOR] = stuff;
+                    break;
+                case RIGHT_HAND:
+                    build[RIGHT_HAND] = stuff;
+                    break;
+                case LEFT_HAND:
+                    build[LEFT_HAND] = stuff;
+                    break;
+                case LEGGINGS:
+                    build[LEGGINGS] = stuff;
+                    break;
+                case BOOTS:
+                    build[BOOTS] = stuff;
+                    break;
+                case TWO_HAND:
+                    object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0);
+                    build[RIGHT_HAND] = stuff;
+                    build[LEFT_HAND] = object2;
+                    break;
+                default:
+                    break;
+            }
+        }
+        printf("\n");
+    }
+
+    fclose(fptr);
+
+    return build;
+}
+
 /*void displayEqpt(Player *target){
     printf("                  /88888888888888888888888888\          \n");
     printf("                  |88888888888888888888888888/      <---    \n");

@@ -17,6 +17,7 @@
 void startMenu();
 void displayMainMenu(Player *player);
 void startNewGame();
+Player* loadYourGame();
 
 int main(int argc, char *argv[])
 {
@@ -52,7 +53,7 @@ void startMenu(){
             startNewGame();
             break;
         case 2:
-            //loadExistingGame();
+            loadYourGame();
             break;
         default:
             break;
@@ -87,6 +88,7 @@ void displayMainMenu(Player *player){
     printf("3 - See your potion inventory\n");
     printf("4 - See your stuff inventory\n");
     printf("5 - See your equipment\n");
+    printf("6 _ Save and quit\n");
 
     userChoice = userInputInt();
 
@@ -106,6 +108,10 @@ void displayMainMenu(Player *player){
         case 5:
             calcAttributesWithEqpt(player);
             break;
+        case 6:
+            saveYourGame(player);
+            startMenu();
+            break;
         default:
             printf("Please enter a correct entry !\n");
             Sleep(1500);
@@ -124,10 +130,13 @@ void displayGameOverMenu(Player *player){
     printf("##############GAME OVER##############\n");
     printf("#####################################\n");
 
+    printf("\nYour score is -> %d\n", player->score);
+
     if(player->life > 0){
-        printf("You still have %d life\n", player->life);
+        printf("\nYou still have %d life\n", player->life);
         printf("Would you like to continue ?\n");
         printf("1 : yes\n2 : No\n");
+        userChoice = userInputInt();
 
         switch(userChoice){
             case 1:
@@ -144,13 +153,60 @@ void displayGameOverMenu(Player *player){
             default:
                 break;
         }
-
+    }
+    else{
         printf("You are dead, you finished the game with :\n");
         printf("Score -> %d\n", player->score);
         printf("Try to do better next time...\n");
         Sleep(5000);
         startMenu();
     }
+}
+
+void saveYourGame(Player *player){
+    Player *toSave = malloc(sizeof(Player));
+    strcpy(toSave->name, player->name);
+    toSave->attack = player->attack;
+    toSave->defense = player->defense;
+    toSave->dodge = player->dodge;
+    toSave->gold = player->gold;
+    toSave->health = player->health;
+    toSave->job = player->job;
+    toSave->level = player->level;
+    toSave->life = player->life;
+    toSave->relDef = player->relDef;
+    toSave->score = player->score;
+    writeToFile_item(player->inventory);
+    writeToFile_stuff(player->armory);
+    writeToFile_eqpt(player->build);
+    FILE * saved_player = fopen("./saved_player.txt", "w+");
+    if (saved_player != NULL) {
+        fwrite(toSave, sizeof(Player), 1, saved_player);
+        fclose(saved_player);
+    }
+}
+
+Player* loadYourGame(){
+    Player *loadPlayer = malloc(sizeof(Player));
+    DlistItem *loadInventory = useItem_new();
+    DlistStuff *loadArmory = item_new();
+    StuffItem** loadBuild = malloc(sizeof(StuffItem));
+
+    loadInventory = readFromFile_item();
+    loadArmory = readFromFile_stuff();
+    loadBuild = readFromFile_eqpt();
+
+    FILE * saved_player = fopen("./saved_player.txt", "r");
+    if (saved_player != NULL) {
+        fread(loadPlayer, sizeof(Player), 1, saved_player);
+        fclose(saved_player);
+    }
+
+    loadPlayer->inventory = loadInventory;
+    loadPlayer->armory = loadArmory;
+    loadPlayer->build[6] = loadBuild;
+
+    return loadPlayer;
 }
 
 /*Example of SAVE STRUCT

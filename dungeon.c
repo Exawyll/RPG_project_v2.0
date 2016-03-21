@@ -5,7 +5,8 @@
 #include "mob.h"
 #include "player.h"
 
-Mob* generateMob(Player *player){
+Mob* generateMob(Player *player)
+{
     Mob* myMob = malloc(sizeof(Mob));
     int randNbr;
 
@@ -66,7 +67,8 @@ Mob* generateMob(Player *player){
     return myMob;
 }
 
-int choiceInDungeon(){
+int choiceInDungeon()
+{
     int userChoice = -1;
 
     system("cls");
@@ -82,7 +84,8 @@ int choiceInDungeon(){
     return userChoice;
 }
 
-void researchInDungeon(Player *player){
+void researchInDungeon(Player *player)
+{
     int luckyDice = doRand(1,20);
     int giftGold = doRand(50, 350);
     StuffItem *giftStuff;
@@ -110,7 +113,8 @@ void researchInDungeon(Player *player){
     }
 }
 
-void switchDungeons(Player *player){
+void switchDungeons(Player *player)
+{
     Mob* unMob;
     switch(choiceInDungeon()){
         case 1:
@@ -133,7 +137,8 @@ void switchDungeons(Player *player){
     }
 }
 
-int calculateNomberOfMob(Player *player){
+int calculateNomberOfMob(Player *player)
+{
     static int numberOfMob = 5;
 
     if((player->level)%3 == 0){
@@ -142,7 +147,8 @@ int calculateNomberOfMob(Player *player){
     return numberOfMob;
 }
 
-void goThroughDungeon(Player *player){
+void goThroughDungeon(Player *player)
+{
     int dungeonSize = calculateNomberOfMob(player);
 
     printf("\nWelcome to a new dungeon\nOnly the bravest stay alive through these caves, be strong and take care...\n\n");
