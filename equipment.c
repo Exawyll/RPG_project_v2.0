@@ -97,7 +97,8 @@ void calcAttributesWithEqpt(Player *target)
 
 void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int relDef){
     printf("Your stats with equipment : \n");
-    printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, target->health, attack, defense, relDef, target->dodge);
+    printf("Level : %d\nName: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n", target->level, target->name, target->health, attack, defense, relDef, target->dodge);
+    printf("Gold: %d\nScore: %d\nLife: %d\n\n", target->gold, target->score, target->life);
 }
 
 void displayEqpt(Player *target)
@@ -157,9 +158,22 @@ void displayEqpt(Player *target)
     printf("\n");
 }
 
+int displayEqptMenu()
+{
+    int userChoice;
+    printf("press 1 to unequip stuff or 0 to go back\n");
+    userChoice = userInputInt();
+    switch(userChoice)
+    {
+    case 1:
+        return 1;
+    case 0:
+    }
+}
+
 void initEqpt(Player *target){
     int i = 0;
-    for(i = 0; i < 6; i++){
+    for(i = 0; i < 6; i++){printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, target->health, attack, defense, relDef, target->dodge);
         StuffItem* fakeObject = stuffItem_ctor(' ',0,i,0,0,0);
         target->build[i] = fakeObject;
     }

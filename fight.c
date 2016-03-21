@@ -83,6 +83,9 @@ int fightPlayerToMob (Player *target, Mob *mob) {
         case 2:
             printf("Running away!\n");
             return(0);
+        case 3:
+            show_inventory(target);
+            break;
         default:
             printf("Bad input. Try again.\n");
             break;
@@ -230,5 +233,5 @@ void increaseLevel(Player *player){
 }
 
 void DisplayFightMenu () {
-    printf("1 -> Attack\n2 -> Run\n3 -> Go back in Town");
+    printf("1 -> Attack\n2 -> Run\n3 -> Potion Inventory\n");
 }

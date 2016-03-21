@@ -69,32 +69,33 @@ int setJob(Player *target){
         case WARRIOR:
             target->health += 100;
             target->attack += 10;
-            target->defense += 10;
-            target->relDef += 5;
+            target->defense += 3;
+            target->relDef += 1;
             target->dodge += 1;
             target->job = WARRIOR;
             break;
         case RANGER:
-            target->health += 50;
+            target->health += 100;
             target->attack += 10;
-            target->defense += 8;
+            target->defense += 2;
             target->relDef += 6;
+            target->dodge += 1;
             target->job = RANGER;
             break;
         case WIZARD:
-            target->health += 40;
+            target->health += 90;
             target->attack += 8;
-            target->defense += 6;
-            target->relDef += 5;
+            target->defense += 1;
+            target->relDef += 1;
             target->dodge += 3;
             target->job = WIZARD;
             break;
         default:
             target->health += 10;
             target->attack += 0;
-            target->defense += 20;
-            target->relDef += 10;
-            target->dodge += 5;
+            target->defense += 1;
+            target->relDef += 1;
+            target->dodge += 1;
             target->job = -1;
             break;
     }
@@ -146,13 +147,16 @@ void buildToStart(Player *target){
     }
 }
 
-void menu_player(Player *target){
+void menu_player(Player *target, int callingPlace)
+{
     int userChoice;
 
     printf("########################\n");
     printf("#1 : POTION inventory  #\n");
     printf("#2 : STUFF Inventory   #\n");
     printf("#3 : EQUIPMENT         #\n");
+    printf("#4 : CHARACTER stats   #\n");
+    printf("#(press 0 to return)   #\n");
     printf("########################\n");
 
     userChoice = userInputInt();
@@ -166,6 +170,17 @@ void menu_player(Player *target){
             break;
         case 3:
             displayEqpt(target);
+            break;
+        case 4:
+            calcAttributesWithEqpt(target);
+            break;
+        case 0:
+            if (callingPlace == 0){
+                displayMainMenu(target);
+            }
+            else if (callingPlace == 1){
+
+            }
             break;
         default:
             printf("Please, write only a correct entry !\n");

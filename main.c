@@ -13,7 +13,6 @@
 
 #define NBR_POTIONS 3
 
-
 void startMenu();
 void displayMainMenu(Player *player);
 void startNewGame();
@@ -26,7 +25,8 @@ int main(int argc, char *argv[])
     return(0);
 }
 
-void startMenu(){
+void startMenu()
+{
     int userChoice = 0;
 
     system("cls");
@@ -39,10 +39,9 @@ void startMenu(){
     printf("~~~                                                   ~~~\n");
     printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
-
     printf("\n\n");
     printf("Would you like to continue a story or start a new one? \n");
-    printf("_______________________________________________________\n");
+    printf("-------------------------------------------------------\n");
     printf("1 : New Game\n");
     printf("2 : Load Game\n\n");
 
@@ -60,8 +59,8 @@ void startMenu(){
     }
 }
 
-void startNewGame(){
-
+void startNewGame()
+{
     system("cls");
 
     printf("Here start a great adventure, and everything starts with you, so tell me more about you...\n\n");
@@ -74,7 +73,8 @@ void startNewGame(){
     displayMainMenu(Hero);
 }
 
-void displayMainMenu(Player *player){
+void displayMainMenu(Player *player)
+{
     int userChoice = 0;
 
     system("cls");
@@ -85,10 +85,8 @@ void displayMainMenu(Player *player){
     printf("--------------------------------------\n");
     printf("1 - Empty an infested Dungeon\n");
     printf("2 - Go to the tavern if you want to buy new stuff or potions\n");
-    printf("3 - See your potion inventory\n");
-    printf("4 - See your stuff inventory\n");
-    printf("5 - See your equipment\n");
-    printf("6 _ Save and quit\n");
+    printf("3 - Display player menu\n");
+    printf("4 _ Save and quit\n");
 
     userChoice = userInputInt();
 
@@ -100,15 +98,9 @@ void displayMainMenu(Player *player){
             goToTavern(player);
             break;
         case 3:
-            show_inventory(player);
+            menu_player(player, 0);
             break;
         case 4:
-            show_stuff(player);
-            break;
-        case 5:
-            calcAttributesWithEqpt(player);
-            break;
-        case 6:
             saveYourGame(player);
             startMenu();
             break;

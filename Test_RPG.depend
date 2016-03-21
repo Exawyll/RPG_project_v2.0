@@ -100,7 +100,7 @@
 
 1457122403 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.h
 
-1458483920 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
+1458586304 d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\player.h
 	"usableItem.h"
 	"stuffItem.h"
 	"equipment.h"
@@ -162,7 +162,7 @@
 	"usableItem.h"
 	"stuffItem.h"
 
-1457812679 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.c
+1458484505 source:d:\mes documents\imie itstart\antoine_c\code_source_c\test_rpg\stuffitem.c
 	<stdlib.h>
 	<stdio.h>
 	<time.h>
