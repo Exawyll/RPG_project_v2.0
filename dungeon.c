@@ -75,9 +75,10 @@ int choiceInDungeon()
 
     printf("You enter through an old gate where you can here screams quite next to you...\n");
     printf("What do you want to do :\n");
-    printf("1 - Go back in town\n");
+    printf("1 - Go directly for a fight\n");
     printf("2 - Look around for a treasure\n");
-    printf("3 - Go directly for a fight\n");
+    printf("3 - Display player menu\n");
+    printf("3 - Go back in town\n");
 
     userChoice = userInputInt();
 
@@ -115,19 +116,21 @@ void researchInDungeon(Player *player)
 
 void switchDungeons(Player *player)
 {
+    int flag = 0;
     Mob* unMob;
     switch(choiceInDungeon()){
-        case 1:
+        case 3:
             displayMainMenu(player);
             break;
         case 2:
             researchInDungeon(player);
             break;
-        case 3:
+        case 1:
             unMob = generateMob(player);
             char* name = setMobNames(unMob->races);
             printf("\nOh you encountered a %s, good luck...\n", name);
-            if(fightPlayerToMob(player, unMob)){
+            flag = fightPlayerToMob(player, unMob);
+            if(flag){
                 printf("Good job you killed it\n");
             }
             break;

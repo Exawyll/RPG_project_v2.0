@@ -132,15 +132,28 @@ int fightMobToPlayer (Mob *mob, Player *target) {
 
     // Victoryǃ
     if (mob->health <= 0) {
+        system("cls");
         printf("%s has bested %s in combat.\n", target->name, mobName);
         calculateReward(target, mob);
-        return 1;
+        chanceOfDrop(target);
+        return (1);
     }
     else {
         // Swap mob and player.
         fightPlayerToMob(target,mob);
     }
     return(0);
+}
+
+void chanceOfDrop(Player* target)
+{
+    int chance = doRand(1,10);
+    if(chance == 10){
+        printf("The mob left a weapon for you in your armory\n");
+        Sleep(1000);
+        StuffItem *luckyWeapon = generateWeapon();
+        item_append(target->armory, *luckyWeapon);
+    }
 }
 
 //Print and increase the score + Gold of the player

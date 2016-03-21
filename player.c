@@ -156,7 +156,7 @@ void menu_player(Player *target, int callingPlace)
     printf("#2 : STUFF Inventory   #\n");
     printf("#3 : EQUIPMENT         #\n");
     printf("#4 : CHARACTER stats   #\n");
-    printf("#(press 0 to return)   #\n");
+    printf("#>> press 0 to return  #\n");
     printf("########################\n");
 
     userChoice = userInputInt();
@@ -177,9 +177,6 @@ void menu_player(Player *target, int callingPlace)
         case 0:
             if (callingPlace == 0){
                 displayMainMenu(target);
-            }
-            else if (callingPlace == 1){
-
             }
             break;
         default:

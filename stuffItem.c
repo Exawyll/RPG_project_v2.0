@@ -543,7 +543,7 @@ int autoEquip(Player *target, StuffItem *toEquip){
 void show_stuff(Player *target){
     int userChoice = 0;
     int userChoice2 = 0;
-    useItem_display(target->armory);
+    item_display(target->armory);
 
     printf("1 : EQUIP item\n2 : DELETE item\n(press 0 to get back)\n");
 
@@ -573,7 +573,6 @@ void show_stuff(Player *target){
 void set_equip(Player *target, int position){
     StuffItem* toEquip = item_return_stuff(target->armory, position);
     int type = toEquip->type;
-    printf("Type : %d\n", type);
     StuffItem *object;
     StuffItem *object2;
     switch(type){
@@ -606,20 +605,15 @@ void set_equip(Player *target, int position){
             }
             break;
         case RIGHT_HAND:
-            printf("Name : \n");
             if(target->build[RIGHT_HAND])
             {
-                printf("la\n");
                 object = target->build[RIGHT_HAND];
-                printf("reussi\n");
                 item_append(target->armory, *object);
-                printf("dur\n");
                 target->build[RIGHT_HAND] = toEquip;
                 item_remove_id(target->armory, position);
             }
             else
             {
-                printf("Dans right hand\n");
                 target->build[RIGHT_HAND] = toEquip;
                 item_remove_id(target->armory, position);
             }
@@ -667,7 +661,7 @@ void set_equip(Player *target, int position){
             }
             break;
         case TWO_HAND:
-            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0);
+            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,TWO_HAND,0,0,0);
             if(target->build[RIGHT_HAND])
             {
                 object = target->build[RIGHT_HAND];
@@ -689,6 +683,80 @@ void set_equip(Player *target, int position){
             else
             {
                 target->build[LEFT_HAND] = object2;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void Unequip(Player *target, int typeStuff){
+    StuffItem* toUnEquip = target->build[typeStuff];
+    StuffItem* object;
+
+    switch(typeStuff){
+        case HELMET:
+            if(target->build[HELMET])
+            {
+                toUnEquip = target->build[HELMET];
+                item_append(target->armory, *toUnEquip);
+                target->build[HELMET] = NULL;
+            }
+            break;
+        case ARMOR:
+            if(target->build[ARMOR])
+            {
+                toUnEquip = target->build[ARMOR];
+                item_append(target->armory, *toUnEquip);
+                //target->build[ARMOR] = NULL;
+            }
+            break;
+        case RIGHT_HAND:
+            if(target->build[RIGHT_HAND])
+            {
+                if (target->build[RIGHT_HAND]->type == TWO_HAND){
+                    toUnEquip = target->build[RIGHT_HAND];
+                    item_append(target->armory, *toUnEquip);
+                    target->build[RIGHT_HAND] = NULL;
+                    target->build[LEFT_HAND] = NULL;
+                }
+                else{
+                    toUnEquip = target->build[RIGHT_HAND];
+                    item_append(target->armory, *toUnEquip);
+                    target->build[RIGHT_HAND] = NULL;
+                }
+            }
+            break;
+        case LEFT_HAND:
+            if(target->build[LEFT_HAND])
+            {
+                if (target->build[LEFT_HAND]->type == TWO_HAND){
+                    toUnEquip = target->build[RIGHT_HAND];
+                    item_append(target->armory, *toUnEquip);
+                    target->build[RIGHT_HAND] = NULL;
+                    target->build[LEFT_HAND] = NULL;
+                }
+                else{
+                    toUnEquip = target->build[LEFT_HAND];
+                    item_append(target->armory, *toUnEquip);
+                    target->build[LEFT_HAND] = NULL;
+                }
+            }
+            break;
+        case LEGGINGS:
+            if(target->build[LEGGINGS])
+            {
+                toUnEquip = target->build[LEGGINGS];
+                item_append(target->armory, *toUnEquip);
+                target->build[LEGGINGS] = NULL;
+            }
+            break;
+        case BOOTS:
+            if(target->build[BOOTS])
+            {
+                toUnEquip = target->build[BOOTS];
+                item_append(target->armory, *toUnEquip);
+                target->build[BOOTS] = NULL;
             }
             break;
         default:

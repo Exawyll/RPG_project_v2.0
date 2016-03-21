@@ -119,7 +119,7 @@ void displayGameOverMenu(Player *player){
     system("cls");
 
     printf("#####################################\n");
-    printf("##############GAME OVER##############\n");
+    printf("############# GAME OVER #############\n");
     printf("#####################################\n");
 
     printf("\nYour score is -> %d\n", player->score);

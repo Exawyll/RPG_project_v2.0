@@ -134,10 +134,10 @@ void displayEqpt(Player *target)
                         printf("BODY --> ");
                         break;
                     case RIGHT_HAND:
-                        printf("HAND --> ");
+                        printf("R.HAND-> ");
                         break;
                     case LEFT_HAND:
-                        printf("HAND --> ");
+                        printf("L.HAND-> ");
                         break;
                     case LEGGINGS:
                         printf("LEGS --> ");
@@ -155,25 +155,34 @@ void displayEqpt(Player *target)
         }
     }
     printf("-------------------------------\n");
+    displayEqptMenu(target);
     printf("\n");
 }
 
-int displayEqptMenu()
+void displayEqptMenu(Player* player)
 {
     int userChoice;
+    int userChoice2;
     printf("press 1 to unequip stuff or 0 to go back\n");
     userChoice = userInputInt();
     switch(userChoice)
     {
     case 1:
-        return 1;
+        printf("Select the weapon to unequip\n");
+        printf("(1:HEAD\n2:BODY\n3:R.HAND\n4:L.HAND\n5:LEGS\n6:FOOT\n");
+        userChoice2 = userInputInt();
+        userChoice2--;
+        Unequip(player, userChoice2);
+        break;
     case 0:
+        displayMainMenu(player);
+        break;
     }
 }
 
 void initEqpt(Player *target){
     int i = 0;
-    for(i = 0; i < 6; i++){printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, target->health, attack, defense, relDef, target->dodge);
+    for(i = 0; i < 6; i++){
         StuffItem* fakeObject = stuffItem_ctor(' ',0,i,0,0,0);
         target->build[i] = fakeObject;
     }
