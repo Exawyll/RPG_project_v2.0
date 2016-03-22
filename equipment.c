@@ -5,11 +5,6 @@
 #include "stuffItem.h"
 #include "player.h"
 
-/*- Equipment.c : contient les fonctions suivantes :
-			- calcAttack(Equipment* equipment, Mob* mob)
-			- calcRelDef(Equipment* equipment, Mob* mob)
-			- calcAbsDef(Equipment* equipment, Mob* mob)*/
-
 int calcAttack(Player *target){
     int bonusATT = 0;
     int attack = 0;
@@ -165,18 +160,17 @@ void displayEqptMenu(Player* player)
     int userChoice2;
     printf("press 1 to unequip stuff or 0 to go back\n");
     userChoice = userInputInt();
-    switch(userChoice)
-    {
-    case 1:
-        printf("Select the weapon to unequip\n");
-        printf("1:HEAD\n2:BODY\n3:R.HAND\n4:L.HAND\n5:LEGS\n6:FOOT\n");
-        userChoice2 = userInputInt();
-        userChoice2--;
-        Unequip(player, userChoice2);
-        break;
-    case 0:
-        menu_player(player);
-        break;
+    switch(userChoice){
+        case 1:
+            printf("Select the weapon to unequip\n");
+            printf("1:HEAD\n2:BODY\n3:R.HAND\n4:L.HAND\n5:LEGS\n6:FOOT\n");
+            userChoice2 = userInputInt();
+            userChoice2--;
+            Unequip(player, userChoice2);
+            break;
+        case 0:
+            //menu_player(player, 0);
+            return (0);
     }
 }
 

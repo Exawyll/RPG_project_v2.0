@@ -106,11 +106,8 @@ int choiceInDungeon()
     printf("What do you want to do :\n");
     printf("1 - Go directly for a fight\n");
     printf("2 - Look around for a treasure\n");
-    printf("3 - Display potions\n");
-    printf("4 - Display your stuff\n");
-    printf("5 - Display your equipment\n");
-    printf("6 - Display your stats\n");
-    printf("7 - Go back in town (you won't be able to continue this dungeon)\n");
+    printf("3 - Display player menu\n");
+    printf("4 - Go back in town (you won't be able to continue this dungeon)\n");
 
     userChoice = userInputInt();
 
@@ -122,43 +119,33 @@ void switchDungeons(Player *player)
     int flag = 0;
     Mob* unMob;
     int userChoice;
-    int numberOfMob = 0;
-    switch(choiceInDungeon()){
-        case 1:
-            unMob = generateMob(player);
-            char* name = setMobNames(unMob->races);
-            printf("\nOh you encountered a %s, good luck...\n", name);
-            flag = fightPlayerToMob(player, unMob);
-            if(flag){
-                printf("Good job you killed it\n");
-            }
-            break;
-        case 2:
-            researchInDungeon(player);
-            break;
-        case 3:
-            show_inventory(player);
-            break;
-        case 4:
-            show_stuff(player);
-            break;
-        case 5:
-            displayEqpt(player);
-            break;
-        case 6:
-            calcAttributesWithEqpt(player);
-            printf("Press 0 to return\n");
-            while(userChoice != 0){
-                userChoice = userInputInt();
-            }
-            menu_player(player);
-            break;
-        case 7:
-            displayMainMenu(player);
-            break;
-        default:
-            printf("Please press a correct entry !\n");
-            break;
+    int numberOfMob = calculateNomberOfMob(player);
+
+    while(numberOfMob > 0){
+        switch(choiceInDungeon()){
+            case 1:
+                unMob = generateMob(player);
+                char* name = setMobNames(unMob->races);
+                printf("\nOh you encountered a %s, good luck...\n", name);
+                flag = fightPlayerToMob(player, unMob);
+                if(flag == 1){
+                    printf("Good job you killed it\n");
+                    numberOfMob--;
+                }
+                break;
+            case 2:
+                researchInDungeon(player);
+                break;
+            case 3:
+                menu_player(player, 1);
+                break;
+            case 4:
+                displayMainMenu(player);
+                break;
+            default:
+                printf("Please press a correct entry !\n");
+                break;
+        }
     }
 }
 

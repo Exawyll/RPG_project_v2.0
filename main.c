@@ -90,30 +90,33 @@ void displayMainMenu(Player *player)
     printf("1 - Empty an infested Dungeon\n");
     printf("2 - Go to the tavern if you want to buy new stuff or potions\n");
     printf("3 - Display player menu\n");
-    printf("4 _ Save and quit\n");
+    printf("4 - Save and quit\n");
 
-    userChoice = userInputInt();
+    while(1){
+        userChoice = userInputInt();
 
-    switch(userChoice){
-        case 1:
-            goThroughDungeon(player);
-            break;
-        case 2:
-            goToTavern(player);
-            break;
-        case 3:
-            menu_player(player);
-            break;
-        case 4:
-            saveYourGame(player);
-            startMenu();
-            break;
-        default:
-            printf("Please enter a correct entry !\n");
-            Sleep(1500);
-            displayMainMenu(player);
-            break;
+        switch(userChoice){
+            case 1:
+                goThroughDungeon(player);
+                break;
+            case 2:
+                goToTavern(player);
+                break;
+            case 3:
+                menu_player(player, 0);
+                break;
+            case 4:
+                saveYourGame(player);
+                startMenu();
+                break;
+            default:
+                printf("Please enter a correct entry !\n");
+                Sleep(1500);
+                displayMainMenu(player);
+                break;
+        }
     }
+
 }
 
 void displayGameOverMenu(Player *player){

@@ -533,7 +533,7 @@ void setPotionAtStart(Player *target){
     useItem_display(target->inventory);
 }
 
-void show_inventory(Player *target){
+int show_inventory(Player *target){
     int userChoice = 0;
     useItem_display(target->inventory);
 
@@ -547,7 +547,8 @@ void show_inventory(Player *target){
         deletePotion(target);
     }
     else if (userChoice == 0){
-        menu_player(target);
+        return (0);
+        //menu_player(target, 0);
     }
     else{
         printf("Please choose only 1 or 2\n");

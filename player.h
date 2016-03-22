@@ -38,13 +38,13 @@ void SetName(Player *target);
 Player* NewPlayer();    // Creates player and sets class.
 int setJob(Player* target);
 void buildToStart(Player *target);
-void menu_player(Player *target);
+int menu_player(Player *target, int callingPlace);
 //Concern USABLE ITEMS
 UsableItem createUsableItems(enum itemNumber);
 void menuSelectPotion();
 void init_inventory(Player* target);
 void setPotionAtStart(Player *target);
-void show_inventory(Player *target);
+int show_inventory(Player *target);
 void useYourPotion(Player *target);
 void deletePotion(Player *target);
 //Concern STUFF ITEMS

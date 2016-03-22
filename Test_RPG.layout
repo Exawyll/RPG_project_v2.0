@@ -2,14 +2,19 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+	<File name="mobRace.h" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="123" topLine="0" />
+		</Cursor>
+	</File>
 	<File name="wastecode.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2995" topLine="77" />
 		</Cursor>
 	</File>
-	<File name="player.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="player.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5222" topLine="158" />
+			<Cursor1 position="5358" topLine="170" />
 		</Cursor>
 	</File>
 	<File name="equipment.h" open="1" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
@@ -29,7 +34,7 @@
 	</File>
 	<File name="fight.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3844" topLine="110" />
+			<Cursor1 position="3844" topLine="151" />
 		</Cursor>
 	</File>
 	<File name="dungeon.h" open="1" top="0" tabpos="20" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -39,7 +44,7 @@
 	</File>
 	<File name="equipment.c" open="1" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="410" topLine="117" />
+			<Cursor1 position="4933" topLine="155" />
 		</Cursor>
 	</File>
 	<File name="tavern.c" open="1" top="0" tabpos="21" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
@@ -49,7 +54,7 @@
 	</File>
 	<File name="usableItem.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="16620" topLine="533" />
+			<Cursor1 position="16625" topLine="534" />
 		</Cursor>
 	</File>
 	<File name="usableItem.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
@@ -74,12 +79,12 @@
 	</File>
 	<File name="stuffItem.c" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="17361" topLine="545" />
+			<Cursor1 position="17390" topLine="578" />
 		</Cursor>
 	</File>
 	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3195" topLine="124" />
+			<Cursor1 position="2617" topLine="104" />
 		</Cursor>
 	</File>
 	<File name="stuffItem.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
@@ -94,7 +99,7 @@
 	</File>
 	<File name="player.h" open="1" top="0" tabpos="17" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="971" topLine="36" />
+			<Cursor1 position="1171" topLine="36" />
 		</Cursor>
 	</File>
 	<File name="mob.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
@@ -102,14 +107,9 @@
 			<Cursor1 position="169" topLine="37" />
 		</Cursor>
 	</File>
-	<File name="dungeon.c" open="1" top="1" tabpos="19" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="dungeon.c" open="1" top="0" tabpos="19" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3354" topLine="119" />
-		</Cursor>
-	</File>
-	<File name="mobRace.h" open="1" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="123" topLine="0" />
+			<Cursor1 position="4139" topLine="131" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -35,11 +35,11 @@ void DisplayStats (struct playerStructure *target) {
 Player* NewPlayer() {
     Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,1,3);
 
-    SetName(tempPlayer);
+    //SetName(tempPlayer);
     setJob(tempPlayer);
     initEqpt(tempPlayer);
     setStuffAtStart(tempPlayer);
-    buildToStart(tempPlayer);
+    //buildToStart(tempPlayer);
     setPotionAtStart(tempPlayer);
 
     return(tempPlayer);
@@ -144,7 +144,7 @@ void buildToStart(Player *target){
     }
 }
 
-void menu_player(Player *target)
+int menu_player(Player *target, int callingPlace)
 {
     int userChoice;
 
@@ -158,31 +158,39 @@ void menu_player(Player *target)
     printf("#>> press 0 to return  #\n");
     printf("########################\n");
 
-    userChoice = userInputInt();
+    //while(1){
+        userChoice = userInputInt();
 
-    switch(userChoice){
-        case 1:
-            show_inventory(target);
-            break;
-        case 2:
-            show_stuff(target);
-            break;
-        case 3:
-            displayEqpt(target);
-            break;
-        case 4:
-            calcAttributesWithEqpt(target);
-            printf("Press 0 to return\n");
-            while(userChoice != 0){
-                userChoice = userInputInt();
-            }
-            menu_player(target);
-            break;
-        case 0:
-            //displayMainMenu(target);
-            break;
-        default:
-            printf("Please, write only a correct entry !\n");
-            break;
-    }
+        switch(userChoice){
+            case 1:
+                show_inventory(target);
+                menu_player(target, 0);
+                break;
+            case 2:
+                show_stuff(target);
+                menu_player(target, 0);
+                break;
+            case 3:
+                displayEqpt(target);
+                menu_player(target, 0);
+                break;
+            case 4:
+                calcAttributesWithEqpt(target);
+                printf("Press 0 to return\n");
+                while(userChoice != 0){
+                    userChoice = userInputInt();
+                }
+                menu_player(target, 0);
+                break;
+            case 0:
+                if(callingPlace == 0){
+                    displayMainMenu(target);
+                }
+                break;
+            default:
+                printf("Please, write only a correct entry !\n");
+                break;
+        }
+    //}
+
 }
