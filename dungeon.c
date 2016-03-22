@@ -67,24 +67,6 @@ Mob* generateMob(Player *player)
     return myMob;
 }
 
-int choiceInDungeon()
-{
-    int userChoice = -1;
-
-    system("cls");
-
-    printf("You enter through an old gate where you can here screams quite next to you...\n");
-    printf("What do you want to do :\n");
-    printf("1 - Go directly for a fight\n");
-    printf("2 - Look around for a treasure\n");
-    printf("3 - Display player menu\n");
-    printf("3 - Go back in town\n");
-
-    userChoice = userInputInt();
-
-    return userChoice;
-}
-
 void researchInDungeon(Player *player)
 {
     int luckyDice = doRand(1,20);
@@ -114,17 +96,34 @@ void researchInDungeon(Player *player)
     }
 }
 
+int choiceInDungeon()
+{
+    int userChoice = -1;
+
+    system("cls");
+
+    printf("You enter through an old gate where you can here screams quite next to you...\n");
+    printf("What do you want to do :\n");
+    printf("1 - Go directly for a fight\n");
+    printf("2 - Look around for a treasure\n");
+    printf("3 - Display potions\n");
+    printf("4 - Display your stuff\n");
+    printf("5 - Display your equipment\n");
+    printf("6 - Display your stats\n");
+    printf("7 - Go back in town (you won't be able to continue this dungeon)\n");
+
+    userChoice = userInputInt();
+
+    return userChoice;
+}
+
 void switchDungeons(Player *player)
 {
     int flag = 0;
     Mob* unMob;
+    int userChoice;
+    int numberOfMob = 0;
     switch(choiceInDungeon()){
-        case 3:
-            displayMainMenu(player);
-            break;
-        case 2:
-            researchInDungeon(player);
-            break;
         case 1:
             unMob = generateMob(player);
             char* name = setMobNames(unMob->races);
@@ -133,6 +132,29 @@ void switchDungeons(Player *player)
             if(flag){
                 printf("Good job you killed it\n");
             }
+            break;
+        case 2:
+            researchInDungeon(player);
+            break;
+        case 3:
+            show_inventory(player);
+            break;
+        case 4:
+            show_stuff(player);
+            break;
+        case 5:
+            displayEqpt(player);
+            break;
+        case 6:
+            calcAttributesWithEqpt(player);
+            printf("Press 0 to return\n");
+            while(userChoice != 0){
+                userChoice = userInputInt();
+            }
+            menu_player(player);
+            break;
+        case 7:
+            displayMainMenu(player);
             break;
         default:
             printf("Please press a correct entry !\n");

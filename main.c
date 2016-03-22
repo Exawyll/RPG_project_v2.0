@@ -13,7 +13,7 @@
 
 #define NBR_POTIONS 3
 
-void startMenu();
+int startMenu();
 void displayMainMenu(Player *player);
 void startNewGame();
 Player* loadYourGame();
@@ -25,8 +25,9 @@ int main(int argc, char *argv[])
     return(0);
 }
 
-void startMenu()
+int startMenu()
 {
+    Player* newPlayer;
     int userChoice = 0;
 
     system("cls");
@@ -44,6 +45,7 @@ void startMenu()
     printf("-------------------------------------------------------\n");
     printf("1 : New Game\n");
     printf("2 : Load Game\n\n");
+    printf("Press 0 to exit the game...\n");
 
     userChoice = userInputInt();
 
@@ -52,8 +54,11 @@ void startMenu()
             startNewGame();
             break;
         case 2:
-            loadYourGame();
+            newPlayer = loadYourGame();
+            displayMainMenu(newPlayer);
             break;
+        case 0:
+            return (0);
         default:
             break;
     }
@@ -63,12 +68,11 @@ void startNewGame()
 {
     system("cls");
 
-    printf("Here start a great adventure, and everything starts with you, so tell me more about you...\n\n");
+    printf("Here start a great adventure, and everything starts with you,\nso tell me more about you...\n\n");
 
     Player *Hero = NewPlayer();
 
-    printf("Dear %s, you have been sent by gods to free our caves full of evil creatures."
-           "They infested our cities since the day...\n");
+    //printf("Dear %s, you have been sent by gods to free our caves\nfull of evil creatures.\n\nThey infested our cities since the day...\n\n");
 
     displayMainMenu(Hero);
 }
@@ -98,7 +102,7 @@ void displayMainMenu(Player *player)
             goToTavern(player);
             break;
         case 3:
-            menu_player(player, 0);
+            menu_player(player);
             break;
         case 4:
             saveYourGame(player);
@@ -110,7 +114,6 @@ void displayMainMenu(Player *player)
             displayMainMenu(player);
             break;
     }
-
 }
 
 void displayGameOverMenu(Player *player){
@@ -182,7 +185,7 @@ Player* loadYourGame(){
     Player *loadPlayer = malloc(sizeof(Player));
     DlistItem *loadInventory = useItem_new();
     DlistStuff *loadArmory = item_new();
-    StuffItem** loadBuild = malloc(sizeof(StuffItem));
+    StuffItem** loadBuild;
 
     loadInventory = readFromFile_item();
     loadArmory = readFromFile_stuff();

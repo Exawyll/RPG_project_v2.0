@@ -546,6 +546,9 @@ void show_inventory(Player *target){
     else if(userChoice == 2){
         deletePotion(target);
     }
+    else if (userChoice == 0){
+        menu_player(target);
+    }
     else{
         printf("Please choose only 1 or 2\n");
     }

@@ -27,14 +27,12 @@ Player* player_ctor(char name[50], int health, int attack, int defense, int relD
 
 // Takes a player as an argument and prints their name, health, and attack. Returns nothing.
 void DisplayStats (struct playerStructure *target) {
-    // We don't want to keep retyping all this.
     printf("Your stats without equipment :\n");
     printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, target->health, target->attack, target->defense, target->relDef, target->dodge);
 }
 
 // Creates player and set job.
 Player* NewPlayer() {
-    // Allocate memory to player pointer.
     Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,1,3);
 
     SetName(tempPlayer);
@@ -43,9 +41,8 @@ Player* NewPlayer() {
     setStuffAtStart(tempPlayer);
     buildToStart(tempPlayer);
     setPotionAtStart(tempPlayer);
-    displayMainMenu(tempPlayer);
 
-    return(tempPlayer); // Return memory address of player.
+    return(tempPlayer);
 }
 
 void SetName(Player *target) {
@@ -147,9 +144,11 @@ void buildToStart(Player *target){
     }
 }
 
-void menu_player(Player *target, int callingPlace)
+void menu_player(Player *target)
 {
     int userChoice;
+
+    system("cls");
 
     printf("########################\n");
     printf("#1 : POTION inventory  #\n");
@@ -173,11 +172,14 @@ void menu_player(Player *target, int callingPlace)
             break;
         case 4:
             calcAttributesWithEqpt(target);
+            printf("Press 0 to return\n");
+            while(userChoice != 0){
+                userChoice = userInputInt();
+            }
+            menu_player(target);
             break;
         case 0:
-            if (callingPlace == 0){
-                displayMainMenu(target);
-            }
+            //displayMainMenu(target);
             break;
         default:
             printf("Please, write only a correct entry !\n");

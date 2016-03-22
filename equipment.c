@@ -169,13 +169,13 @@ void displayEqptMenu(Player* player)
     {
     case 1:
         printf("Select the weapon to unequip\n");
-        printf("(1:HEAD\n2:BODY\n3:R.HAND\n4:L.HAND\n5:LEGS\n6:FOOT\n");
+        printf("1:HEAD\n2:BODY\n3:R.HAND\n4:L.HAND\n5:LEGS\n6:FOOT\n");
         userChoice2 = userInputInt();
         userChoice2--;
         Unequip(player, userChoice2);
         break;
     case 0:
-        displayMainMenu(player);
+        menu_player(player);
         break;
     }
 }
@@ -209,8 +209,8 @@ void writeToFile_eqpt(StuffItem **build){
 }
 
 //Read a list of structure to display it
-StuffItem** readFromFile_eqpt(){
-    StuffItem** build = malloc(sizeof(StuffItem));
+StuffItem* readFromFile_eqpt(){
+    StuffItem* build[6];
     StuffItem* stuff = malloc(sizeof(StuffItem));
     StuffItem* object2 = malloc(sizeof(StuffItem));
     FILE *fptr;

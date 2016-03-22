@@ -561,7 +561,7 @@ void show_stuff(Player *target){
             item_remove_id(target->armory, userChoice2);
             break;
         case 0:
-            displayMainMenu(target);
+            menu_player(target);
             break;
         default:
             printf("Please choose only 1 or 2\n");
