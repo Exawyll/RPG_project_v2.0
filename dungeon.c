@@ -1,9 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 #include "dungeon.h"
+#include "fight.h"
 #include "mob.h"
+#include "mobRace.h"
 #include "player.h"
+#include "gameUtil.h"
 
 Mob* generateMob(Player *player)
 {
@@ -86,7 +90,7 @@ void researchInDungeon(Player *player)
             break;
         case 10:
             printf("Good job you just found %d gold !", giftGold);
-            player->gold;
+            player->gold += giftGold;
             Sleep(2000);
             break;
         default:
@@ -106,8 +110,11 @@ int choiceInDungeon()
     printf("What do you want to do :\n");
     printf("1 - Go directly for a fight\n");
     printf("2 - Look around for a treasure\n");
-    printf("3 - Display player menu\n");
-    printf("4 - Go back in town (you won't be able to continue this dungeon)\n");
+    printf("3 - Display potions\n");
+    printf("4 - Display stuff\n");
+    printf("5 - Display equipment\n");
+    printf("6 - Display stats\n");
+    printf("7 - Go back in town (you won't be able to continue this dungeon)\n");
 
     userChoice = userInputInt();
 
@@ -137,9 +144,23 @@ void switchDungeons(Player *player)
                 researchInDungeon(player);
                 break;
             case 3:
-                menu_player(player, 1);
+                show_inventory(player);
                 break;
             case 4:
+                show_stuff(player);
+                break;
+            case 5:
+                displayEqpt(player);
+                break;
+            case 6:
+                calcAttributesWithEqpt(player);
+                printf("Press 0 to return\n");
+                userChoice = 1;
+                while(userChoice != 0){
+                    userChoice = userInputInt();
+                }
+                break;
+            case 7:
                 displayMainMenu(player);
                 break;
             default:

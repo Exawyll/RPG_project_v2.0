@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <windows.h>
 
 #include "player.h"
 #include "fight.h"
@@ -10,13 +11,14 @@
 #include "mob.h"
 #include "mobRace.h"
 #include "dungeon.h"
-
-#define NBR_POTIONS 3
+#include "equipment.h"
 
 int startMenu();
 void displayMainMenu(Player *player);
 void startNewGame();
 Player* loadYourGame();
+void displayGameOverMenu(Player *player);
+void saveYourGame(Player *player);
 
 int main(int argc, char *argv[])
 {
@@ -30,7 +32,7 @@ int startMenu()
     Player* newPlayer;
     int userChoice = 0;
 
-    system("cls");
+    //system("cls");
 
     printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     printf("~~~                                                   ~~~\n");
@@ -62,6 +64,7 @@ int startMenu()
         default:
             break;
     }
+    return (0);
 }
 
 void startNewGame()
@@ -81,7 +84,7 @@ void displayMainMenu(Player *player)
 {
     int userChoice = 0;
 
-    system("cls");
+    //system("cls");
 
     printf("<< IN TOWN >>\n\n");
     printf("----------------------------------\n");
@@ -161,7 +164,8 @@ void displayGameOverMenu(Player *player){
     }
 }
 
-void saveYourGame(Player *player){
+void saveYourGame(Player *player)
+{
     Player *toSave = malloc(sizeof(Player));
     strcpy(toSave->name, player->name);
     toSave->attack = player->attack;
@@ -184,15 +188,20 @@ void saveYourGame(Player *player){
     }
 }
 
-Player* loadYourGame(){
+Player* loadYourGame()
+{
+    int i = 0;
     Player *loadPlayer = malloc(sizeof(Player));
     DlistItem *loadInventory = useItem_new();
     DlistStuff *loadArmory = item_new();
-    StuffItem** loadBuild;
+    StuffItem* loadBuild[6];
 
+    initEqpt(loadPlayer);
     loadInventory = readFromFile_item();
     loadArmory = readFromFile_stuff();
-    loadBuild = readFromFile_eqpt();
+    loadBuild[6] = readFromFile_eqpt();
+
+    printf("price : %d\n", loadBuild[1]->price);
 
     FILE * saved_player = fopen("./saved_player.txt", "r");
     if (saved_player != NULL) {
@@ -202,7 +211,10 @@ Player* loadYourGame(){
 
     loadPlayer->inventory = loadInventory;
     loadPlayer->armory = loadArmory;
-    loadPlayer->build[6] = loadBuild;
+    for(i = 0; i < 6; i++){
+        loadPlayer->build[i] = loadBuild[i];
+    }
+
 
     return loadPlayer;
 }

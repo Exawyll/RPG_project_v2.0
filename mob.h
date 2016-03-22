@@ -15,4 +15,12 @@ Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int do
 //Prototype of functions
 void createMobs();
 void displayStatsMob(Mob *mob);
+Mob* createGobelin();
+Mob* createSkeleton();
+Mob* createOrc();
+Mob* createZombie();
+Mob* createUrukai();
+Mob* createTroll();
+Mob* createDragon();
+
 #endif // MOB_H_INCLUDED

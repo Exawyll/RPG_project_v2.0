@@ -15,6 +15,7 @@ typedef enum ClassEnum  {
 
 typedef struct playerStructure {
     char name[50];
+    int maxHP;
     int health;
     int attack;
     int defense;
@@ -28,9 +29,10 @@ typedef struct playerStructure {
     int score;
     int level;
     int life;
+    int nbrKills;
 }Player;
 
-Player* player_ctor(char[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score, int level, int life);
+Player* player_ctor(char[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score, int level, int life, int nbrKills, int maxHP);
 
 // Function Prototype
 void DisplayStats (Player *target);
@@ -60,6 +62,7 @@ void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int rel
 int calcAbsDef(Player *target);
 int calcRelDef(Player *target);
 int calcAttack(Player *target);
+void displayEqptMenu(Player* player);
 //Concern Dungeon
 Mob* generateMob(Player *player);
 int choiceInDungeon();

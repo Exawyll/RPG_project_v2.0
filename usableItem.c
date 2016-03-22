@@ -553,6 +553,7 @@ int show_inventory(Player *target){
     else{
         printf("Please choose only 1 or 2\n");
     }
+    return (0);
 }
 
 void useYourPotion(Player *target){
@@ -565,7 +566,13 @@ void useYourPotion(Player *target){
 
     switch(id){
         case HEALTH_POTION:
-            target->health += POTION_LIFE;
+            if((target->health + POTION_LIFE) <= target->maxHP){
+                target->health += POTION_LIFE;
+            }
+            else{
+                target->health = target->maxHP;
+            }
+
             useItem_remove_id(target->inventory, userChoice);
             break;
         case STRENGTH_POTION:

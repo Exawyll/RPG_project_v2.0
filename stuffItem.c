@@ -484,22 +484,22 @@ void setStuffAtStart(Player *target){
             break;
         case RANGER:
             if(userChoice == 1){
-                autoEquip(target, stuffItem_ctor("My First Bow", 10, TWO_HAND, 10, 0, 0));
-                autoEquip(target, stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 1, 10));
+                autoEquip(target, stuffItem_ctor("My First Bow", 10, TWO_HAND, 5, 0, 0));
+                autoEquip(target, stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 1, 5));
             }
             else{
-                item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 10, 0, 0));
-                item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 1, 10));
+                item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 5, 0, 0));
+                item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 1, 5));
             }
             break;
         case WIZARD:
             if(userChoice == 1){
-                autoEquip(target, stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 10, 0, 0));
-                autoEquip(target, stuffItem_ctor("My First Robe", 10, ARMOR, 0, 1, 10));
+                autoEquip(target, stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 5, 0, 0));
+                autoEquip(target, stuffItem_ctor("My First Robe", 10, ARMOR, 0, 1, 5));
             }
             else{
-                item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 10, 0, 0));
-                item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 1, 10));
+                item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 5, 0, 0));
+                item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 1, 5));
             }
             break;
         default:
@@ -530,7 +530,7 @@ int autoEquip(Player *target, StuffItem *toEquip){
             target->build[BOOTS] = toEquip;
             break;
         case TWO_HAND:
-            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0);
+            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,TWO_HAND,0,0,0);
             target->build[RIGHT_HAND] = toEquip;
             target->build[LEFT_HAND] = object2;
             break;
@@ -543,6 +543,7 @@ int autoEquip(Player *target, StuffItem *toEquip){
 void show_stuff(Player *target){
     int userChoice = 0;
     int userChoice2 = 0;
+    StuffItem* toEquip;
     item_display(target->armory);
 
     printf("1 : EQUIP item\n2 : DELETE item\n(press 0 to get back)\n");
@@ -553,7 +554,9 @@ void show_stuff(Player *target){
         case 1:
             printf("Which object you want to EQUIP ?\n(Type the corresponding number)\n");
             userChoice2 = userInputInt();
-            set_equip(target, userChoice2);
+            toEquip = item_return_stuff(target->armory, userChoice2);
+            autoEquip(target, stuffItem_ctor(toEquip->name,toEquip->price,toEquip->type,toEquip->I_bonusATT,toEquip->I_bonusDEFRel,toEquip->I_bonusDEFAbs));
+            item_remove_id(target->armory, userChoice2);
             break;
         case 2:
             printf("Which object you want to DELETE ?\n(Type the corresponding number)\n");
@@ -696,67 +699,91 @@ void Unequip(Player *target, int typeStuff){
 
     switch(typeStuff){
         case HELMET:
-            if(target->build[HELMET])
+            if(target->build[HELMET]->name != ' ')
             {
                 toUnEquip = target->build[HELMET];
                 item_append(target->armory, *toUnEquip);
-                target->build[HELMET] = NULL;
+                target->build[HELMET] = stuffItem_ctor(' ',0,HELMET,0,0,0);
+            }
+            else{
+                printf("You don't have anything equipped here...\n");
+                displayEqptMenu(target);
             }
             break;
         case ARMOR:
-            if(target->build[ARMOR])
+            if(target->build[ARMOR]->name != ' ')
             {
                 toUnEquip = target->build[ARMOR];
                 item_append(target->armory, *toUnEquip);
-                //target->build[ARMOR] = NULL;
+                target->build[ARMOR] = stuffItem_ctor(' ',0,ARMOR,0,0,0);
+            }
+            else{
+                printf("You don't have anything equipped here...\n");
+                displayEqptMenu(target);
             }
             break;
         case RIGHT_HAND:
-            if(target->build[RIGHT_HAND])
+            if(target->build[RIGHT_HAND]->name != ' ')
             {
                 if (target->build[RIGHT_HAND]->type == TWO_HAND){
                     toUnEquip = target->build[RIGHT_HAND];
                     item_append(target->armory, *toUnEquip);
-                    target->build[RIGHT_HAND] = NULL;
-                    target->build[LEFT_HAND] = NULL;
+                    target->build[RIGHT_HAND] = stuffItem_ctor(' ',0,RIGHT_HAND,0,0,0);
+                    target->build[LEFT_HAND] = stuffItem_ctor(' ',0,LEFT_HAND,0,0,0);
                 }
                 else{
                     toUnEquip = target->build[RIGHT_HAND];
                     item_append(target->armory, *toUnEquip);
-                    target->build[RIGHT_HAND] = NULL;
+                    target->build[RIGHT_HAND] = stuffItem_ctor(' ',0,RIGHT_HAND,0,0,0);
                 }
+            }
+            else{
+                printf("You don't have anything equipped here...\n");
+                displayEqptMenu(target);
             }
             break;
         case LEFT_HAND:
-            if(target->build[LEFT_HAND])
+            if(target->build[LEFT_HAND]->name != ' ')
             {
                 if (target->build[LEFT_HAND]->type == TWO_HAND){
                     toUnEquip = target->build[RIGHT_HAND];
                     item_append(target->armory, *toUnEquip);
-                    target->build[RIGHT_HAND] = NULL;
-                    target->build[LEFT_HAND] = NULL;
+                    target->build[RIGHT_HAND] = stuffItem_ctor(' ',0,RIGHT_HAND,0,0,0);
+                    target->build[LEFT_HAND] = stuffItem_ctor(' ',0,LEFT_HAND,0,0,0);
                 }
                 else{
                     toUnEquip = target->build[LEFT_HAND];
                     item_append(target->armory, *toUnEquip);
-                    target->build[LEFT_HAND] = NULL;
+                    target->build[LEFT_HAND] = stuffItem_ctor(' ',0,LEFT_HAND,0,0,0);
                 }
+            }
+            else{
+                printf("You don't have anything equipped here...\n");
+                displayEqptMenu(target);
             }
             break;
         case LEGGINGS:
-            if(target->build[LEGGINGS])
+            if(target->build[LEGGINGS]->name != ' ')
             {
                 toUnEquip = target->build[LEGGINGS];
                 item_append(target->armory, *toUnEquip);
-                target->build[LEGGINGS] = NULL;
+                target->build[LEGGINGS] = stuffItem_ctor(' ',0,LEGGINGS,0,0,0);
+            }
+            else{
+                printf("You don't have anything equipped here...\n");
+                displayEqptMenu(target);
             }
             break;
         case BOOTS:
-            if(target->build[BOOTS])
+            if(target->build[BOOTS]->name != ' ')
             {
                 toUnEquip = target->build[BOOTS];
                 item_append(target->armory, *toUnEquip);
-                target->build[BOOTS] = NULL;
+                target->build[BOOTS] = stuffItem_ctor(' ',0,BOOTS,0,0,0);
+            }
+            else{
+                printf("You don't have anything equipped here...\n");
+                displayEqptMenu(target);
             }
             break;
         default:

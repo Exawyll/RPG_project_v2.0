@@ -53,14 +53,12 @@ int calcAbsDef(Player *target){
 void calcAttributesWithEqpt(Player *target)
 {
     int bonusATT = 0;
-    int bonusHP = 0;
     int bonusDEF = 0;
     int bonusDEFRel = 0;
     int i = 0;
     int attack = 0;
     int defense = 0;
     int relDef = 0;
-    int dodge = 0;
 
     attack = target->attack;
     defense = target->defense;
@@ -92,8 +90,8 @@ void calcAttributesWithEqpt(Player *target)
 
 void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int relDef){
     printf("Your stats with equipment : \n");
-    printf("Level : %d\nName: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n", target->level, target->name, target->health, attack, defense, relDef, target->dodge);
-    printf("Gold: %d\nScore: %d\nLife: %d\n\n", target->gold, target->score, target->life);
+    printf("Level : %d\nName: %s\nHealth: %d/%d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n", target->level, target->name, target->health, target->maxHP, attack, defense, relDef, target->dodge);
+    printf("Gold: %d\nScore: %d\nLife: %d\nKills: %d\n\n", target->gold, target->score, target->life, target->nbrKills);
 }
 
 void displayEqpt(Player *target)
@@ -112,7 +110,7 @@ void displayEqpt(Player *target)
     printf("-------------------------------\n");
 
     for(i = 0; i < 6; i++){
-        if(target->build[i])
+        if(target->build[i] != NULL)
         {
             name = target->build[i]->name;
             price = target->build[i]->price;
@@ -178,12 +176,13 @@ void initEqpt(Player *target){
     int i = 0;
     for(i = 0; i < 6; i++){
         StuffItem* fakeObject = stuffItem_ctor(' ',0,i,0,0,0);
+        target->build[i] = malloc(sizeof(StuffItem));
         target->build[i] = fakeObject;
     }
 }
 
 //How to save the stuff equipped on the player
-void writeToFile_eqpt(StuffItem **build){
+void writeToFile_eqpt(StuffItem** build){
     int i = 0;
     FILE *fptr;
     fptr=fopen("./list_eqpt.txt","w+");
@@ -195,6 +194,7 @@ void writeToFile_eqpt(StuffItem **build){
         if (build[i] != NULL)
         {
         stuff = build[i];
+        printf("Write price : %d\n", stuff->price);
         fwrite(stuff,sizeof(StuffItem),1,fptr);
         }
     }

@@ -134,9 +134,9 @@ int fightMobToPlayer (Mob *mob, Player *target) {
     if (mob->health <= 0) {
         system("cls");
         printf("%s has bested %s in combat.\n", target->name, mobName);
+        target->nbrKills++;
         calculateReward(target, mob);
         chanceOfDrop(target);
-        return (1);
     }
     else {
         // Swap mob and player.
@@ -226,7 +226,7 @@ void calculateReward(Player *player, Mob* mob){
             break;
     }
 
-    if((player->score)%100 == 0){
+    if((player->nbrKills)%3 == 0){
         Sleep(1000);
         printf("Congratulation you won a new level !!!\n");
         Sleep(1000);
@@ -240,7 +240,7 @@ void increaseLevel(Player *player){
         player->attack++;
         player->defense++;
         player->dodge++;
-        player->health += 10;
+        player->maxHP += 10;
         player->relDef++;
     }
 }
