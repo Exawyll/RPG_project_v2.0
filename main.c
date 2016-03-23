@@ -194,12 +194,12 @@ Player* loadYourGame()
     Player *loadPlayer = malloc(sizeof(Player));
     DlistItem *loadInventory = useItem_new();
     DlistStuff *loadArmory = item_new();
-    StuffItem* loadBuild[6];
+    StuffItem** loadBuild = malloc(sizeof(StuffItem));
 
     initEqpt(loadPlayer);
     loadInventory = readFromFile_item();
     loadArmory = readFromFile_stuff();
-    loadBuild[6] = readFromFile_eqpt();
+    loadBuild = readFromFile_eqpt();
 
     printf("price : %d\n", loadBuild[1]->price);
 
@@ -214,8 +214,6 @@ Player* loadYourGame()
     for(i = 0; i < 6; i++){
         loadPlayer->build[i] = loadBuild[i];
     }
-
-
     return loadPlayer;
 }
 

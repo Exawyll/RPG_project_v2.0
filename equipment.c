@@ -193,8 +193,7 @@ void writeToFile_eqpt(StuffItem** build){
     {
         if (build[i] != NULL)
         {
-        stuff = build[i];
-        printf("Write price : %d\n", stuff->price);
+        stuff = stuffItem_ctor(build[i]->name,build[i]->price,build[i]->type,build[i]->I_bonusATT,build[i]->I_bonusDEFRel,build[i]->I_bonusDEFAbs);
         fwrite(stuff,sizeof(StuffItem),1,fptr);
         }
     }
@@ -203,8 +202,8 @@ void writeToFile_eqpt(StuffItem** build){
 }
 
 //Read a list of structure to display it
-StuffItem* readFromFile_eqpt(){
-    StuffItem* build[6];
+StuffItem** readFromFile_eqpt(){
+    StuffItem** build = malloc(sizeof(StuffItem));
     StuffItem* stuff = malloc(sizeof(StuffItem));
     StuffItem* object2 = malloc(sizeof(StuffItem));
     FILE *fptr;
@@ -218,26 +217,26 @@ StuffItem* readFromFile_eqpt(){
         while (fread(stuff,sizeof(StuffItem),1,fptr) == 1) {
             switch(stuff->type){
                 case HELMET:
-                    build[HELMET] = stuff;
+                    build[HELMET] = stuffItem_ctor(stuff->name,stuff->price,stuff->type,stuff->I_bonusATT,stuff->I_bonusDEFRel,stuff->I_bonusDEFAbs);
                     break;
                 case ARMOR:
-                    build[ARMOR] = stuff;
+                    build[ARMOR] = stuffItem_ctor(stuff->name,stuff->price,stuff->type,stuff->I_bonusATT,stuff->I_bonusDEFRel,stuff->I_bonusDEFAbs);;
                     break;
                 case RIGHT_HAND:
-                    build[RIGHT_HAND] = stuff;
+                    build[RIGHT_HAND] = stuffItem_ctor(stuff->name,stuff->price,stuff->type,stuff->I_bonusATT,stuff->I_bonusDEFRel,stuff->I_bonusDEFAbs);;
                     break;
                 case LEFT_HAND:
-                    build[LEFT_HAND] = stuff;
+                    build[LEFT_HAND] = stuffItem_ctor(stuff->name,stuff->price,stuff->type,stuff->I_bonusATT,stuff->I_bonusDEFRel,stuff->I_bonusDEFAbs);;
                     break;
                 case LEGGINGS:
-                    build[LEGGINGS] = stuff;
+                    build[LEGGINGS] = stuffItem_ctor(stuff->name,stuff->price,stuff->type,stuff->I_bonusATT,stuff->I_bonusDEFRel,stuff->I_bonusDEFAbs);;
                     break;
                 case BOOTS:
-                    build[BOOTS] = stuff;
+                    build[BOOTS] = stuffItem_ctor(stuff->name,stuff->price,stuff->type,stuff->I_bonusATT,stuff->I_bonusDEFRel,stuff->I_bonusDEFAbs);;
                     break;
                 case TWO_HAND:
                     object2 = stuffItem_ctor("RIGHT_HAND Copy",0,LEFT_HAND,0,0,0);
-                    build[RIGHT_HAND] = stuff;
+                    build[RIGHT_HAND] = stuffItem_ctor(stuff->name,stuff->price,stuff->type,stuff->I_bonusATT,stuff->I_bonusDEFRel,stuff->I_bonusDEFAbs);;
                     build[LEFT_HAND] = object2;
                     break;
                 default:

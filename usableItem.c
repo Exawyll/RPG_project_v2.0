@@ -568,12 +568,17 @@ void useYourPotion(Player *target){
         case HEALTH_POTION:
             if((target->health + POTION_LIFE) <= target->maxHP){
                 target->health += POTION_LIFE;
+                useItem_remove_id(target->inventory, userChoice);
+            }
+            else if (target->health == target->maxHP){
+                printf("Your life is full, you don't need health potion !");
+                Sleep(1000);
             }
             else{
                 target->health = target->maxHP;
             }
 
-            useItem_remove_id(target->inventory, userChoice);
+
             break;
         case STRENGTH_POTION:
             target->attack += POTION_STRENGTH;

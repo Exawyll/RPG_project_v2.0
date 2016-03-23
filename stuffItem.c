@@ -573,7 +573,7 @@ void show_stuff(Player *target){
 
 }
 
-void set_equip(Player *target, int position){
+/*void set_equip(Player *target, int position){
     StuffItem* toEquip = item_return_stuff(target->armory, position);
     int type = toEquip->type;
     StuffItem *object;
@@ -691,7 +691,7 @@ void set_equip(Player *target, int position){
         default:
             break;
     }
-}
+}*/
 
 void Unequip(Player *target, int typeStuff){
     StuffItem* toUnEquip = target->build[typeStuff];
