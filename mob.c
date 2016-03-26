@@ -4,11 +4,11 @@
 #include "mob.h"
 #include "mobRace.h"
 
-#define MOB_LIFE 100
-#define MOB_ATT 5
-#define MOB_DEF 5
-#define MOB_RELDEF 1
-#define MOB_DODGE 1
+#define MOB_LIFE 90
+#define MOB_ATT 8
+#define MOB_DEF 7
+#define MOB_RELDEF 2
+#define MOB_DODGE 3
 
 Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int dodge){
     Mob* p = malloc(sizeof(Mob));
@@ -21,6 +21,7 @@ Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int do
     return p;
 }
 
+//
 Mob* createGobelin(){
     Mob* gobelin = mob_ctor(GOBELIN, MOB_LIFE, MOB_ATT, MOB_DEF,MOB_RELDEF, MOB_DODGE);
     return gobelin;
@@ -54,11 +55,4 @@ Mob* createTroll(){
 Mob* createDragon(){
     Mob* dragon = mob_ctor(DRAGON, MOB_LIFE+60, MOB_ATT+10, MOB_DEF+10,MOB_RELDEF+6, MOB_DODGE+6);
     return dragon;
-}
-
-// Takes a player as an argument and prints their name, health, and attack. Returns nothing.
-void displayStatsMob(Mob *mob) {
-    // We don't want to keep retyping all this.
-    char* nameMob = setMobNames(mob->races);
-    printf("Name: %s\nHealth: %d\n\n", nameMob, mob->health);
 }

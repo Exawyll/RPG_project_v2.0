@@ -7,11 +7,6 @@
 #include "equipment.h"
 #include "gameUtil.h"
 
-/*- StuffItem.c : contient les fonctions suivantes :
-			- eqpStuffItem(StuffItem* item, Mob* mob)
-			- unEqpStuffItem(StuffItem* item, Mob* mob)
-			- sellStuffItem(StuffItem* item, Player* player)*/
-
 StuffItem* stuffItem_ctor(char* name, int price, int type, int I_bonusATT, int I_bonusDEFRel, int I_bonusDEFAbs){
     StuffItem* p = malloc(sizeof(StuffItem));
     p->name = name;
@@ -54,10 +49,6 @@ void printf_struct_stuff(StuffItem* stuff)
         printf("     ATT : +%d\n     DEFRel : +%d\n     DEF : +%d\n\n", stuff->I_bonusATT, stuff->I_bonusDEFRel, stuff->I_bonusDEFAbs);
     }
 }
-
-/*int* display_list_ids(DlistStuff *p_list)
-{
-}*/
 
 //Create a new list
 DlistStuff *item_new(void)
@@ -512,24 +503,48 @@ int autoEquip(Player *target, StuffItem *toEquip){
     StuffItem *object2;
     switch(type){
         case HELMET:
+            if(target->build[HELMET]->name != ' '){
+                unEquip(target, target->build[HELMET]->type);
+            }
             target->build[HELMET] = toEquip;
             break;
         case ARMOR:
+            if(target->build[ARMOR]->name != ' '){
+                unEquip(target, target->build[ARMOR]->type);
+            }
             target->build[ARMOR] = toEquip;
             break;
         case RIGHT_HAND:
+            if(target->build[RIGHT_HAND]->name != ' '){
+                unEquip(target, target->build[RIGHT_HAND]->type);
+            }
             target->build[RIGHT_HAND] = toEquip;
             break;
         case LEFT_HAND:
+            if(target->build[LEFT_HAND]->name != ' '){
+                unEquip(target, target->build[LEFT_HAND]->type);
+            }
             target->build[LEFT_HAND] = toEquip;
             break;
         case LEGGINGS:
+            if(target->build[LEGGINGS]->name != ' '){
+                unEquip(target, target->build[LEGGINGS]->type);
+            }
             target->build[LEGGINGS] = toEquip;
             break;
         case BOOTS:
+            if(target->build[BOOTS]->name != ' '){
+                unEquip(target, target->build[BOOTS]->type);
+            }
             target->build[BOOTS] = toEquip;
             break;
         case TWO_HAND:
+            if(target->build[HELMET]->name != ' '){
+                unEquip(target, target->build[HELMET]->type);
+            }
+            if(target->build[HELMET]->name != ' '){
+                unEquip(target, target->build[HELMET]->type);
+            }
             object2 = stuffItem_ctor("RIGHT_HAND Copy",0,TWO_HAND,0,0,0);
             target->build[RIGHT_HAND] = toEquip;
             target->build[LEFT_HAND] = object2;
@@ -693,7 +708,7 @@ void show_stuff(Player *target){
     }
 }*/
 
-void Unequip(Player *target, int typeStuff){
+void unEquip(Player *target, int typeStuff){
     StuffItem* toUnEquip = target->build[typeStuff];
     StuffItem* object;
 

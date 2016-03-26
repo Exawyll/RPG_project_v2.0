@@ -32,7 +32,7 @@ int startMenu()
     Player* newPlayer;
     int userChoice = 0;
 
-    //system("cls");
+    system("cls");
 
     printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     printf("~~~                                                   ~~~\n");
@@ -60,7 +60,7 @@ int startMenu()
             displayMainMenu(newPlayer);
             break;
         case 0:
-            return (0);
+            exit (0);
         default:
             break;
     }
@@ -75,7 +75,7 @@ void startNewGame()
 
     Player *Hero = NewPlayer();
 
-    //printf("Dear %s, you have been sent by gods to free our caves\nfull of evil creatures.\n\nThey infested our cities since the day...\n\n");
+    printf("Dear %s, you have been sent by gods to free our caves\nfull of evil creatures.\n\nThey infested our cities since the day...\n\n");
 
     displayMainMenu(Hero);
 }
@@ -84,7 +84,7 @@ void displayMainMenu(Player *player)
 {
     int userChoice = 0;
 
-    //system("cls");
+    system("cls");
 
     printf("<< IN TOWN >>\n\n");
     printf("----------------------------------\n");
@@ -173,11 +173,13 @@ void saveYourGame(Player *player)
     toSave->dodge = player->dodge;
     toSave->gold = player->gold;
     toSave->health = player->health;
+    toSave->maxHP = player->maxHP;
     toSave->job = player->job;
     toSave->level = player->level;
     toSave->life = player->life;
     toSave->relDef = player->relDef;
     toSave->score = player->score;
+    toSave->nbrKills = player->nbrKills;
     writeToFile_item(player->inventory);
     writeToFile_stuff(player->armory);
     writeToFile_eqpt(player->build);

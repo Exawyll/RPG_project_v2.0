@@ -52,7 +52,9 @@ void deletePotion(Player *target);
 //Concern STUFF ITEMS
 void setStuffAtStart(Player *target);
 void show_stuff(Player *target);
-void set_equip(Player *target, int position);
+//void set_equip(Player *target, int position);
+void unEquip(Player *target, int typeStuff);
+int autoEquip(Player *target, StuffItem *toEquip);
 //Concern Equipment
 void initEqpt(Player *target);
 void displayEqpt(Player *target);

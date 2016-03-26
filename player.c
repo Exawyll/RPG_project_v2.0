@@ -37,11 +37,11 @@ void DisplayStats (struct playerStructure *target) {
 Player* NewPlayer() {
     Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,0,1,3,0);
 
-    //SetName(tempPlayer);
+    SetName(tempPlayer);
     setJob(tempPlayer);
     initEqpt(tempPlayer);
     setStuffAtStart(tempPlayer);
-    //buildToStart(tempPlayer);
+    buildToStart(tempPlayer);
     setPotionAtStart(tempPlayer);
 
     return(tempPlayer);

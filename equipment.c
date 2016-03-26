@@ -138,6 +138,9 @@ void displayEqpt(Player *target)
                     case BOOTS:
                         printf("FOOT --> ");
                         break;
+                    case TWO_HAND:
+                        printf("HANDS--> ");
+                        break;
                 }
                 printf("Name :%s\n", name);
                 printf("         Price :%d\n", price);
@@ -164,7 +167,7 @@ void displayEqptMenu(Player* player)
             printf("1:HEAD\n2:BODY\n3:R.HAND\n4:L.HAND\n5:LEGS\n6:FOOT\n");
             userChoice2 = userInputInt();
             userChoice2--;
-            Unequip(player, userChoice2);
+            unEquip(player, userChoice2);
             break;
         case 0:
             //menu_player(player, 0);

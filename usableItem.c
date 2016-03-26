@@ -6,7 +6,7 @@
 #include "gameUtil.h"
 
 #define NBR_POTIONS 3
-#define POTION_LIFE 10
+#define POTION_LIFE 50
 #define POTION_STRENGTH 10
 #define POTION_DEFENSE 10
 #define POTION_DODGE 10

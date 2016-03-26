@@ -9,6 +9,7 @@
 #include "player.h"
 #include "gameUtil.h"
 
+//Generation of mobs for dungeons, depending on the level of the player
 Mob* generateMob(Player *player)
 {
     Mob* myMob = malloc(sizeof(Mob));
@@ -106,8 +107,10 @@ int choiceInDungeon()
 
     system("cls");
 
-    printf("You enter through an old gate where you can here screams quite next to you...\n");
+    printf("You hear screams all around you...\n\n");
+    printf("------------------------\n");
     printf("What do you want to do :\n");
+    printf("------------------------\n");
     printf("1 - Go directly for a fight\n");
     printf("2 - Look around for a treasure\n");
     printf("3 - Display potions\n");
@@ -123,22 +126,21 @@ int choiceInDungeon()
 
 void switchDungeons(Player *player)
 {
-    int flag = 0;
     Mob* unMob;
     int userChoice;
-    int numberOfMob = calculateNomberOfMob(player);
+    int dungeonSize = calculateNomberOfMob(player);
 
-    while(numberOfMob > 0){
+    while(dungeonSize > 0){
         switch(choiceInDungeon()){
             case 1:
                 unMob = generateMob(player);
                 char* name = setMobNames(unMob->races);
-                printf("\nOh you encountered a %s, good luck...\n", name);
-                flag = fightPlayerToMob(player, unMob);
-                if(flag == 1){
-                    printf("Good job you killed it\n");
-                    numberOfMob--;
-                }
+                system("cls");
+                printf("\nOh you encountered a %s, good luck...\n\n", name);
+                fightPlayerToMob(player, unMob);
+                dungeonSize--;
+                printf("Good job you killed it... More %d mobs to empty this dungeon !\n", dungeonSize);
+                Sleep(2000);
                 break;
             case 2:
                 researchInDungeon(player);
@@ -172,7 +174,7 @@ void switchDungeons(Player *player)
 
 int calculateNomberOfMob(Player *player)
 {
-    static int numberOfMob = 5;
+    static int numberOfMob = 3;
 
     if((player->level)%3 == 0){
         numberOfMob += 2;
@@ -182,16 +184,17 @@ int calculateNomberOfMob(Player *player)
 
 void goThroughDungeon(Player *player)
 {
-    int dungeonSize = calculateNomberOfMob(player);
-
     printf("\nWelcome to a new dungeon\nOnly the bravest stay alive through these caves, be strong and take care...\n\n");
 
-    while(dungeonSize > 0){
-        switchDungeons(player);
-        dungeonSize--;
-    }
+    switchDungeons(player);
 
     printf("Congratulation you emptied another dungeon!!!\n");
+    Sleep(500);
     printf("After a long walk... you finally arrive back in town...\n");
+    Sleep(500);
+    printf("You life is back to maximum now !\n\n");
+    printf("Number of kills : %d\nScore : %d\n", player->nbrKills, player->score);
+    Sleep(3000);
+    player->health = player->maxHP;
     displayMainMenu(player);
 }
