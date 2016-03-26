@@ -2,11 +2,30 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <windows.h>
 
-/*- GameUtil.c : contient l'ensemble des fonctions utilitaires (redondante ou non) du programme
-			- doRand(int start, int end)
-			- https://openclassrooms.com/courses/les-listes-doublement-chainees-en-langage-c
-			- ...*/
+void color(int t,int f)
+{
+    HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H,f*16+t);
+}
+/*les valeurs:
+0: noir
+1: bleu foncé
+2: vert
+3: bleu-gris
+4: marron
+5: pourpre
+6: kaki
+7: gris clair
+8: gris
+9: bleu
+10: vert fluo
+11: turquoise
+12: rouge
+13: rose fluo
+14: jaune fluo
+15: blanc */
 
 //Clear the buffer
 static void purge_buffer(void){
@@ -88,7 +107,7 @@ int rollDice_dodge(int number){
         }
 
     }
-    else if(number >= 5 && number < 10){
+    else if(number >= 5 && number < 20){
         diceResult = doRand(1, 4);
         if(diceResult == 4){
             return 1;

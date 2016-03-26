@@ -52,14 +52,23 @@ void SetName(Player *target) {
     printf("Please give a name for your character : ");
     name = userInputChar();
     strcpy(target->name, name);
+
+    system("cls");
+
+    printf("Bonjour %s,\n", target->name);
+    Sleep(2000);
+    printf("What do you do in your life ?\n");
+    Sleep(2000);
 }
 
 int setJob(Player *target){
     int choice = 0;
 
-    printf("Please select your job : \n1 : WARRIOR (Start with a SWORD and a TEXTILE ARMOR)\n");
+    system("cls");
+
+    printf("Please select your job : \n\n1 : WARRIOR (Start with a SWORD and a TEXTILE ARMOR)\n");
     printf("2 : RANGER (Start with a BOW and a TINY SHORT)\n");
-    printf("3 : WIZARD (Start with a WAND and a ROBE)\n(NO JOB if you enter a wrong input \"not recommended\")");
+    printf("3 : WIZARD (Start with a WAND and a ROBE)\n\n(NO JOB if you enter a wrong input \"not recommended\")\n");
     choice = userInputInt();
     choice--;
 
@@ -110,13 +119,13 @@ void buildToStart(Player *target){
 
     system("cls");
 
-    printf("\nHi %s, time to set your stats :\n", target->name);
+    printf("Hi %s, time to set your stats :\n", target->name);
     printf("You have %d points to attribute, please select what you want to increase :\n", skillPTS);
 
     while(skillPTS > 0){
 
         if(skillPTS < 10){
-            printf("\nYou still have %d points to attribute...\n", skillPTS);
+            printf("You still have %d points to attribute...\n\n", skillPTS);
         }
 
         calcAttributesWithEqpt(target);
@@ -156,6 +165,7 @@ int menu_player(Player *target, int callingPlace)
     int userChoice;
 
     system("cls");
+    color(12, 0);
 
     printf("########################\n");
     printf("#1 : POTION inventory  #\n");
@@ -196,6 +206,20 @@ int menu_player(Player *target, int callingPlace)
         default:
             printf("Please, write only a correct entry !\n");
             break;
+    }
+}
+
+char* setJobNames(int job){
+    switch(job)
+    {
+        case WARRIOR:
+            return "WARRIOR";
+        case RANGER:
+            return "RANGER";
+        case WIZARD:
+            return "WIZARD";
+        default:
+            return "NO JOB";
     }
 }
 

@@ -4,13 +4,14 @@
 typedef struct mobStructure {
     int races;
     int health;
+    int maxHP;
     int attack;
     int defense;
     int relDef;
     int dodge;
 }Mob;
 //Prototype of constructor for mob
-Mob* mob_ctor(int races, int health, int attack, int defense, int relDef, int dodge);
+Mob* mob_ctor(int races, int health, int maxHP, int attack, int defense, int relDef, int dodge);
 
 //Prototype of functions
 void createMobs();

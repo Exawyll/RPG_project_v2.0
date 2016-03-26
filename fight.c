@@ -50,10 +50,8 @@ int fightPlayerToMob (Player *target, Mob *mob) {
     int attack = 0;
     int dodge = rollDice_dodge(mob->dodge);
     char* mobName;
-    int mobHP;
 
     mobName = setMobNames(mob->races);
-    mobHP = mob->health;
 
     DisplayFightMenu();
     int userInput = userInputInt();
@@ -76,7 +74,7 @@ int fightPlayerToMob (Player *target, Mob *mob) {
                     printf("%s inflicted 0 damage to %s.\n", target->name, mobName);
                 }
             }
-            printf("\n%s : %d/%d HP\n\n", mobName, mob->health, mobHP);
+            printf("\n%s : %d/%d HP\n\n", mobName, mob->health, mob->maxHP);
             break;
         case 2:
             printf("Running away!\n");

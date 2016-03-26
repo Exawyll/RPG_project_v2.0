@@ -88,9 +88,13 @@ void calcAttributesWithEqpt(Player *target)
     displayStatsPlayerWithEqpt(target, attack, defense, relDef);
 }
 
-void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int relDef){
+void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int relDef)
+{
+    char *job = setJobNames(target->job);
+    printf("----------------------------\n");
     printf("Your stats with equipment : \n");
-    printf("Level : %d\nName: %s\nHealth: %d/%d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n", target->level, target->name, target->health, target->maxHP, attack, defense, relDef, target->dodge);
+    printf("----------------------------\n");
+    printf("Job : %s\nLevel : %d\nName: %s\nHealth: %d/%d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n", job, target->level, target->name, target->health, target->maxHP, attack, defense, relDef, target->dodge);
     printf("Gold: %d\nScore: %d\nLife: %d\nKills: %d\n\n", target->gold, target->score, target->life, target->nbrKills);
 }
 

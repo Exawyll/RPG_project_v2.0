@@ -13,6 +13,7 @@ void goToTavern(Player *player)
     int userChoice = 0;
 
     system("cls");
+    color(14, 0);
 
     printf("################################\n");
     printf("#                              #\n");
@@ -115,8 +116,6 @@ void buyNewStuff(Player *player){
     int badChoice = 0;
 
     mercant = generateMercantStuff();
-
-    player->gold = 1000;
 
     while(objectToBuy){
 
@@ -228,8 +227,6 @@ void buyNewPotions(Player *player)
     UsableItem *objectBought;
     DlistItem *mercant = generateMercantItem();
     int badChoice = 0;
-
-    player->gold = 1000;
 
     while(objectToBuy){
 

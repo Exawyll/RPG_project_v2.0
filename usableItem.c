@@ -294,7 +294,15 @@ DlistItem *useItem_remove_id(DlistItem *p_list, int position)
                 if (p_temp->p_next == NULL)
                 {
                     p_list->p_tail = p_temp->p_prev;
-                    p_list->p_tail->p_next = NULL;
+                    if(p_list->length == 1)
+                    {
+                        p_list->p_tail = NULL;
+                        p_list->p_head = NULL;
+                    }
+                    else
+                    {
+                        p_list->p_tail->p_next = NULL;
+                    }
                 }
                 else if (p_temp->p_prev == NULL)
                 {
@@ -478,29 +486,29 @@ DlistItem* readFromFile_item(){
 
 UsableItem createUsableItems(enum itemNumber number){
     if(number == HEALTH_POTION){
-        UsableItem health = *usableItem_ctor("HEALTH_POTION", HEALTH_POTION, "Heals 20 health points.", 50, 0, POTION_LIFE, 0, 0, 0);
+        UsableItem health = *usableItem_ctor("HEALTH_POTION", HEALTH_POTION, "Heals 50 health points.", 50, 0, POTION_LIFE, 0, 0, 0);
         return health;
     }
     else if(number == STRENGTH_POTION){
-        UsableItem strength = *usableItem_ctor("STRENGTH_POTION", STRENGTH_POTION, "Add 20 attack points.", 100, TIME_EFFECT, 0, POTION_STRENGTH, 0, 0);
+        UsableItem strength = *usableItem_ctor("STRENGTH_POTION", STRENGTH_POTION, "Add 10 attack points.", 100, TIME_EFFECT, 0, POTION_STRENGTH, 0, 0);
         return strength;
     }
     else if(number == DEFENSE_POTION){
-        UsableItem defense = *usableItem_ctor("DEFENSE_POTION", DEFENSE_POTION, "Add 20 defense points.", 100, TIME_EFFECT, 0, 0, POTION_DEFENSE, 0);
+        UsableItem defense = *usableItem_ctor("DEFENSE_POTION", DEFENSE_POTION, "Add 10 defense points.", 100, TIME_EFFECT, 0, 0, POTION_DEFENSE, 0);
         return defense;
     }
     else if(number == GHOST_POTION){
-        UsableItem ghost = *usableItem_ctor("GHOST_POTION", GHOST_POTION,"Add 20 dodge points.", 100, TIME_EFFECT, 0, 0, 0, POTION_DODGE);
+        UsableItem ghost = *usableItem_ctor("GHOST_POTION", GHOST_POTION,"Add 10 dodge points.", 100, TIME_EFFECT, 0, 0, 0, POTION_DODGE);
         return ghost;
     }
 }
 
 void menuSelectPotion(){
-    printf("Now you have 3 potions to add to your inventory, what will you choose ?\n(trick : you can have many of the same type)\n");
+    printf("Now you have 3 potions to add to your inventory, what will you choose ?\n\n(trick : you can have many of the same type)\n\n");
     printf("1 : HEALTH POTION (increase temporally 10 HP)\n");
     printf("2 : STRENGTH POTION (increase temporally 10 attack points)\n");
     printf("3 : DEFENSE POTION (increase temporally 10 defense points)\n");
-    printf("4 : GHOST POTION (increase temporally 10 dodge points)\n");
+    printf("4 : GHOST POTION (increase temporally 10 dodge points)\n\n");
     printf("(WARNING : if you enter a wrong input, you won't have ANY POTION !!!)\n");
 }
 

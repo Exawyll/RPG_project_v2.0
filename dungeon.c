@@ -62,12 +62,13 @@ Mob* generateMob(Player *player)
     else{
         int race = doRand(1, 7);
         int health = doRand(170, 300);
+        int maxHP = health;
         int attack = doRand(10, 30);
         int defense = doRand(10, 30);
         int relDef = doRand(5, 20);
         int dodge = doRand(5, 20);
 
-        myMob = mob_ctor(race, health, attack, defense, relDef, dodge);
+        myMob = mob_ctor(race, health, maxHP, attack, defense, relDef, dodge);
     }
     return myMob;
 }
@@ -106,7 +107,9 @@ int choiceInDungeon()
     int userChoice = -1;
 
     system("cls");
+    color(11, 0);
 
+    printf("<< IN DUNGEON >>\n\n");
     printf("You hear screams all around you...\n\n");
     printf("------------------------\n");
     printf("What do you want to do :\n");
@@ -136,7 +139,7 @@ void switchDungeons(Player *player)
                 unMob = generateMob(player);
                 char* name = setMobNames(unMob->races);
                 system("cls");
-                printf("\nOh you encountered a %s, good luck...\n\n", name);
+                printf("Oh you encountered a %s, good luck...\n\n", name);
                 fightPlayerToMob(player, unMob);
                 dungeonSize--;
                 printf("Good job you killed it... More %d mobs to empty this dungeon !\n", dungeonSize);

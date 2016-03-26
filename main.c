@@ -33,6 +33,7 @@ int startMenu()
     int userChoice = 0;
 
     system("cls");
+    color(12, 0);
 
     printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
     printf("~~~                                                   ~~~\n");
@@ -41,6 +42,8 @@ int startMenu()
     printf("~~~                    --- EX@W ---                   ~~~\n");
     printf("~~~                                                   ~~~\n");
     printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+
+    color(15, 0);
 
     printf("\n\n");
     printf("Would you like to continue a story or start a new one? \n");
@@ -71,11 +74,28 @@ void startNewGame()
 {
     system("cls");
 
-    printf("Here start a great adventure, and everything starts with you,\nso tell me more about you...\n\n");
+    printf("Here start a great adventure.\n\n");
+    Sleep(3000);
+    printf("...Hello young Hero\n\n");
+    Sleep(1000);
+    printf("you have been sent by gods to help us\n\n");
+    Sleep(1000);
+    printf("all our caves are now full of evil creatures\n\n");
+    Sleep(1000);
+    printf("they infested our cities and take all our needs\n\n");
+    Sleep(1000);
+    printf("we don't have anything left and our sons and wifes\n\n");
+    Sleep(1000);
+    printf("need food and drugs to survive\n\n");
+    Sleep(1000);
+    printf("you are our only hope\n\n");
+    Sleep(1000);
+    printf("so tell me more about you...\n\n");
+    Sleep(3000);
 
     Player *Hero = NewPlayer();
 
-    printf("Dear %s, you have been sent by gods to free our caves\nfull of evil creatures.\n\nThey infested our cities since the day...\n\n");
+
 
     displayMainMenu(Hero);
 }
@@ -85,14 +105,19 @@ void displayMainMenu(Player *player)
     int userChoice = 0;
 
     system("cls");
+    color(10, 0);
 
     printf("<< IN TOWN >>\n\n");
     printf("----------------------------------\n");
     printf("Here are all the things you can do :\n");
-    printf("--------------------------------------\n");
+    printf("--------------------------------------\n\n");
+    color(11, 0);
     printf("1 - Empty an infested Dungeon\n");
+    color(14, 0);
     printf("2 - Go to the tavern if you want to buy new stuff or potions\n");
+    color(12, 0);
     printf("3 - Display player menu\n");
+    color(15, 0);
     printf("4 - Save and quit\n");
 
     while(1){
@@ -124,14 +149,25 @@ void displayMainMenu(Player *player)
 
 void displayGameOverMenu(Player *player){
     int userChoice;
+    int flag = 0;
+    int i = 0;
 
     system("cls");
 
-    printf("#####################################\n");
-    printf("############# GAME OVER #############\n");
-    printf("#####################################\n");
+    while(flag < 10){
+        for(i = 0; i < 15; i++){
+            Sleep(10);
+            system("cls");
+            color(i, 0);
 
-    printf("\nYour score is -> %d\n", player->score);
+            printf("#####################################\n");
+            printf("############# GAME OVER #############\n");
+            printf("#####################################\n");
+
+            printf("\nYour score is -> %d\n", player->score);
+        }
+        flag++;
+    }
 
     if(player->life > 0){
         printf("\nYou still have %d life\n", player->life);

@@ -1,6 +1,7 @@
 #ifndef GAMEUTIL_H_INCLUDED
 #define GAMEUTIL_H_INCLUDED
 
+void color(int t,int f);
 void clean (char *chaine);
 void purge_buffer(void);
 int userInputInt();

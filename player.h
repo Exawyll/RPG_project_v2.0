@@ -41,6 +41,7 @@ Player* NewPlayer();    // Creates player and sets class.
 int setJob(Player* target);
 void buildToStart(Player *target);
 int menu_player(Player *target, int callingPlace);
+char* setJobNames(int job);
 //Concern USABLE ITEMS
 UsableItem createUsableItems(enum itemNumber);
 void menuSelectPotion();
