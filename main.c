@@ -50,7 +50,7 @@ int startMenu()
     printf("-------------------------------------------------------\n");
     printf("1 : New Game\n");
     printf("2 : Load Game\n\n");
-    printf("Press 0 to exit the game...\n");
+    printf("Press enter to exit the game...\n");
 
     userChoice = userInputInt();
 
@@ -65,6 +65,9 @@ int startMenu()
         case 0:
             exit (0);
         default:
+            printf("Please enter a correct entry...\n");
+            Sleep(2000);
+            startMenu();
             break;
     }
     return (0);
@@ -74,8 +77,8 @@ void startNewGame()
 {
     system("cls");
 
-    printf("Here start a great adventure.\n\n");
-    Sleep(3000);
+    /*printf("Here start a great adventure.\n\n");
+    Sleep(2000);
     printf("...Hello young Hero\n\n");
     Sleep(1000);
     printf("you have been sent by gods to help us\n\n");
@@ -91,7 +94,7 @@ void startNewGame()
     printf("you are our only hope\n\n");
     Sleep(1000);
     printf("so tell me more about you...\n\n");
-    Sleep(3000);
+    Sleep(3000);*/
 
     Player *Hero = NewPlayer();
 
@@ -115,10 +118,11 @@ void displayMainMenu(Player *player)
     printf("1 - Empty an infested Dungeon\n");
     color(14, 0);
     printf("2 - Go to the tavern if you want to buy new stuff or potions\n");
-    color(12, 0);
-    printf("3 - Display player menu\n");
     color(15, 0);
+    printf("3 - Display player menu\n");
+    color(12, 0);
     printf("4 - Save and quit\n");
+    color(15, 0);
 
     while(1){
         userChoice = userInputInt();
@@ -165,6 +169,7 @@ void displayGameOverMenu(Player *player){
             printf("#####################################\n");
 
             printf("\nYour score is -> %d\n", player->score);
+            printf("You killed %d monster(s)...\n", player->nbrKills);
         }
         flag++;
     }
@@ -178,26 +183,21 @@ void displayGameOverMenu(Player *player){
         switch(userChoice){
             case 1:
                 player->life--;
+                player->health = player->maxHP;
+                player->gold = 0;
+                setPotionAtStart(player);
                 displayMainMenu(player);
-                break;
-            case 2:
-                printf("You are dead, you finished the game with :\n");
-                printf("Score -> %d\n", player->score);
-                printf("Try to do better next time...\n");
-                Sleep(5000);
-                startMenu();
                 break;
             default:
                 break;
         }
     }
-    else{
-        printf("You are dead, you finished the game with :\n");
-        printf("Score -> %d\n", player->score);
-        printf("Try to do better next time...\n");
-        Sleep(5000);
-        startMenu();
-    }
+    printf("You are dead, you finished the game with :\n");
+    printf("Score -> %d\n", player->score);
+    printf("Kills -> %d\n", player->nbrKills);
+    printf("Try to do better next time...\n");
+    Sleep(5000);
+    startMenu();
 }
 
 void saveYourGame(Player *player)

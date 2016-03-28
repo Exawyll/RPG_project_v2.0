@@ -459,39 +459,19 @@ DlistStuff* readFromFile_stuff(){
 
 void setStuffAtStart(Player *target){
     target->armory = item_new();
-    printf("Would you like to auto-equip the basic stuff ?\n1 : Yes\n2 : No\n");
-    int userChoice = userInputInt();
 
     switch(target->job){
         case WARRIOR:
-            if(userChoice == 1){
                 autoEquip(target, stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 10, 0, 0));
                 autoEquip(target, stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 1, 10));
-            }
-            else{
-                item_append(target->armory, *stuffItem_ctor("My First Sword", 10, RIGHT_HAND, 10, 0, 0));
-                item_append(target->armory, *stuffItem_ctor("Textile Armor", 10, ARMOR, 0, 1, 10));
-            }
             break;
         case RANGER:
-            if(userChoice == 1){
                 autoEquip(target, stuffItem_ctor("My First Bow", 10, TWO_HAND, 5, 0, 0));
                 autoEquip(target, stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 1, 5));
-            }
-            else{
-                item_append(target->armory, *stuffItem_ctor("My First Bow", 10, TWO_HAND, 5, 0, 0));
-                item_append(target->armory, *stuffItem_ctor("A Tiny Short", 10, ARMOR, 0, 1, 5));
-            }
             break;
         case WIZARD:
-            if(userChoice == 1){
                 autoEquip(target, stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 5, 0, 0));
                 autoEquip(target, stuffItem_ctor("My First Robe", 10, ARMOR, 0, 1, 5));
-            }
-            else{
-                item_append(target->armory, *stuffItem_ctor("My First Wand", 10, RIGHT_HAND, 5, 0, 0));
-                item_append(target->armory, *stuffItem_ctor("My First Robe", 10, ARMOR, 0, 1, 5));
-            }
             break;
         default:
             break;
@@ -552,7 +532,6 @@ int autoEquip(Player *target, StuffItem *toEquip){
         default:
             break;
     }
-    return(0);
 }
 
 void show_stuff(Player *target){
@@ -585,7 +564,6 @@ void show_stuff(Player *target){
             printf("Please choose only 1 or 2\n");
             break;
     }
-
 }
 
 /*void set_equip(Player *target, int position){
@@ -638,7 +616,8 @@ void show_stuff(Player *target){
             break;
         case LEFT_HAND:
             if(target->build[LEFT_HAND])
-            {
+            {printf("Good job you killed it... More %d mobs to empty this dungeon !\n", dungeonSize);
+                    Sleep(2000);
                 object = target->build[LEFT_HAND];
                 item_append(target->armory, *object);
                 target->build[LEFT_HAND] = toEquip;
@@ -804,6 +783,7 @@ void unEquip(Player *target, int typeStuff){
         default:
             break;
     }
+    displayEqpt(target);
 }
 
 StuffItem* generateWeapon(){

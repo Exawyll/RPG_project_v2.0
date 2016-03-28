@@ -10,7 +10,7 @@
 
 #define POINT_TO_ATTRIBUTE 10
 
-Player* player_ctor(char name[50], int maxHP, int health, int attack, int defense, int relDef, int dodge, int gold, int score, int level, int life, int nbrKills){
+Player* player_ctor(char name[50], int maxHP, int health, int attack, int defense, int relDef, int dodge, int potion, int gold, int score, int level, int life, int nbrKills, int nbrDungeons){
     Player* p = malloc(sizeof(Player));
     p->name[50] = name[50];
     p->maxHP = maxHP;
@@ -19,11 +19,13 @@ Player* player_ctor(char name[50], int maxHP, int health, int attack, int defens
     p->defense = defense;
     p->relDef = relDef;
     p->dodge = dodge;
+    p->potion = potion;
     p->gold = gold;
     p->score = score;
     p->level = level;
     p->life = life;
     p->nbrKills = nbrKills;
+    p->nbrDungeons = nbrDungeons;
     return p;
 }
 
@@ -35,7 +37,7 @@ void DisplayStats (struct playerStructure *target) {
 
 // Creates player and set job.
 Player* NewPlayer() {
-    Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,0,1,3,0);
+    Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,0,0,1,3,0,0);
 
     SetName(tempPlayer);
     setJob(tempPlayer);
@@ -55,16 +57,14 @@ void SetName(Player *target) {
 
     system("cls");
 
-    printf("Bonjour %s,\n", target->name);
+    /*printf("Hi dear %s, future great hero\n", target->name);
     Sleep(2000);
-    printf("What do you do in your life ?\n");
-    Sleep(2000);
+    printf("What do you do in your life ?\n\n");
+    Sleep(2000);*/
 }
 
 int setJob(Player *target){
     int choice = 0;
-
-    system("cls");
 
     printf("Please select your job : \n\n1 : WARRIOR (Start with a SWORD and a TEXTILE ARMOR)\n");
     printf("2 : RANGER (Start with a BOW and a TINY SHORT)\n");
@@ -165,7 +165,7 @@ int menu_player(Player *target, int callingPlace)
     int userChoice;
 
     system("cls");
-    color(12, 0);
+    color(15, 0);
 
     printf("########################\n");
     printf("#1 : POTION inventory  #\n");

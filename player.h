@@ -23,6 +23,7 @@ typedef struct playerStructure {
     int dodge;
     int job;
     DlistItem *inventory;
+    int potion;
     DlistStuff *armory;
     StuffItem* build[6];
     int gold;
@@ -30,9 +31,10 @@ typedef struct playerStructure {
     int level;
     int life;
     int nbrKills;
+    int nbrDungeons;
 }Player;
 
-Player* player_ctor(char[50], int health, int attack, int defense, int relDef, int dodge, int gold, int score, int level, int life, int nbrKills, int maxHP);
+Player* player_ctor(char[50], int maxHP, int health, int attack, int defense, int relDef, int dodge, int potion, int gold, int score, int level, int life, int nbrKills, int nbrDungeons);
 
 // Function Prototype
 void DisplayStats (Player *target);
@@ -50,6 +52,7 @@ void setPotionAtStart(Player *target);
 int show_inventory(Player *target);
 void useYourPotion(Player *target);
 void deletePotion(Player *target);
+void handleTimeEffect(Player *player, int att, int def, int esq);
 //Concern STUFF ITEMS
 void setStuffAtStart(Player *target);
 void show_stuff(Player *target);

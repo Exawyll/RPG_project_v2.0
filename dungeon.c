@@ -132,18 +132,26 @@ void switchDungeons(Player *player)
     Mob* unMob;
     int userChoice;
     int dungeonSize = calculateNomberOfMob(player);
+    int flag = 0;
 
     while(dungeonSize > 0){
         switch(choiceInDungeon()){
             case 1:
+                flag = player->nbrKills;
                 unMob = generateMob(player);
                 char* name = setMobNames(unMob->races);
                 system("cls");
                 printf("Oh you encountered a %s, good luck...\n\n", name);
                 fightPlayerToMob(player, unMob);
-                dungeonSize--;
-                printf("Good job you killed it... More %d mobs to empty this dungeon !\n", dungeonSize);
-                Sleep(2000);
+                if(player->nbrKills > flag){
+                    dungeonSize--;
+                    printf("Good job you killed it... More %d mobs to empty this dungeon !\n", dungeonSize);
+                    Sleep(2000);
+                }
+                else{
+                    printf("You ran away, you still have %d mobs to kill in this dungeon !\n", dungeonSize);
+                    Sleep(2000);
+                }
                 break;
             case 2:
                 researchInDungeon(player);
@@ -170,6 +178,7 @@ void switchDungeons(Player *player)
                 break;
             default:
                 printf("Please press a correct entry !\n");
+                Sleep(2000);
                 break;
         }
     }
@@ -187,17 +196,23 @@ int calculateNomberOfMob(Player *player)
 
 void goThroughDungeon(Player *player)
 {
-    printf("\nWelcome to a new dungeon\nOnly the bravest stay alive through these caves, be strong and take care...\n\n");
+    system("cls");
+
+    printf("*** Welcome to a new dungeon ***\n\nOnly the bravest will stay alive, be strong if you want to survive...\n\n");
+    printf("You'll receive 200 Gold if you empty this dungeon, good luck !\n");
+    Sleep(5000);
 
     switchDungeons(player);
 
     printf("Congratulation you emptied another dungeon!!!\n");
+    printf("Gold +200\n");
+    player->gold += 200;
     Sleep(500);
     printf("After a long walk... you finally arrive back in town...\n");
     Sleep(500);
     printf("You life is back to maximum now !\n\n");
     printf("Number of kills : %d\nScore : %d\n", player->nbrKills, player->score);
-    Sleep(3000);
+    Sleep(4000);
     player->health = player->maxHP;
     displayMainMenu(player);
 }

@@ -109,6 +109,8 @@ void displayEqpt(Player *target)
     int bonusDEFAbs = 0;
     int i = 0;
 
+    system("cls");
+
     printf("-------------------------------\n");
     printf("-          EQUIPPED           -\n");
     printf("-------------------------------\n");
@@ -148,9 +150,9 @@ void displayEqpt(Player *target)
                 }
                 printf("Name :%s\n", name);
                 printf("         Price :%d\n", price);
-                printf("         ATT :%d\n", bonusATT);
-                printf("         DEF :%d\n", bonusDEFAbs);
-                printf("         DEFRel :%d\n", bonusDEFRel);
+                printf("         ATT +%d\n", bonusATT);
+                printf("         DEF +%d\n", bonusDEFAbs);
+                printf("         DEFRel +%d\n", bonusDEFRel);
             }
         }
     }
@@ -168,13 +170,29 @@ void displayEqptMenu(Player* player)
     switch(userChoice){
         case 1:
             printf("Select the weapon to unequip\n");
-            printf("1:HEAD\n2:BODY\n3:R.HAND\n4:L.HAND\n5:LEGS\n6:FOOT\n");
+            if(player->build[HELMET]->name != ' '){
+                printf("1:HEAD\n");
+            }
+            if(player->build[ARMOR]->name != ' '){
+                printf("2:BODY\n");
+            }
+            if(player->build[RIGHT_HAND]->name != ' '){
+                printf("3:R.HAND\n");
+            }
+            if(player->build[LEFT_HAND]->name != ' '){
+                printf("4:L.HAND\n");
+            }
+            if(player->build[LEGGINGS]->name != ' '){
+                printf("5:LEGS\n");
+            }
+            if(player->build[BOOTS]->name != ' '){
+                printf("6:FOOT\n");
+            }
             userChoice2 = userInputInt();
             userChoice2--;
             unEquip(player, userChoice2);
             break;
         case 0:
-            //menu_player(player, 0);
             return (0);
     }
 }

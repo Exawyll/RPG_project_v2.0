@@ -50,6 +50,7 @@ int fightPlayerToMob (Player *target, Mob *mob) {
     int attack = 0;
     int dodge = rollDice_dodge(mob->dodge);
     char* mobName;
+    int victory = 0;
 
     mobName = setMobNames(mob->races);
 
@@ -81,16 +82,30 @@ int fightPlayerToMob (Player *target, Mob *mob) {
             return(0);
         case 3:
             show_inventory(target);
+            system("cls");
+            fightPlayerToMob(target, mob);
             break;
         default:
             printf("Bad input. Try again.\n");
             break;
     }
 
+    //Check potions
+    if (target->potion > 0) {
+        target->potion--;
+        if (target->potion == 0){
+            handleTimeEffect(target, 0, 0, 0);
+        }
+    }
+
     // Victoryǃ
-    if (target->health <= 0) {
-        printf("%s has bested %s in combat.\n", mobName, target->name);
-        displayGameOverMenu(target);
+    if (mob->health <= 0) {
+        system("cls");
+        printf("%s has bested %s in combat.\n", target->name, mobName);
+        target->nbrKills++;
+        calculateReward(target, mob);
+        chanceOfDrop(target);
+        return (0);
     }
     else {
         // Swap player and mob.
@@ -125,14 +140,11 @@ int fightMobToPlayer (Mob *mob, Player *target) {
         }
     }
     printf("\n%s : %d/%d HP\n\n", target->name, target->health, target->maxHP);
+
     // Victoryǃ
-    if (mob->health <= 0) {
-        system("cls");
-        printf("%s has bested %s in combat.\n", target->name, mobName);
-        target->nbrKills++;
-        calculateReward(target, mob);
-        chanceOfDrop(target);
-        return (1);
+    if (target->health <= 0) {
+        printf("%s has bested %s in combat.\n", mobName, target->name);
+        displayGameOverMenu(target);
     }
     else {
         // Swap mob and player.

@@ -48,6 +48,8 @@ void goToTavern(Player *player)
             break;
         default:
             printf("Please, enter a correct entry !\n");
+            Sleep(1000);
+            goToTavern(player);
             break;
     }
 }

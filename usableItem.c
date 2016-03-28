@@ -10,7 +10,7 @@
 #define POTION_STRENGTH 10
 #define POTION_DEFENSE 10
 #define POTION_DODGE 10
-#define TIME_EFFECT 3
+#define TIME_EFFECT 4
 
 /*- Usableitem.c : contient les fonctions suivantes :
 			- doUsableItemEffect(Usableitem* item, Mob* mob)
@@ -584,26 +584,79 @@ void useYourPotion(Player *target){
             }
             else{
                 target->health = target->maxHP;
+                useItem_remove_id(target->inventory, userChoice);
             }
-
-
             break;
         case STRENGTH_POTION:
-            target->attack += POTION_STRENGTH;
-            useItem_remove_id(target->inventory, userChoice);
+            if(target->potion == 0){
+                handleTimeEffect(target, POTION_STRENGTH, 0, 0);
+                useItem_remove_id(target->inventory, userChoice);
+                target->potion = TIME_EFFECT;
+            }
+            else{
+                printf("You can only have one potion at a time !\n");
+                Sleep(2000);
+            }
             break;
         case DEFENSE_POTION:
-            target->defense += POTION_DEFENSE;
-            useItem_remove_id(target->inventory, userChoice);
+            if(target->potion == 0){
+                handleTimeEffect(target, 0, POTION_DEFENSE, 0);
+                useItem_remove_id(target->inventory, userChoice);
+                target->potion = TIME_EFFECT;
+            }
+            else{
+                printf("You can only have one potion at a time !\n");
+                Sleep(2000);
+            }
             break;
         case GHOST_POTION:
-            target->dodge += POTION_DODGE;
-            useItem_remove_id(target->inventory, userChoice);
+            if(target->potion == 0){
+                handleTimeEffect(target, 0, 0, POTION_DODGE);
+                useItem_remove_id(target->inventory, userChoice);
+                target->potion = TIME_EFFECT;
+            }
+            else{
+                printf("You can only have one potion at a time !\n");
+                Sleep(2000);
+            }
             break;
         default:
             break;
     }
     show_inventory(target);
+}
+
+void handleTimeEffect(Player *player, int att, int def, int esq)
+{
+    static int attack = 0;
+    static int defense = 0;
+    static int dodge = 0;
+
+    if(att > 0 || def > 0 || esq > 0){
+        attack = att;
+        defense = def;
+        dodge = esq;
+
+        player->attack += attack;
+        player->defense += defense;
+        player->dodge += dodge;
+    }
+    else{
+        printf("Your potion effect disappear...\n");
+        Sleep(2000);
+        if(attack > 0){
+            player->attack -= attack;
+            attack = 0;
+        }
+        if(defense > 0){
+            player->defense -= defense;
+            defense = 0;
+        }
+        if(dodge > 0){
+            player->dodge -= dodge;
+            dodge = 0;
+        }
+    }
 }
 
 void deletePotion(Player *target)
