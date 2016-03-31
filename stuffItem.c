@@ -551,11 +551,13 @@ void show_stuff(Player *target){
             toEquip = item_return_stuff(target->armory, userChoice2);
             autoEquip(target, stuffItem_ctor(toEquip->name,toEquip->price,toEquip->type,toEquip->I_bonusATT,toEquip->I_bonusDEFRel,toEquip->I_bonusDEFAbs));
             item_remove_id(target->armory, userChoice2);
+            show_stuff(target);
             break;
         case 2:
             printf("Which object you want to DELETE ?\n(Type the corresponding number)\n");
             userChoice2 = userInputInt();
             item_remove_id(target->armory, userChoice2);
+            show_stuff(target);
             break;
         case 0:
             //menu_player(target, 0);
@@ -565,127 +567,6 @@ void show_stuff(Player *target){
             break;
     }
 }
-
-/*void set_equip(Player *target, int position){
-    StuffItem* toEquip = item_return_stuff(target->armory, position);
-    int type = toEquip->type;
-    StuffItem *object;
-    StuffItem *object2;
-    switch(type){
-        case HELMET:
-            if(target->build[HELMET])
-            {
-                object = target->build[HELMET];
-                item_append(target->armory, *object);
-                target->build[HELMET] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            else
-            {
-                target->build[HELMET] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            break;
-        case ARMOR:
-            if(target->build[ARMOR])
-            {
-                object = target->build[ARMOR];
-                item_append(target->armory, *object);
-                target->build[ARMOR] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            else
-            {
-                target->build[ARMOR] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            break;
-        case RIGHT_HAND:
-            if(target->build[RIGHT_HAND])
-            {
-                object = target->build[RIGHT_HAND];
-                item_append(target->armory, *object);
-                target->build[RIGHT_HAND] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            else
-            {
-                target->build[RIGHT_HAND] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            break;
-        case LEFT_HAND:
-            if(target->build[LEFT_HAND])
-            {printf("Good job you killed it... More %d mobs to empty this dungeon !\n", dungeonSize);
-                    Sleep(2000);
-                object = target->build[LEFT_HAND];
-                item_append(target->armory, *object);
-                target->build[LEFT_HAND] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            else
-            {
-                target->build[LEFT_HAND] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            break;
-        case LEGGINGS:
-            if(target->build[LEGGINGS])
-            {
-                object = target->build[LEGGINGS];
-                item_append(target->armory, *object);
-                target->build[LEGGINGS] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            else
-            {
-                target->build[LEGGINGS] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            break;
-        case BOOTS:
-            if(target->build[BOOTS])
-            {
-                object = target->build[BOOTS];
-                item_append(target->armory, *object);
-                target->build[BOOTS] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            else
-            {
-                target->build[BOOTS] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            break;
-        case TWO_HAND:
-            object2 = stuffItem_ctor("RIGHT_HAND Copy",0,TWO_HAND,0,0,0);
-            if(target->build[RIGHT_HAND])
-            {
-                object = target->build[RIGHT_HAND];
-                item_append(target->armory, *object);
-                target->build[RIGHT_HAND] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            else
-            {
-                target->build[RIGHT_HAND] = toEquip;
-                item_remove_id(target->armory, position);
-            }
-            if(target->build[LEFT_HAND])
-            {
-                object = target->build[LEFT_HAND];
-                item_append(target->armory, *object);
-                target->build[LEFT_HAND] = object2;
-            }
-            else
-            {
-                target->build[LEFT_HAND] = object2;
-            }
-            break;
-        default:
-            break;
-    }
-}*/
 
 void unEquip(Player *target, int typeStuff){
     StuffItem* toUnEquip = target->build[typeStuff];
@@ -783,7 +664,6 @@ void unEquip(Player *target, int typeStuff){
         default:
             break;
     }
-    displayEqpt(target);
 }
 
 StuffItem* generateWeapon(){
@@ -791,16 +671,16 @@ StuffItem* generateWeapon(){
     int price = doRand(100, 1000);
     int type = doRand(0,6);
     char *name = generateName(type);
-    int bonusATT = doRand(1,20);
+    int bonusATT = doRand(1,10);
     int bonusDEFRel = doRand(1,5);
-    int bonusDEFAbs = doRand(1,20);
+    int bonusDEFAbs = doRand(1,10);
 
     StuffItem* newStuff = stuffItem_ctor(name,price,type,bonusATT,bonusDEFRel,bonusDEFAbs);
 
     return newStuff;
 }
 
-//WARNING simple quotes for names doesn't work
+//WARNING simple quotes for names does not work
 char* generateName(int type){
     char *name;
 
@@ -825,7 +705,7 @@ char* generateName(int type){
             name = "boots";
             break;
         case 6:
-            name = "Big Weapon";
+            name = "Two hand Weapon";
             break;
     }
     return name;

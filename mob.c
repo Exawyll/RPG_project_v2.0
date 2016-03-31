@@ -5,7 +5,7 @@
 #include "mobRace.h"
 
 #define MOB_LIFE 90
-#define MOB_ATT 8
+#define MOB_ATT 10
 #define MOB_DEF 7
 #define MOB_RELDEF 2
 #define MOB_DODGE 3
@@ -39,21 +39,21 @@ Mob* createOrc(){
 }
 
 Mob* createZombie(){
-    Mob* zombie = mob_ctor(ZOMBIE, MOB_LIFE+30, MOB_LIFE+30, MOB_ATT+7, MOB_DEF+7,MOB_RELDEF+3, MOB_DODGE+3);
+    Mob* zombie = mob_ctor(ZOMBIE, MOB_LIFE+30, MOB_LIFE+30, MOB_ATT+10, MOB_DEF+7,MOB_RELDEF+3, MOB_DODGE+3);
     return zombie;
 }
 
 Mob* createUrukai(){
-    Mob* urukai = mob_ctor(URUKAI, MOB_LIFE+40, MOB_LIFE+40, MOB_ATT+8, MOB_DEF+8,MOB_RELDEF+4, MOB_DODGE+4);
+    Mob* urukai = mob_ctor(URUKAI, MOB_LIFE+40, MOB_LIFE+40, MOB_ATT+20, MOB_DEF+8,MOB_RELDEF+4, MOB_DODGE+4);
     return urukai;
 }
 
 Mob* createTroll(){
-    Mob* troll = mob_ctor(TROLL, MOB_LIFE+50, MOB_LIFE+50, MOB_ATT+9, MOB_DEF+9,MOB_RELDEF+5, MOB_DODGE+5);
+    Mob* troll = mob_ctor(TROLL, MOB_LIFE+50, MOB_LIFE+50, MOB_ATT+30, MOB_DEF+9,MOB_RELDEF+5, MOB_DODGE+5);
     return troll;
 }
 
 Mob* createDragon(){
-    Mob* dragon = mob_ctor(DRAGON, MOB_LIFE+60, MOB_LIFE+60, MOB_ATT+10, MOB_DEF+10,MOB_RELDEF+6, MOB_DODGE+6);
+    Mob* dragon = mob_ctor(DRAGON, MOB_LIFE+60, MOB_LIFE+60, MOB_ATT+40, MOB_DEF+10,MOB_RELDEF+6, MOB_DODGE+6);
     return dragon;
 }

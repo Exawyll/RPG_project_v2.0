@@ -73,11 +73,12 @@ int startMenu()
     return (0);
 }
 
+//Starting story after new game
 void startNewGame()
 {
     system("cls");
 
-    /*printf("Here start a great adventure.\n\n");
+    printf("Here start a great adventure.\n\n");
     Sleep(2000);
     printf("...Hello young Hero\n\n");
     Sleep(1000);
@@ -94,15 +95,14 @@ void startNewGame()
     printf("you are our only hope\n\n");
     Sleep(1000);
     printf("so tell me more about you...\n\n");
-    Sleep(3000);*/
+    Sleep(3000);
 
     Player *Hero = NewPlayer();
-
-
 
     displayMainMenu(Hero);
 }
 
+//Main menu in town
 void displayMainMenu(Player *player)
 {
     int userChoice = 0;
@@ -148,9 +148,9 @@ void displayMainMenu(Player *player)
                 break;
         }
     }
-
 }
 
+//Display the game over menu
 void displayGameOverMenu(Player *player){
     int userChoice;
     int flag = 0;
@@ -169,13 +169,14 @@ void displayGameOverMenu(Player *player){
             printf("#####################################\n");
 
             printf("\nYour score is -> %d\n", player->score);
+            printf("Dungeon(s) done : %d\n", player->nbrDungeons);
             printf("You killed %d monster(s)...\n", player->nbrKills);
         }
         flag++;
     }
 
     if(player->life > 0){
-        printf("\nYou still have %d life\n", player->life);
+        printf("\nYou still have %d life(s)\n", player->life);
         printf("Would you like to continue ?\n");
         printf("1 : yes\n2 : No\n");
         userChoice = userInputInt();
@@ -195,11 +196,13 @@ void displayGameOverMenu(Player *player){
     printf("You are dead, you finished the game with :\n");
     printf("Score -> %d\n", player->score);
     printf("Kills -> %d\n", player->nbrKills);
+    printf("Dungeon(s) -> %d\n", player->nbrDungeons);
     printf("Try to do better next time...\n");
     Sleep(5000);
     startMenu();
 }
 
+//Save current player in a file
 void saveYourGame(Player *player)
 {
     Player *toSave = malloc(sizeof(Player));
@@ -216,6 +219,7 @@ void saveYourGame(Player *player)
     toSave->relDef = player->relDef;
     toSave->score = player->score;
     toSave->nbrKills = player->nbrKills;
+    toSave->nbrDungeons = player->nbrDungeons;
     writeToFile_item(player->inventory);
     writeToFile_stuff(player->armory);
     writeToFile_eqpt(player->build);
@@ -226,6 +230,7 @@ void saveYourGame(Player *player)
     }
 }
 
+//load existing player from a file
 Player* loadYourGame()
 {
     int i = 0;
@@ -239,8 +244,6 @@ Player* loadYourGame()
     loadArmory = readFromFile_stuff();
     loadBuild = readFromFile_eqpt();
 
-    printf("price : %d\n", loadBuild[1]->price);
-
     FILE * saved_player = fopen("./saved_player.txt", "r");
     if (saved_player != NULL) {
         fread(loadPlayer, sizeof(Player), 1, saved_player);
@@ -249,27 +252,10 @@ Player* loadYourGame()
 
     loadPlayer->inventory = loadInventory;
     loadPlayer->armory = loadArmory;
+
     for(i = 0; i < 6; i++){
         loadPlayer->build[i] = loadBuild[i];
     }
+
     return loadPlayer;
 }
-
-/*Example of SAVE STRUCT
-struct date *object=malloc(sizeof(struct date));
-strcpy(object->day,"Good day");
-object->month=6;
-object->year=2013;
-FILE * file= fopen("output", "wb");
-if (file != NULL) {
-    fwrite(object, sizeof(struct date), 1, file);
-    fclose(file);
-}
-
-struct date *object2=malloc(sizeof(struct date));
-    FILE * file= fopen("output", "rb");
-    if (file != NULL) {
-        fread(object2, sizeof(struct date), 1, file);
-        fclose(file);
-    }
-    printf("%s/%d/%d\n",object2->day,object2->month,object2->year);*/

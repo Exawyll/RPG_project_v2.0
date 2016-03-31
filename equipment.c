@@ -5,7 +5,10 @@
 #include "stuffItem.h"
 #include "player.h"
 
-int calcAttack(Player *target){
+//Calculate attack from the player due to the equipment
+//does not affect the real attack
+int calcAttack(Player *target)
+{
     int bonusATT = 0;
     int attack = 0;
     int i = 0;
@@ -20,7 +23,9 @@ int calcAttack(Player *target){
     return attack;
 }
 
-int calcRelDef(Player *target){
+//Calculate the relative defense with equipment
+int calcRelDef(Player *target)
+{
     int bonusDEFRel = 0;
     int relDef = 0;
     int i = 0;
@@ -35,7 +40,9 @@ int calcRelDef(Player *target){
     return relDef;
 }
 
-int calcAbsDef(Player *target){
+//Calculate the absolute defense with equipment
+int calcAbsDef(Player *target)
+{
     int bonusDEF = 0;
     int defense = 0;
     int i = 0;
@@ -50,6 +57,7 @@ int calcAbsDef(Player *target){
     return defense;
 }
 
+//Calculate all the attributes with equipment of the player
 void calcAttributesWithEqpt(Player *target)
 {
     int bonusATT = 0;
@@ -88,6 +96,7 @@ void calcAttributesWithEqpt(Player *target)
     displayStatsPlayerWithEqpt(target, attack, defense, relDef);
 }
 
+//Display the stats of the player with equipment
 void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int relDef)
 {
     char *job = setJobNames(target->job);
@@ -98,6 +107,7 @@ void displayStatsPlayerWithEqpt(Player *target, int attack, int defense, int rel
     printf("Gold: %d\nScore: %d\nLife: %d\nKills: %d\n\n", target->gold, target->score, target->life, target->nbrKills);
 }
 
+//Display the equipment of the player
 void displayEqpt(Player *target)
 {
     char *name;
@@ -161,6 +171,7 @@ void displayEqpt(Player *target)
     printf("\n");
 }
 
+//display the menu for the equipment and take the user choice
 void displayEqptMenu(Player* player)
 {
     int userChoice;
@@ -197,7 +208,9 @@ void displayEqptMenu(Player* player)
     }
 }
 
-void initEqpt(Player *target){
+//Initialize the equipment with empty stuffitems
+void initEqpt(Player *target)
+{
     int i = 0;
     for(i = 0; i < 6; i++){
         StuffItem* fakeObject = stuffItem_ctor(' ',0,i,0,0,0);
@@ -207,7 +220,8 @@ void initEqpt(Player *target){
 }
 
 //How to save the stuff equipped on the player
-void writeToFile_eqpt(StuffItem** build){
+void writeToFile_eqpt(StuffItem** build)
+{
     int i = 0;
     FILE *fptr;
     fptr=fopen("./list_eqpt.txt","w+");
@@ -226,8 +240,9 @@ void writeToFile_eqpt(StuffItem** build){
     fclose(fptr);
 }
 
-//Read a list of structure to display it
-StuffItem** readFromFile_eqpt(){
+//Read the stuff equipped on the player saved in a file
+StuffItem** readFromFile_eqpt()
+{
     StuffItem** build = malloc(sizeof(StuffItem));
     StuffItem* stuff = malloc(sizeof(StuffItem));
     StuffItem* object2 = malloc(sizeof(StuffItem));
@@ -275,39 +290,3 @@ StuffItem** readFromFile_eqpt(){
 
     return build;
 }
-
-/*void displayEqpt(Player *target){
-    printf("                  /88888888888888888888888888\          \n");
-    printf("                  |88888888888888888888888888/      <---    \n");
-    printf("                   |~~____~~~~~~~~~\"\"\"\"\"\"\"\"\"|           \n");
-    printf("                  / \_________/\"\"\"\"\"\"\"\"\"\"\"\"\"\           \n");
-    printf("                 /  |              \\         \\          \n");
-    printf("                /   |  88    88     \\         \\         \n");
-    printf("               /    |  88    88      \\         \\        \n");
-    printf("              /    /                  \\        |        \n");
-    printf("             /     |   ________        \\       |        \n");
-    printf("             \\     |   \______/        /       |        \n");
-    printf("  /\\\"\\         \\     \\____________     /        |        \n");
-    printf("  | |__________\\_        |  |        /        /         \n");
-    printf("/\"\"\"\"\\           \\_------\'  \'-------/       --          \n");
-    printf("\\____/,___________\\                 -------/            \n");
-    printf("------*            |                    \\               \n");
-    printf("  ||               |                     \\              \n");
-    printf("  ||               |                 ^    \\             \n");
-    printf("  ||               |                | \\    \\            \n");
-    printf("  ||               |                |  \\    \\           \n");
-    printf("  ||               |                |   \\    \\          \n");
-    printf("  \\|              /                /\"\"\\\"\\/    /          \n");
-    printf("     -------------                |    |    /           \n");
-    printf("     |\\--_                        \____/___/            \n");
-    printf("     |   |\\-_                       |                   \n");
-    printf("     |   |   \\_                     |                   \n");
-    printf("     |   |     \\                    |                   \n");
-    printf("     |   |      \\_                  |                   \n");
-    printf("     |   |        ----___           |                   \n");
-    printf("     |   |               \\----------|                   \n");
-    printf("     /   |                     |     ----------\"\"\\      \n");
-    printf("/\"\--\"--_|                     |               |  \\     \n");
-    printf("|_______/                      \\______________/    )    \n");
-    printf("                                              \\___/     \n");
-}*/

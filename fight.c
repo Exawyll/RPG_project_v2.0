@@ -10,20 +10,26 @@
 
 #define SCORE_MOB 10
 
-int calcPlayerAttack (Player *target){
+//Roll dice attack and add the attack of the player
+int calcPlayerAttack (Player *target)
+{
     int diceATT = rollDice_attack();
     int AttackWithEqpt = calcAttack(target);
     int totAttack = (AttackWithEqpt + diceATT);
     return totAttack;
 }
 
-int calcMobAttack (Mob *mob) {
+//Roll dice attack and add the attack of the mob
+int calcMobAttack (Mob *mob)
+{
     int diceATT = rollDice_attack();
     int totAttack = (mob->attack + diceATT);
     return totAttack;
 }
 
-int calcPlayerRelDef (Player *target, int attack){
+//Decrease the attack by the player defense relative
+int calcPlayerRelDef (Player *target, int attack)
+{
     int relDefWithEqpt = calcRelDef(target);
     double relDEF = (relDefWithEqpt/100);
     double resultingAttack = attack - (attack * relDEF);
@@ -35,7 +41,9 @@ int calcPlayerRelDef (Player *target, int attack){
     }
 }
 
-int calcMobRelDef (Mob *mob, int attack){
+//Decrease the attack by the mob defense relative
+int calcMobRelDef (Mob *mob, int attack)
+{
     double relDEF = (mob->relDef/100);
     double resultingAttack = attack - (attack * relDEF);
     if(resultingAttack > 0){
@@ -46,48 +54,51 @@ int calcMobRelDef (Mob *mob, int attack){
     }
 }
 
+//Player fight a mob
 int fightPlayerToMob (Player *target, Mob *mob) {
     int attack = 0;
     int dodge = rollDice_dodge(mob->dodge);
     char* mobName;
     int victory = 0;
+    int userInput = 0;
 
     mobName = setMobNames(mob->races);
 
-    DisplayFightMenu();
-    int userInput = userInputInt();
-    attack = calcPlayerAttack(target);
-    system("cls");
+    while(userInput != 1 && userInput != 2) {
+        DisplayFightMenu();
+        userInput = userInputInt();
+        attack = calcPlayerAttack(target);
+        system("cls");
 
-    switch (userInput) {
-        case 1:
-            if(dodge){
-                printf("%s has dodged.\n", mobName);
-            }
-            else{
-                attack = calcMobRelDef(mob, attack);
-                int effectiveAttack = attack - mob->defense;
-                if(effectiveAttack > 0){
-                    mob->health -= effectiveAttack;
-                    printf("%s inflicted %d damage to %s.\n", target->name, effectiveAttack, mobName);
+        switch (userInput) {
+            case 1:
+                if(dodge){
+                    printf("%s has dodged.\n", mobName);
                 }
                 else{
-                    printf("%s inflicted 0 damage to %s.\n", target->name, mobName);
+                    attack = calcMobRelDef(mob, attack);
+                    int effectiveAttack = attack - mob->defense;
+                    if(effectiveAttack > 0){
+                        mob->health -= effectiveAttack;
+                        printf("%s inflicted %d damage to %s.\n", target->name, effectiveAttack, mobName);
+                    }
+                    else{
+                        printf("%s inflicted 0 damage to %s.\n", target->name, mobName);
+                    }
                 }
-            }
-            printf("\n%s : %d/%d HP\n\n", mobName, mob->health, mob->maxHP);
-            break;
-        case 2:
-            printf("Running away!\n");
-            return(0);
-        case 3:
-            show_inventory(target);
-            system("cls");
-            fightPlayerToMob(target, mob);
-            break;
-        default:
-            printf("Bad input. Try again.\n");
-            break;
+                printf("\n%s : %d/%d HP\n\n", mobName, mob->health, mob->maxHP);
+                break;
+            case 2:
+                printf("Running away!\n");
+                return(0);
+            case 3:
+                show_inventory(target);
+                system("cls");
+                break;
+            default:
+                printf("Bad input. Try again.\n");
+                break;
+        }
     }
 
     //Check potions
@@ -114,6 +125,7 @@ int fightPlayerToMob (Player *target, Mob *mob) {
     return(0);
 }
 
+//Mob fight a player
 int fightMobToPlayer (Mob *mob, Player *target) {
     int attack = 0;
     int defensePlayerWithEqpt = 0;
@@ -253,6 +265,10 @@ void increaseLevel(Player *player){
     }
 }
 
-void DisplayFightMenu () {
+void DisplayFightMenu ()
+{
+    printf("----------\n");
+    printf("Fight Menu\n");
+    printf("----------\n");
     printf("1 -> Attack\n2 -> Run\n3 -> Potions\n");
 }

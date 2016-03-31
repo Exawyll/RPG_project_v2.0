@@ -96,7 +96,10 @@ int rollDice_attack(){
 //number is the dodge value of the mob
 //Three different dodge dices depending on the dodge value
 int rollDice_dodge(int number){
-    int diceResult = 0;
+    int diceResult;
+    diceResult = 0;
+    Sleep(800);
+
     if(number < 5){
         diceResult = doRand(1, 8);
         if(diceResult == 8){

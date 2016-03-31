@@ -10,7 +10,7 @@
 #define POTION_STRENGTH 10
 #define POTION_DEFENSE 10
 #define POTION_DODGE 10
-#define TIME_EFFECT 4
+#define TIME_EFFECT 3
 
 /*- Usableitem.c : contient les fonctions suivantes :
 			- doUsableItemEffect(Usableitem* item, Mob* mob)
@@ -505,7 +505,7 @@ UsableItem createUsableItems(enum itemNumber number){
 
 void menuSelectPotion(){
     printf("Now you have 3 potions to add to your inventory, what will you choose ?\n\n(trick : you can have many of the same type)\n\n");
-    printf("1 : HEALTH POTION (increase temporally 10 HP)\n");
+    printf("1 : HEALTH POTION (increase 50 HP)\n");
     printf("2 : STRENGTH POTION (increase temporally 10 attack points)\n");
     printf("3 : DEFENSE POTION (increase temporally 10 defense points)\n");
     printf("4 : GHOST POTION (increase temporally 10 dodge points)\n\n");
@@ -591,7 +591,7 @@ void useYourPotion(Player *target){
             if(target->potion == 0){
                 handleTimeEffect(target, POTION_STRENGTH, 0, 0);
                 useItem_remove_id(target->inventory, userChoice);
-                target->potion = TIME_EFFECT;
+                target->potion = TIME_EFFECT+1;
             }
             else{
                 printf("You can only have one potion at a time !\n");
@@ -602,7 +602,7 @@ void useYourPotion(Player *target){
             if(target->potion == 0){
                 handleTimeEffect(target, 0, POTION_DEFENSE, 0);
                 useItem_remove_id(target->inventory, userChoice);
-                target->potion = TIME_EFFECT;
+                target->potion = TIME_EFFECT+1;
             }
             else{
                 printf("You can only have one potion at a time !\n");
@@ -613,7 +613,7 @@ void useYourPotion(Player *target){
             if(target->potion == 0){
                 handleTimeEffect(target, 0, 0, POTION_DODGE);
                 useItem_remove_id(target->inventory, userChoice);
-                target->potion = TIME_EFFECT;
+                target->potion = TIME_EFFECT+1;
             }
             else{
                 printf("You can only have one potion at a time !\n");

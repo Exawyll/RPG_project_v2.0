@@ -15,6 +15,7 @@ Mob* generateMob(Player *player)
     Mob* myMob = malloc(sizeof(Mob));
     int randNbr;
 
+    //weakest mobs if level under 5
     if((player->level) < 5){
         randNbr = doRand(1, 3);
         switch(randNbr){
@@ -31,6 +32,8 @@ Mob* generateMob(Player *player)
                 break;
         }
     }
+
+    //Can generate all the mobs if level between 5 and 10
     else if((player->level) >= 5 && (player->level) < 10){
         randNbr = doRand(1, 7);
         switch(randNbr){
@@ -59,11 +62,13 @@ Mob* generateMob(Player *player)
                 break;
         }
     }
+
+    //Generation of cheated mobs if level over 10
     else{
         int race = doRand(1, 7);
         int health = doRand(170, 300);
         int maxHP = health;
-        int attack = doRand(10, 30);
+        int attack = doRand(40, 100);
         int defense = doRand(10, 30);
         int relDef = doRand(5, 20);
         int dodge = doRand(5, 20);
@@ -73,6 +78,7 @@ Mob* generateMob(Player *player)
     return myMob;
 }
 
+//Randomize with a dice 20 for awards in dungeons if you begin to search
 void researchInDungeon(Player *player)
 {
     int luckyDice = doRand(1,20);
@@ -89,6 +95,9 @@ void researchInDungeon(Player *player)
             printf("Oh oh it's a trap, you lose 20 HP !\n");
             player->health -= 20;
             Sleep(2000);
+            if (player->health < 0) {
+                displayGameOverMenu(player);
+            }
             break;
         case 10:
             printf("Good job you just found %d gold !", giftGold);
@@ -102,6 +111,7 @@ void researchInDungeon(Player *player)
     }
 }
 
+//Menu in dungeon with user choice
 int choiceInDungeon()
 {
     int userChoice = -1;
@@ -127,6 +137,7 @@ int choiceInDungeon()
     return userChoice;
 }
 
+//Calling of the different actions available in a dungeon
 void switchDungeons(Player *player)
 {
     Mob* unMob;
@@ -184,6 +195,8 @@ void switchDungeons(Player *player)
     }
 }
 
+//Calculate the size of the dungeon depending on the level of the player
+//Start with 3 mobs and increase by 2 every three levels
 int calculateNomberOfMob(Player *player)
 {
     static int numberOfMob = 3;
@@ -194,6 +207,7 @@ int calculateNomberOfMob(Player *player)
     return numberOfMob;
 }
 
+//Menu to start a dungeon
 void goThroughDungeon(Player *player)
 {
     system("cls");
