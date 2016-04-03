@@ -4,6 +4,9 @@
 #include <time.h>
 #include <windows.h>
 
+#include "gameUtil.h"
+
+//Color function of the console
 void color(int t,int f)
 {
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
@@ -28,14 +31,16 @@ void color(int t,int f)
 15: blanc */
 
 //Clear the buffer
-static void purge_buffer(void){
+void purge_buffer(void)
+{
     int c;
     while ((c = getchar()) != '\n' && c != EOF)
     {}
 }
 
 //Remove the '\n' from the user input
-static void clean (char *string){
+void clean (char *string)
+{
     char *p = strchr(string, '\n');
 
     if (p)
@@ -50,7 +55,8 @@ static void clean (char *string){
 }
 
 // Get input int.
-int userInputInt(){
+int userInputInt()
+{
     int userInput = 0;
     char userNumber[10];
 
@@ -63,7 +69,8 @@ int userInputInt(){
 }
 
 // Get input char.
-char* userInputChar(){
+char* userInputChar()
+{
     char* string = malloc(50*sizeof(char));
     printf("\n>> ");
     fflush(stdin);
@@ -74,16 +81,17 @@ char* userInputChar(){
 }
 
 //Return a random number between MAX and MIN
-int doRand(int MIN, int MAX){
+int doRand(int MIN, int MAX)
+{
     srand(time(NULL));
     return (rand() % (MAX - MIN + 1)) + MIN;
 }
 
-//Roll dice attack
+//Roll the dices to attack
 //Always 2d4 et 1d6
 //Return the sum of the three dices
-//Roll the dices to attack
-int rollDice_attack(){
+int rollDice_attack()
+{
     int sumAttack = 0;
     int dice6 = doRand(1, 6);
     int dice4a = doRand(1, 4);
@@ -95,7 +103,9 @@ int rollDice_attack(){
 //Roll the dice to dodge
 //number is the dodge value of the mob
 //Three different dodge dices depending on the dodge value
-int rollDice_dodge(int number){
+//1d8 if dodge < 5 ...
+int rollDice_dodge(int number)
+{
     int diceResult;
     diceResult = 0;
     Sleep(800);
@@ -128,10 +138,5 @@ int rollDice_dodge(int number){
             return 0;
         }
     }
-}
-
-//Weapons generation
-int generateType(){
-    return doRand(0,6);
 }
 

@@ -5,11 +5,12 @@
 #include "mob.h"
 
 //prototypes
-/*void goThroughDungeon(Player *player);
+void goThroughDungeon(Player *player);
 int calculateNomberOfMob(Player *player);
 void switchDungeons(Player *player);
 int choiceInDungeon();
 void researchInDungeon(Player *player);
-Mob* generateMob(Player *player);*/
+Mob* generateMob(Player *player);
+int choiceInDungeon();
 
 #endif // DUNGEON_H_INCLUDED

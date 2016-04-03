@@ -1,10 +1,8 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include "usableItem.h"
 #include "stuffItem.h"
-#include "equipment.h"
-#include "mob.h"
+#include "usableItem.h"
 
 // Classes are enumerated. WARRIOR = 0; RANGER = 1, etc.
 typedef enum ClassEnum  {
@@ -13,6 +11,7 @@ typedef enum ClassEnum  {
     WIZARD,
 } job;
 
+//The most important player structure that store all the player data
 typedef struct playerStructure {
     char name[50];
     int maxHP;
@@ -34,31 +33,31 @@ typedef struct playerStructure {
     int nbrDungeons;
 }Player;
 
+//Constructor prototype
 Player* player_ctor(char[50], int maxHP, int health, int attack, int defense, int relDef, int dodge, int potion, int gold, int score, int level, int life, int nbrKills, int nbrDungeons);
 
-// Function Prototype
-void DisplayStats (Player *target);
+// Function Prototype for Player.c
 void SetName(Player *target);
-Player* NewPlayer();    // Creates player and sets class.
+Player* NewPlayer();
 int setJob(Player* target);
 void buildToStart(Player *target);
 int menu_player(Player *target, int callingPlace);
 char* setJobNames(int job);
+
 //Concern USABLE ITEMS
-UsableItem createUsableItems(enum itemNumber);
-void menuSelectPotion();
 void init_inventory(Player* target);
 void setPotionAtStart(Player *target);
 int show_inventory(Player *target);
 void useYourPotion(Player *target);
 void deletePotion(Player *target);
 void handleTimeEffect(Player *player, int att, int def, int esq);
+
 //Concern STUFF ITEMS
 void setStuffAtStart(Player *target);
 void show_stuff(Player *target);
-//void set_equip(Player *target, int position);
 void unEquip(Player *target, int typeStuff);
 int autoEquip(Player *target, StuffItem *toEquip);
+
 //Concern Equipment
 void initEqpt(Player *target);
 void displayEqpt(Player *target);
@@ -69,28 +68,21 @@ int calcAbsDef(Player *target);
 int calcRelDef(Player *target);
 int calcAttack(Player *target);
 void displayEqptMenu(Player* player);
+void writeToFile_eqpt(StuffItem** build);
+StuffItem** readFromFile_eqpt();
+
 //Concern Dungeon
-Mob* generateMob(Player *player);
-int choiceInDungeon();
+/*Mob* generateMob(Player *player);
 void researchInDungeon(Player *player);
 void switchDungeons(Player *player);
 int calculateNomberOfMob(Player *player);
-void goThroughDungeon(Player *player);
+void goThroughDungeon(Player *player);*/
+
 //Concern Tavern
-void goToTavern(Player *player);
-DlistStuff *generateMercantStuff();
-void printAmbianceText();
-void waitMenuMercant(int i);
-StuffItem *item_select_id(DlistStuff *p_list, int position);
+/*void goToTavern(Player *player);
 void buyNewStuff(Player *player);
 void sellOldStuff(Player *player);
-DlistItem *generateMercantItem();
-UsableItem *useItem_select_id(DlistItem *p_list, int position);
 void buyNewPotions(Player *player);
-void sellPotions(Player *player);
-void printf_stuff_mercant(StuffItem* stuff);
-void mercant_stuff_display(DlistStuff *p_list);
-void printf_item_mercant(UsableItem* item);
-void mercant_item_display(DlistItem *p_list);
+void sellPotions(Player *player);*/
 
 #endif // PLAYER_H_INCLUDED

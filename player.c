@@ -10,7 +10,9 @@
 
 #define POINT_TO_ATTRIBUTE 10
 
-Player* player_ctor(char name[50], int maxHP, int health, int attack, int defense, int relDef, int dodge, int potion, int gold, int score, int level, int life, int nbrKills, int nbrDungeons){
+//Constructor for a player
+Player* player_ctor(char name[50], int maxHP, int health, int attack, int defense, int relDef, int dodge, int potion, int gold, int score, int level, int life, int nbrKills, int nbrDungeons)
+{
     Player* p = malloc(sizeof(Player));
     p->name[50] = name[50];
     p->maxHP = maxHP;
@@ -29,14 +31,9 @@ Player* player_ctor(char name[50], int maxHP, int health, int attack, int defens
     return p;
 }
 
-// Takes a player as an argument and prints their name, health, and attack. Returns nothing.
-void DisplayStats (struct playerStructure *target) {
-    printf("Your stats without equipment :\n");
-    printf("Name: %s\nHealth: %d\nAttack: %d\nDefense : %d\nRelative Defense : %d\nDodge : %d\n\n", target->name, target->health, target->attack, target->defense, target->relDef, target->dodge);
-}
-
-// Creates player and set job.
-Player* NewPlayer() {
+// Creates player and set job/Eqpt/Potions.
+Player* NewPlayer()
+{
     Player *tempPlayer = player_ctor("Exaw", 0,0,0,0,0,0,0,0,0,1,3,0,0);
 
     SetName(tempPlayer);
@@ -49,7 +46,9 @@ Player* NewPlayer() {
     return(tempPlayer);
 }
 
-void SetName(Player *target) {
+//Ask to the user the name of the player
+void SetName(Player *target)
+{
     char* name;
     printf("Please give a name for your character : ");
     name = userInputChar();
@@ -57,18 +56,20 @@ void SetName(Player *target) {
 
     system("cls");
 
-    /*printf("Hi dear %s, future great hero\n", target->name);
+    printf("Hi dear %s, future great hero\n", target->name);
     Sleep(2000);
     printf("What do you do in your life ?\n\n");
-    Sleep(2000);*/
+    Sleep(2000);
 }
 
-int setJob(Player *target){
+//Set the job and give a starting stuff to the player
+int setJob(Player *target)
+{
     int choice = 0;
 
     printf("Please select your job : \n\n1 : WARRIOR (Start with a SWORD and a TEXTILE ARMOR)\n");
     printf("2 : RANGER (Start with a BOW and a TINY SHORT)\n");
-    printf("3 : WIZARD (Start with a WAND and a ROBE)\n\n(NO JOB if you enter a wrong input \"not recommended\")\n");
+    printf("3 : WIZARD (Start with a WAND and a ROBE)\n\n(WARNING : NO JOB if you enter a wrong input \"not recommended\")\n");
     choice = userInputInt();
     choice--;
 
@@ -78,8 +79,8 @@ int setJob(Player *target){
             target->health += 100;
             target->maxHP += 100;
             target->attack += 10;
-            target->defense += 3;
-            target->relDef += 1;
+            target->defense += 2;
+            target->relDef += 2;
             target->dodge += 1;
             target->job = WARRIOR;
             break;
@@ -88,8 +89,8 @@ int setJob(Player *target){
             target->maxHP += 100;
             target->attack += 10;
             target->defense += 2;
-            target->relDef += 6;
-            target->dodge += 1;
+            target->relDef += 3;
+            target->dodge += 5;
             target->job = RANGER;
             break;
         case WIZARD:
@@ -114,7 +115,9 @@ int setJob(Player *target){
     return(0);
 }
 
-void buildToStart(Player *target){
+//Attribute the stats to start
+void buildToStart(Player *target)
+{
     int skillPTS = POINT_TO_ATTRIBUTE;
 
     system("cls");
@@ -160,6 +163,7 @@ void buildToStart(Player *target){
     }
 }
 
+//Player menu to see potions/Stuff/equipment/stats
 int menu_player(Player *target, int callingPlace)
 {
     int userChoice;
@@ -209,7 +213,9 @@ int menu_player(Player *target, int callingPlace)
     }
 }
 
-char* setJobNames(int job){
+//Give a name for the chosen job
+char* setJobNames(int job)
+{
     switch(job)
     {
         case WARRIOR:
@@ -222,4 +228,3 @@ char* setJobNames(int job){
             return "NO JOB";
     }
 }
-

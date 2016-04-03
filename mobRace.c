@@ -3,7 +3,9 @@
 
 #include "mobRace.h"
 
-char* setMobNames(int races){
+//Give a name to the mob depending of the race
+char* setMobNames(int races)
+{
     switch(races)
     {
         case GOBELIN:

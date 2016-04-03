@@ -8,6 +8,10 @@
 
 #define NBR_WEAPON_MERCANT 12
 
+//Prototype for the Main menu
+void displayMainMenu(Player *player);
+
+//Menu entrance in a tavern with all the things you can do
 void goToTavern(Player *player)
 {
     int userChoice = 0;
@@ -54,12 +58,15 @@ void goToTavern(Player *player)
     }
 }
 
+//The stuffItem merchant is generated randomly
 DlistStuff *generateMercantStuff()
 {
     int i = 0;
     DlistStuff *armory = item_new();
 
     for(i = 0; i < NBR_WEAPON_MERCANT; i++){
+
+        //The Sleep function is used to slow down the program in order to generate different numbers with the random function
         Sleep(1000);
         item_append(armory, *generateWeapon());
         waitMenuMercant(i);
@@ -68,12 +75,14 @@ DlistStuff *generateMercantStuff()
     return armory;
 }
 
+//Text displayed during the merchant generation in order to occupy the user
 void printAmbianceText()
 {
     printf("Hello young hero, hard time to get new stuff with the infested caves\nall around us... But I've got something for you right here\nplease have a look and choose carefully what you need :\n\n");
     printf("Please wait for the generation of the market place");
 }
 
+//Tricky menu to display dots like if the program is loading something
 void waitMenuMercant(int i)
 {
     system("cls");
@@ -109,20 +118,25 @@ StuffItem *item_select_id(DlistStuff *p_list, int position)
             }
         }
     }
+    return NULL;
 }
 
+//Function allowing to buy new StuffItem is user have enough gold
 void buyNewStuff(Player *player){
     DlistStuff *mercant;
     int objectToBuy = -1;
     StuffItem *objectBought;
     int badChoice = 0;
 
+    //Generate the merchant
     mercant = generateMercantStuff();
 
+    //Infinite loop until the user call the tavern menu
     while(objectToBuy){
 
         printf("*** YOUR GOLD : %d PO ***\n",player->gold);
 
+        //Control user input
         if(badChoice == 0){
             printf("Please, select the weapon you want to buy : (press 0 to exit)\n");
         }
@@ -135,26 +149,38 @@ void buyNewStuff(Player *player){
             objectToBuy = userInputInt();
         }
 
+        //Option to return to the tavern
         if(objectToBuy == 0){
             goToTavern(player);
         }
 
+        //Return the StuffItem the user wants to buy
         objectBought = item_select_id(mercant, objectToBuy);
 
+        //Check if user have enough gold
         if(objectBought->price > player->gold || badChoice == 1){
             printf("\n\nSorry, buddy you don't have enough coins, get richer and come back\n");
             printf("or buy cheaper... (press 0 to exit)\n\n\n");
             badChoice = 1;
         }
         else{
+            //If he can buy
+            //Decrease the gold amount
             player->gold -= objectBought->price;
+
+            //insert the StuffItem in armory
             item_append(player->armory, *objectBought);
+
+            //Remove it from the merchant
             item_remove_id(mercant, objectToBuy);
+
+            //Display the merchant he wants to buy more
             mercant_stuff_display(mercant);
         }
     }
 }
 
+//Function to sell your old stuff
 void sellOldStuff(Player *player)
 {
     int objectToSell = -1;
@@ -184,12 +210,18 @@ void sellOldStuff(Player *player)
 
         objectSold = item_select_id(player->armory, objectToSell);
 
+        //Increase the gold
         player->gold += objectSold->price;
+
+        //Remove the stuffItem from the player
         item_remove_id(player->armory, objectToSell);
+
+        //Display the new armory to sell more
         item_display(player->armory);
     }
 }
 
+//Generate the Item merchant with the 4 available potions
 DlistItem *generateMercantItem()
 {
     DlistItem *potions = useItem_new();
@@ -221,8 +253,10 @@ UsableItem *useItem_select_id(DlistItem *p_list, int position)
             }
         }
     }
+    return NULL;
 }
 
+//Function to buy new potions
 void buyNewPotions(Player *player)
 {
     int objectToBuy = -1;
@@ -239,6 +273,7 @@ void buyNewPotions(Player *player)
         }
 
         objectToBuy = userInputInt();
+
         //Control the user to not crash the later lists functions
         while(objectToBuy > mercant->length){
             printf("Please select an existing potion !!!\n");
@@ -264,6 +299,7 @@ void buyNewPotions(Player *player)
     }
 }
 
+//Function to sell potions
 void sellPotions(Player *player)
 {
     int potionToSell = -1;
@@ -309,7 +345,7 @@ void printf_stuff_mercant(StuffItem* stuff)
     }
 }
 
-//This display the list
+//This display the list of StuffItems for the merchant
 void mercant_stuff_display(DlistStuff *p_list)
 {
     system("cls");
@@ -347,7 +383,7 @@ void printf_item_mercant(UsableItem* item)
 
 }
 
-//This display the list
+//This display the list of Usable Item from the merchant
 void mercant_item_display(DlistItem *p_list)
 {
     system("cls");

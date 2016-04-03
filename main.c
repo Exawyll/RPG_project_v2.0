@@ -5,14 +5,12 @@
 #include <windows.h>
 
 #include "player.h"
-#include "fight.h"
-#include "usableItem.h"
-#include "gameUtil.h"
-#include "mob.h"
-#include "mobRace.h"
-#include "dungeon.h"
-#include "equipment.h"
 
+//Prototype to avoid implicit declaration warnings
+void goToTavern(Player *player);
+void goThroughDungeon(Player *player);
+int userInputInt();
+void color(int t,int f);
 int startMenu();
 void displayMainMenu(Player *player);
 void startNewGame();
@@ -20,6 +18,7 @@ Player* loadYourGame();
 void displayGameOverMenu(Player *player);
 void saveYourGame(Player *player);
 
+//Starting block of the program
 int main(int argc, char *argv[])
 {
     startMenu();
@@ -27,6 +26,7 @@ int main(int argc, char *argv[])
     return(0);
 }
 
+//First menu where you can start or load
 int startMenu()
 {
     Player* newPlayer;
@@ -151,7 +151,8 @@ void displayMainMenu(Player *player)
 }
 
 //Display the game over menu
-void displayGameOverMenu(Player *player){
+void displayGameOverMenu(Player *player)
+{
     int userChoice;
     int flag = 0;
     int i = 0;

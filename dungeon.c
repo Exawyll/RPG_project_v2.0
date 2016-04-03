@@ -63,7 +63,7 @@ Mob* generateMob(Player *player)
         }
     }
 
-    //Generation of cheated mobs if level over 10
+    //Generation of cheated mobs if level of the player over 10
     else{
         int race = doRand(1, 7);
         int health = doRand(170, 300);
@@ -78,14 +78,14 @@ Mob* generateMob(Player *player)
     return myMob;
 }
 
-//Randomize with a dice 20 for awards in dungeons if you begin to search
+//Randomize with a dice 15 for awards in dungeons if you begin to search
 void researchInDungeon(Player *player)
 {
-    int luckyDice = doRand(1,20);
+    int luckyDice = doRand(1,15);
     int giftGold = doRand(50, 350);
     StuffItem *giftStuff;
     switch(luckyDice){
-        case 20:
+        case 15:
             giftStuff = generateWeapon();
             printf("So lucky you are, you just found a new weapon !\n");
             item_append(player->armory, *giftStuff);
@@ -100,7 +100,7 @@ void researchInDungeon(Player *player)
             }
             break;
         case 10:
-            printf("Good job you just found %d gold !", giftGold);
+            printf("Good job you found %d gold !", giftGold);
             player->gold += giftGold;
             Sleep(2000);
             break;
@@ -213,20 +213,25 @@ void goThroughDungeon(Player *player)
     system("cls");
 
     printf("*** Welcome to a new dungeon ***\n\nOnly the bravest will stay alive, be strong if you want to survive...\n\n");
-    printf("You'll receive 200 Gold if you empty this dungeon, good luck !\n");
+    printf("You'll receive Gold if you empty this dungeon, good luck !\n");
     Sleep(5000);
 
+    //Go to the menu of dungeons
     switchDungeons(player);
 
-    printf("Congratulation you emptied another dungeon!!!\n");
-    printf("Gold +200\n");
-    player->gold += 200;
+    printf("\n*** Congratulation you emptied another dungeon ***\n\n");
+    player->nbrDungeons++;
+    printf("Gold +%d\n\n", (player->nbrDungeons * 100));
+
+    player->gold += (player->nbrDungeons * 100);
     Sleep(500);
-    printf("After a long walk... you finally arrive back in town...\n");
+
+    printf("After a long walk... you finally arrive back in town...\n\n");
     Sleep(500);
     printf("You life is back to maximum now !\n\n");
     printf("Number of kills : %d\nScore : %d\n", player->nbrKills, player->score);
     Sleep(4000);
+
     player->health = player->maxHP;
     displayMainMenu(player);
 }

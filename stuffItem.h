@@ -1,17 +1,6 @@
 #ifndef STUFFITEM_H_INCLUDED
 #define STUFFITEM_H_INCLUDED
 
-
-/*- StuffItem.h : contient l'ensemble des caractéristiques d'un objet porté par une créature :
-			- nom
-			- valeur (valeur en or)
-			- type (tete, torse, jambe, botte, main droite, main gauche)
-			- point de vie
-			- attaque
-			- defense relative
-			- defense absolue*/
-
-// 0 based.
 enum stuffNumber {
     HELMET,
     ARMOR,
@@ -52,16 +41,10 @@ typedef struct item
 
 DlistStuff* readFromFile_stuff();
 void writeToFile_stuff(DlistStuff *p_list);
-DlistStuff *item_find_all(DlistStuff *p_list, StuffItem stuff);
-DlistStuff *item_find(DlistStuff *p_list, StuffItem stuff);
 size_t item_length(DlistStuff *p_list);
 DlistStuff *item_remove_id(DlistStuff *p_list, int position);
-DlistStuff *item_remove_all(DlistStuff *p_list, int stuff);
 DlistStuff *item_remove(DlistStuff *p_list, StuffItem stuff);
 void item_display(DlistStuff *p_list);
-void item_delete(DlistStuff **p_list);
-DlistStuff *item_insert(DlistStuff *p_list, StuffItem stuff, int position);
-DlistStuff *item_prepend(DlistStuff *p_list, StuffItem stuff);
 DlistStuff *item_append(DlistStuff *p_list, StuffItem stuff);
 DlistStuff *item_new(void);
 void printf_struct_stuff(StuffItem* stuff);

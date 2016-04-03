@@ -5,7 +5,7 @@
 #include "stuffItem.h"
 #include "player.h"
 
-//Calculate attack from the player due to the equipment
+//Calculate attack from the player with the equipment
 //does not affect the real attack
 int calcAttack(Player *target)
 {

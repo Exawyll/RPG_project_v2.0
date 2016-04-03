@@ -101,7 +101,7 @@ int fightPlayerToMob (Player *target, Mob *mob) {
         }
     }
 
-    //Check potions
+    //Check of the potions time effect
     if (target->potion > 0) {
         target->potion--;
         if (target->potion == 0){
@@ -165,6 +165,7 @@ int fightMobToPlayer (Mob *mob, Player *target) {
     return(0);
 }
 
+//You have 1 chance over 10 to drop a weapon by killing a mob
 void chanceOfDrop(Player* target)
 {
     int chance = doRand(1,10);
@@ -176,8 +177,9 @@ void chanceOfDrop(Player* target)
     }
 }
 
-//Print and increase the score + Gold of the player
-void calculateReward(Player *player, Mob* mob){
+//Display and increase the score + Gold of the player after killing a mob
+void calculateReward(Player *player, Mob* mob)
+{
     switch(mob->races){
         case GOBELIN:
             player->score += SCORE_MOB;
@@ -255,6 +257,7 @@ void calculateReward(Player *player, Mob* mob){
     }
 }
 
+//Every levels multiple of 3 your stats increase
 void increaseLevel(Player *player){
     if((player->level)%3 == 0){
         player->attack++;
@@ -265,6 +268,7 @@ void increaseLevel(Player *player){
     }
 }
 
+//Display the fight Menu
 void DisplayFightMenu ()
 {
     printf("----------\n");
